@@ -1,0 +1,42 @@
+.slectDiv{
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.slectDiv:hover{
+    background-color: #3c3c3cb0;
+}
+
+/* Custom scrollbar styling for WebKit browsers */
+.slectDivContainer::-webkit-scrollbar {
+    width: 10px; /* Reserve space for the scrollbar */
+}
+
+.slectDivContainer::-webkit-scrollbar-track {
+    background: transparent; /* Initially make the track transparent */
+}
+
+.slectDivContainer::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide thumb initially */
+}
+
+/* Show scrollbar on hover */
+.slectDivContainer:hover::-webkit-scrollbar-thumb {
+    background-color: #3c3c3cb0; /* Visible scrollbar color */
+    border-radius: 10px;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: #fff; /* Adjust to your desired color */
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+/* .slectDivContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #555;  
+} */
+
+

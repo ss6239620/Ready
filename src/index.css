@@ -11,3 +11,63 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+:root {
+  --background: white;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
+}
+
+[data-theme='dark'] {
+  --background: #121212;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --accent: darkred;
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+      display: none;
+  }
+}
+
+/* Modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure modal is above other content */
+}
+
+.modal-content {
+  background: #212121;
+  padding: 20px;
+  border-radius: 8px;
+  width: 480px;
+  height: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: red;
+}
+
+.div-center {
+  display: flex;
+  align-items: center;
+}
+
+.main-content {
+  margin-top: 60px; /* Push the content below the fixed navbar */
+}

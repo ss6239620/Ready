@@ -1,0 +1,62 @@
+.basicInput-external-div:hover {
+  border: 1px solid #fff;
+}
+
+.basicInput-external-div {
+  border: 1px solid #666;
+}
+
+.basicInput-external-div input::placeholder {
+  color: #ccc; /* Placeholder text color */
+  font-size: 15px; /* Adjust font size */
+  opacity: 1; /* Ensure visibility (1 means fully visible) */
+}
+
+.basicInput-external-div textarea::placeholder {
+    color: #ccc; /* Placeholder text color */
+    font-size: 15px; /* Adjust font size */
+    opacity: 1; /* Ensure visibility (1 means fully visible) */
+  }
+
+.basicInput-external-div textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.basicInput-external-div textarea::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+.basicInput-external-div textarea::-webkit-scrollbar-track {
+  background: transparent; /* Initially make the track transparent */
+}
+
+.basicInput-external-div textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #3c3c3cb0; /* Visible scrollbar color */
+  border-radius: 10px;
+}
+
+.simple-drop-down:hover {
+  background-color: #212121;
+  border-radius: 40px;
+}
+
+.bright-border-button-hover:hover {
+  background-color: #3c3c3cb0;
+}
+
+.icon-button-hover:hover {
+  background-color: #252424b0;
+}
+
+.comment-vertical-bar{
+  width: 1px;
+  flex: 1;
+  background: #FFFFFF19;
+}
+
+.comment-vertical-bar:hover{
+  background: #fff;
+  width: 1px;
+  cursor: pointer;
+}

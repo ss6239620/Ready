@@ -1,0 +1,43 @@
+.search-container {
+  width: 450px;
+}
+
+@media (max-width: 900px) {
+  .search-container {
+    width: 350px;
+  }
+}
+
+@media (max-width: 800px) {
+  .search-container {
+    width: 250px;
+  }
+}
+
+@media (max-width: 650px) {
+  .search-container {
+    width: 150px;
+  }
+}
+@media (max-width: 550px) {
+  .search-container {
+    display: none !important;
+  }
+}
+
+
+.navbar-menu {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .navbar-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 950px) {
+  .navbar-title {
+    display: none;
+  }
+}

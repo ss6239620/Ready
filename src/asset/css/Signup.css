@@ -1,0 +1,5 @@
+.back-button:hover{
+    cursor: pointer;
+    background-color: #FFFFFF19;
+    border-radius: 50%;
+}
