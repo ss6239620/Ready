@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../../utils/Search";
+import Underline from "../../utils/Underline";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
@@ -7,6 +8,7 @@ import { RiAccountCircleFill, RiMenuFill } from "react-icons/ri";
 import "../../asset/css/Navbar.css";
 import Sidebar from "./Sidebar";
 import BigButton from "../../utils/buttons/BigButton";
+import IconButton from "../../utils/buttons/IconButton";
 import Login from "../Auth/Login/Login";
 import EmailStage from "../Auth/Signup/EmailStage";
 import PasswordStage from "../Auth/Signup/PasswordStage";
@@ -15,6 +17,10 @@ import InterestStage from "../Auth/Signup/InterestStage";
 import { useUser } from "../../Context/UserContext";
 import { test } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
+import { darkColorTheme } from "../../constant";
+import { FaArrowTrendUp } from "react-icons/fa6";
+import { getTrendingTodayPost } from '../../services/posts'
+import PostSummaryCard from '../../utils/cards/PostSummaryCard'
 
 const SideBarModal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -41,7 +47,8 @@ export default function Navbar() {
         password: "",
         username: '',
         identity: "",
-        interests: []
+        interests: [],
+        profileAvtar: null
     });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,10 +57,14 @@ export default function Navbar() {
     const [passwordStageModal, setPasswordStageModal] = useState(false);
     const [aboutStageModal, setAboutStageModal] = useState(false);
     const [interestStageModal, setInterestStageModal] = useState(false);
+    const [searchTrendingPost, setSearchTrendingPost] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [searchClicked, setSearchClicked] = useState(false)
+
 
     const { user, logout } = useUser();
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -63,11 +74,25 @@ export default function Navbar() {
         setIsModalOpen(false);
     };
 
-    function test1(params) {
-        test().then(res=>console.log('yes')
-        ).catch(err=>console.log('error')
-        )
+    function fetchTrendingTodayPost(params) {
+        setLoading(true)
+        getTrendingTodayPost().then((res) => {
+            setSearchTrendingPost(res.data.data)
+            setLoading(false)
+        }).catch(err => {
+            console.log(err);
+        })
     }
+
+    function closeSearchChild(params) {
+        setSearchClicked(false)
+    }
+
+    useEffect(() => {
+        fetchTrendingTodayPost()
+    }, [])
+
+
 
     return (
         <div>
@@ -84,7 +109,7 @@ export default function Navbar() {
                     alignItems: "center",
                     borderBottom: "0.1px solid #FFFFFF19",
                     zIndex: 10, // Ensure navbar stays on top
-                    backgroundColor: "#101010", 
+                    backgroundColor: "#101010",
                 }}
             >
                 <SideBarModal isOpen={isModalOpen} onClose={closeModal}>
@@ -155,7 +180,24 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div style={{ display: "flex" }}>
-                    <Search />
+                    <Search clicked={searchClicked} setclicked={setSearchClicked}>
+                        {!loading &&
+                            <div style={{ position: 'relative' }}>
+                                <div style={{ background: '#121212', position: 'absolute', paddingBlock: 15, width: '100%' , maxHeight: "calc(100vh - 100px)",overflowY:'auto',borderBottomLeftRadius:20}}>
+                                    <Underline style={{ marginBlock: 10 }} />
+                                    <div style={{ paddingInline: 15 }}>
+                                        <div className="div-center" style={{}}>
+                                            <IconButton Icon={FaArrowTrendUp} size={15} />
+                                            <h5 style={{ marginBlock: 0, fontWeight: 400 }}>TRENDING TODAY</h5>
+                                        </div>
+                                        {searchTrendingPost.map((item, key) => (
+                                            <PostSummaryCard data={item} key={key} onClick={closeSearchChild} no_of_charactor={120} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </Search>
                 </div>
                 {!user && (
                     <div style={{ display: "flex", alignItems: "center" }}>
@@ -181,11 +223,11 @@ export default function Navbar() {
                         <div style={{ marginInline: 10 }}>
                             <IoChatbubbleEllipsesOutline size={25} />
                         </div>
-                        <div onClick={()=>navigate(`/createpost`)} style={{cursor:'pointer', marginInline: 10, display: 'flex', alignItems: 'center' }}>
+                        <div onClick={() => navigate(`/createpost`)} style={{ cursor: 'pointer', marginInline: 10, display: 'flex', alignItems: 'center' }}>
                             <FaPlus size={25} style={{ marginInline: 10 }} />
                             <span>Create</span>
                         </div>
-                        <div onClick={test1} style={{ marginInline: 10 }}>
+                        <div style={{ marginInline: 10 }}>
                             <IoIosNotifications size={25} />
                         </div>
                         <div onClick={logout} style={{ marginInline: 10 }}>

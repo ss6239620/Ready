@@ -4,12 +4,14 @@ import '../../asset/css/util.css';
 export default function Biginput({ placeHolder, style, value, setFormValues, name, minHeight }) {
 
   const handleChange = (e) => {
+    e.preventDefault()
     const { name, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
   };
+  
 
   return (
     <div

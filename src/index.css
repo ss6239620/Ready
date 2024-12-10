@@ -1,17 +1,21 @@
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 :root {
   --background: white;
@@ -20,7 +24,7 @@ code {
   --accent: purple;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --background: #121212;
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
@@ -31,8 +35,12 @@ code {
 
 @media (max-width: 1200px) {
   .sidebar {
-      display: none;
+    display: none;
   }
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 /* Modal.css */
@@ -43,7 +51,7 @@ code {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 1000; /* Ensure modal is above other content */
+  z-index: 99999; /* Ensure modal is above other content */
 }
 
 .modal-content {
@@ -70,4 +78,25 @@ code {
 
 .main-content {
   margin-top: 60px; /* Push the content below the fixed navbar */
+  height: 100%;
+  background-color: var(--background);
+}
+
+/* Custom scrollbar styling for WebKit browsers */
+.slectDivContainer::-webkit-scrollbar {
+  width: 10px; /* Reserve space for the scrollbar */
+}
+
+.slectDivContainer::-webkit-scrollbar-track {
+  background: transparent; /* Initially make the track transparent */
+}
+
+.slectDivContainer::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Hide thumb initially */
+}
+
+/* Show scrollbar on hover */
+.slectDivContainer:hover::-webkit-scrollbar-thumb {
+  background-color: #3c3c3cb0; /* Visible scrollbar color */
+  border-radius: 10px;
 }

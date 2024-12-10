@@ -168,7 +168,7 @@ export default function CreatePost() {
     );
   }
   return (
-    <div className='main-content' style={{ height: "100vh" }}>
+    <div className='main-content' >
       <div style={{ paddingInline: "10%", paddingBlock: "2%", width: "60%" }}>
         <div
           style={{

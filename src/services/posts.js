@@ -16,4 +16,17 @@ const getPost = (postId) => api.get(`/getpost/${postId}`)
 
 const getAllPostOfTribe = (id) => api.get(`/gettribePost/${id}`)
 
-export { createPost, getAllPostOfTribe,getPost }
+const getHomeFeed = (page, limit) => api.get(`/homefeed`, {
+    params: { page, limit }
+})
+
+const getRecentPost = () => api.get(`/recentpost`)
+
+const getTrendingTodayPost = () => api.get(`/trendingtoday`)
+
+const makeVote = (post_id, vote) => api.post(`/postvote`, {
+    vote: vote,
+    post_id: post_id
+})
+
+export { createPost, getAllPostOfTribe, getPost, getHomeFeed, makeVote, getRecentPost,getTrendingTodayPost }

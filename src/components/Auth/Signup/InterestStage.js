@@ -41,8 +41,15 @@ export default function InterestStage({
     };
 
     function handleClick(params) {
+        const formData = new FormData()
+        formData.append('email', formValues.email);
+        formData.append('password', formValues.username);
+        formData.append('username', formValues.password);
+        formData.append('identity', formValues.identity);
+        formData.append('interests', formValues.interests);
+        formData.append('profile_avtar', formValues.profileAvtar);
         // setModal(false)
-        signup(formValues.email, formValues.username, formValues.password, formValues.identity, formValues.interests).then((res) => {
+        signup(formData).then((res) => {
             setUser(res.data.data);
             localStorage.setItem("user", JSON.stringify(res.data.data));
 

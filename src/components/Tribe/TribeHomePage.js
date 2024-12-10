@@ -161,7 +161,7 @@ export default function TribeHomePage({ }) {
                             <div style={{ borderBottom: "0.01px solid #FFFFFF55", marginBlock: 15 }} />
                             <div>
                                 {posts.map((item, index) => (
-                                    <PostCard key={index} data={item} tribeIndo={tribeDetail} hoverEfftect />
+                                    <PostCard key={index} data={item} tribeInfo={tribeDetail} hoverEfftect />
                                 ))}
                             </div>
                         </div>

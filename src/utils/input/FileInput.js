@@ -40,7 +40,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
     return (
         <div
             style={{
-                border:file?'none':'0.5px dashed #666',
+                border: file ? 'none' : '0.5px dashed #666',
                 borderRadius: 30,
                 display: "flex",
                 justifyContent: "center",
@@ -53,7 +53,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
         >
             {!file &&
                 <>
-                    <div style={{ display: "flex", alignItems: "center",paddingBlock:60 }}>
+                    <div style={{ display: "flex", alignItems: "center", paddingBlock: 60 }}>
                         <p style={{ marginInline: 20 }}>Drag and Drop or Upload Media</p>
                         <FaCloudUploadAlt size={25} />
                     </div>
@@ -84,24 +84,48 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
                             controls
                             style={{
                                 width: "100%",
-                                // height: "100%",
+                                maxHeight: "400px",
                                 objectFit: "cover",
                                 display: "block", // Removes extra space under video
-                                borderRadius:30
+                                borderRadius: 30
                             }}
                         />
                     ) : (
-                        <img
-                            src={URL.createObjectURL(file)}
-                            alt="Uploaded file"
-                            style={{
-                                width: "100%",
-                                // height: "100%",
-                                objectFit: "cover",
-                                display: "block", // Removes extra space under image
-                                borderRadius:30
-                            }}
-                        />
+                        <div style={{
+                            width: '100%',
+                            height: '100%',
+                            position:'relative',
+                            borderRadius: 30,
+                            overflow:'hidden',
+                            border:'1px solid gray'
+                        }}>
+                            <img
+                                src={URL.createObjectURL(file)}
+                                alt="Uploaded file"
+                                style={{
+                                    width: "100%",
+                                    maxHeight: "400px",
+                                    objectFit: "cover",
+                                    display: "block", // Removes extra space under image
+                                    position: 'absolute',
+                                    filter: 'blur(50px)',
+                                    zIndex:1,
+                                    backgroundColor:'red'
+                                }}
+                            />
+                            <img
+                                src={URL.createObjectURL(file)}
+                                alt="Uploaded file"
+                                style={{
+                                    width: "100%",
+                                    maxHeight: "400px",
+                                    objectFit: "contain",
+                                    display: "block", // Removes extra space under image
+                                    position: 'relative',
+                                    zIndex:2
+                                }}
+                            />
+                        </div>
                     )}
                     <div style={{
                         position: 'absolute',
@@ -110,7 +134,8 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
                         background: darkColorTheme.primaryColor,
                         padding: 5,
                         borderRadius: '50%',
-                        cursor:'pointer'
+                        cursor: 'pointer',
+                        zIndex:10
                     }}>
                         <AiOutlineDelete size={20} onClick={cancelFile} />
                     </div>

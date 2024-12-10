@@ -1,14 +1,118 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react';
 import { useUser } from "../../Context/UserContext";
+import SimpleDropdown from '../../utils/dropdown/SimpleDropdown';
+import Underline from '../../utils/Underline';
+import { getHomeFeed, getRecentPost } from '../../services/posts';
+import PostCard from '../../utils/cards/PostCard';
+import PostSummaryCard from '../../utils/cards/PostSummaryCard';
+import { darkColorTheme } from '../../constant';
+import { truncateText } from '../../utils/CommonFunction';
+import '../../asset/css/Home.css'
+import '../../asset/css/Sidebar.css'
 
 export default function Home() {
-  const { user } = useUser();
-  console.log(user);
-  
-  return (
-    <div className='main-content'>
-       Home
-    </div>
+  const [postData, setPostData] = useState([]);
+  const [postLoading, setPostLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [recentPost, setRecentPost] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  )
+  const { user } = useUser();
+
+  const fetchHomeFeed = useCallback(() => {
+    setPostLoading(true);
+    getHomeFeed(page, 2)
+      .then((res) => {
+        setPostData(prevData => [...prevData, ...res.data.data]); // Append new posts
+        setHasMore(res.data.data.length > 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      })
+      .finally(() => {
+        setPostLoading(false);
+      });
+  }, [page]);
+
+  useEffect(() => {
+    fetchHomeFeed();
+  }, [page, fetchHomeFeed]);
+
+  const handleScroll = () => {
+    if (!postLoading && hasMore &&
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight - 20) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [postLoading, hasMore]);
+
+  function fetchRecentPost(params) {
+    setLoading(true)
+    getRecentPost().then((res) => {
+      setRecentPost(res.data.data)
+      setLoading(false)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  useEffect(() => {
+    fetchRecentPost()
+  }, [])
+
+
+  return (
+    <div className="main-content" style={{ paddingLeft: 100, paddingBlock: 5, display: 'flex' }}>
+      <div style={{ flex: 1 }}>
+        <div style={{ display: 'flex' }}>
+          <SimpleDropdown title={'Best'} />
+        </div>
+        <div>
+          {postData.map((item, index) => (
+            <div style={{ marginBlock: 5,marginInline:10 }} key={item.id}>
+              <Underline style={{ marginBlock: 5, paddingInline: 10 }} color={darkColorTheme.divider} />
+              <PostCard
+                data={item}
+                tribeInfo={item.posted_tribe_id}
+                hoverEfftect
+              />
+            </div>
+          ))}
+        </div>
+        {postLoading && <div>Loading...</div>}
+        {!hasMore && <div>No More Posts To Show</div>}
+      </div>
+      {!loading ?
+        <div style={{ flex: 0.5, }}>
+          <div
+            className="slectDivContainer main-content"
+            style={{
+              marginBlock: 10,
+              overflowY: "auto",
+              maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
+              position: 'fixed',
+              width: '22%'
+            }}>
+            <div style={{ background: 'black', padding: 15, borderRadius: 10}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
+                <a style={{ color: '#81BFDA', cursor: 'pointer' }}>Clear</a>
+              </div>
+              {
+                recentPost.map((item, key) => (
+                    <PostSummaryCard key={key} data={item} /> 
+                ))
+              }
+            </div>
+          </div>
+        </div> : <div>Loading...</div>
+      }
+    </div>
+  );
 }

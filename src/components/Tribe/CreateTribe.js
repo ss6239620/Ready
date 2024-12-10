@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { darkColorTheme } from "../../constant";
 import { RxCross1 } from "react-icons/rx";
 import Basicinput from "../../utils/input/Basicinput";
@@ -17,6 +17,18 @@ export default function Tribe({ isOpen, setModal }) {
         tribeDescription: '',
         topics: []
     })
+
+      // Add/remove `modal-open` class when `isOpen` changes
+      useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+
+        // Cleanup on unmount
+        return () => document.body.classList.remove('modal-open');
+    }, [isOpen]);
 
     if (!isOpen) return null;
 
@@ -75,7 +87,7 @@ export default function Tribe({ isOpen, setModal }) {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', height: '75%', }}>
-                    <div style={{ flex: '1 0 10%', overflowY: "auto", paddingInline: 10, paddingBlock: 5 }}>
+                    <div className="slectDivContainer" style={{ flex: '1 0 10%', overflowY: "auto", paddingInline: 10, paddingBlock: 5 }}>
                         <Basicinput setFormValues={setformValues} name={'tribeName'} value={formValues.tribeName} placeHolder={'Tribe name'} />
                         <Biginput setFormValues={setformValues} name={'tribeDescription'} value={formValues.tribeDescription} placeHolder={'Tribe description'} style={{ marginBlock: 30, height: '40%' }} />
 

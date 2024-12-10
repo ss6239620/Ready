@@ -59,7 +59,7 @@ export default function BackGroundDropDown({ title, children, style, selectedTri
                     <Search style={{ width: '40%' }} />
                 </div>
             }
-            <div style={{ position: 'absolute', zIndex: 999, marginTop: 10, width: '21%' }}>
+            <div style={{ position: 'absolute', zIndex: 10, marginTop: 10, width: '21%' }}>
                 {clicked && React.cloneElement(children, { closeDropDown })}
             </div>
         </div>

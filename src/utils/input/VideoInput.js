@@ -31,7 +31,7 @@ const VideoInput = ({ contentPath ,style}) => {
   return (
     <video
       ref={videoRef}
-      src={`${contentPath}`}
+      src={`${contentPath}#t=0.1`}
       controls
       muted
       style={{

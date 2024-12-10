@@ -36,26 +36,6 @@ const SideBarComponent = [
     icon: MdOutlineGroups,
     path: "home",
   },
-  {
-    title: "Home",
-    icon: MdHome,
-    path: "home",
-  },
-  {
-    title: "Popular",
-    icon: MdTrendingUp,
-    path: "home",
-  },
-  {
-    title: "Explore",
-    icon: MdExplore,
-    path: "explore",
-  },
-  {
-    title: "All",
-    icon: MdOutlineGroups,
-    path: "home",
-  },
 ];
 
 export default function Sidebar() {
@@ -81,14 +61,14 @@ export default function Sidebar() {
 
   function fetchAllTribe(params) {
     getAllTribe()
-    .then((res) => {
-      setAllJoinedTribe(res.data.data);
-      setIsLoading(false);
-    })
-    .catch((err) => {
-      console.log(err);
-      setIsLoading(true);
-    });
+      .then((res) => {
+        setAllJoinedTribe(res.data.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(true);
+      });
   }
   useEffect(() => {
     fetchAllTribe()
@@ -103,19 +83,26 @@ export default function Sidebar() {
         paddingBlock: 20,
         overflowY: "auto",
         maxHeight: "100vh",
-        position:'fixed',
-        background:'#101010',
-        top:0,
-        left:0,
-        width:240
+        position: 'fixed',
+        background: '#101010',
+        top: 0,
+        maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
+        overflowY: "auto",  // Make this section scrollable
+        left: 0,
+        width: 240,
       }}
     >
       <CreateTribe isOpen={tribeModal} setModal={setTribeModal} />
-      <div style={{}}>
+      <div
+        style={{
+
+          paddingBottom: "20px", // Optional: Add some space at the bottom
+        }}
+      >
         {SideBarComponent.map((item, i) => (
           <div
             className="slectDiv"
-            onClick={()=>navigate(`/${item.path}`)}
+            onClick={() => navigate(`/${item.path}`)}
             style={{
               display: "flex",
               alignItems: "center",
@@ -178,7 +165,7 @@ export default function Sidebar() {
           {!isLoading &&
             allJoinedTribe.map((item, index) => (
               <div
-              onClick={()=>navigate(`/tribe/${item._id}`)}
+                onClick={() => navigate(`/tribe/${item._id}`)}
                 key={index}
                 style={{
                   display: "flex",

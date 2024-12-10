@@ -4,6 +4,8 @@ import BigButton from "../../../utils/buttons/BigButton";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Basicinput from "../../../utils/input/Basicinput";
 import '../../../asset/css/Signup.css'
+import CircularFileInput from "../../../utils/input/CircularFileInput";
+
 
 export default function PasswordStage({ isOpen, setModal, setNextModal, setPreviousModal, formValues, setFormValues }) {
     if (!isOpen) return null;
@@ -25,7 +27,14 @@ export default function PasswordStage({ isOpen, setModal, setNextModal, setPrevi
         setPreviousModal(true); // Go back to the previous modal (e.g., EmailStage)
     }
 
-  const isDisabled = !formValues.username || !formValues.password;
+    const isDisabled = !formValues.username || !formValues.password;
+
+    const setProfileAvatar = (file) => {
+        setFormValues((prev) => ({
+            ...prev,
+            profileAvtar: file,
+        }));
+    };
 
     return (
         <div
@@ -56,6 +65,7 @@ export default function PasswordStage({ isOpen, setModal, setNextModal, setPrevi
                                 Reddit is anonymous, so your username is what you’ll go by here. Choose wisely—because once you get a name, you can’t change it.
                             </a>
                         </div>
+                        <CircularFileInput file={formValues.profileAvtar} setFile={setProfileAvatar} />
                         <Basicinput
                             placeHolder={"Username"}
                             style={{ marginBlock: 20 }}

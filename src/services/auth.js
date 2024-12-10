@@ -18,12 +18,18 @@ const test = () => api.get(`/test`)
 const logoutService = () => api.post(`/logout`)
 
 
-const signup = (email,username, password,identity,interests) => api.post(`/signup`, {
-    email: email,
-    password: password,
-    username: username,
-    identity: identity,
-    interests: interests,
+// const signup = (email,username, password,identity,interests) => api.post(`/signup`, {
+//     email: email,
+//     password: password,
+//     username: username,
+//     identity: identity,
+//     interests: interests,
+// })
+
+const signup = (form) => api.post(`/signup`, form, {
+    headers: {
+        'Content-Type': 'multipart/form-data', // This is required to send form data with files
+    },
 })
 
 export { googleAuth,login,signup ,test,logoutService}
