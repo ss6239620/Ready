@@ -4,10 +4,11 @@ import './index.css';
 import Home from './components/Home/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './components/Layout';
-import Explore from './components/Explore/Explore';
+import Explore from './components/Search/Explore';
 import TribeHomePage from './components/Tribe/TribeHomePage';
 import CreatePost from './components/Posts/CreatePost';
 import Comment from './components/Posts/Comment';
+import SearchHomePage from './components/Search/SearchHomePage';
 
 export default function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -25,6 +26,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path='home' element={<Home />} />
           <Route path="explore" element={<Explore />} />
+          <Route path="search" element={<SearchHomePage />} />
           <Route path="tribe/:id" element={<TribeHomePage />} />
           <Route path="comment/:tribeid/:postid" element={<Comment />} />
           <Route path="createpost" element={<CreatePost />} />

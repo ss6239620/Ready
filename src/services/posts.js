@@ -24,9 +24,11 @@ const getRecentPost = () => api.get(`/recentpost`)
 
 const getTrendingTodayPost = () => api.get(`/trendingtoday`)
 
+const searchPost = (q) => api.get(`/searchpost?q=${q}`)
+
 const makeVote = (post_id, vote) => api.post(`/postvote`, {
     vote: vote,
     post_id: post_id
 })
 
-export { createPost, getAllPostOfTribe, getPost, getHomeFeed, makeVote, getRecentPost,getTrendingTodayPost }
+export { createPost, getAllPostOfTribe, getPost, getHomeFeed, makeVote, getRecentPost,getTrendingTodayPost,searchPost }

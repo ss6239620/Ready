@@ -24,7 +24,7 @@ export default function Layout() {
         Switch to {theme === 'light' ? "Dark" : "Light"} Theme
       </button> */}
         <div style={{ display: 'flex', flex: 1 }}>
-          <div className='sidebar' style={{ flex: '0 0 18%' }}> {/* Fixed width for the sidebar */}
+          <div className='sidebar' style={{ flex: '0 0 18.3%' }}> {/* Fixed width for the sidebar */}
             <Sidebar />
           </div>
           <div style={{ flex: 1 }}> {/* Take remaining space */}
