@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPost } from "../../services/posts";
 import PostCard from "../../utils/cards/PostCard";
 import { getTribeDetails } from "../../services/tribe";
@@ -80,6 +80,7 @@ export default function Comment() {
   const [allCommentdata, setAllCommentdata] = useState([]);
 
   const { tribeid, postid } = useParams();
+  const navigate=useNavigate()
 
   function fetchAllPostCommentData(params) {
     getAllPostComment(postid)
@@ -169,7 +170,7 @@ export default function Comment() {
           }}
         >
           <div>
-            <IconButton Icon={IoIosArrowRoundBack} />
+            <IconButton Icon={IoIosArrowRoundBack} onClick={()=>navigate(-1)} />
           </div>
 
           <div style={{ flex: "1", paddingInline: 15, paddingBlock: 2 }} >
