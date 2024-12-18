@@ -10,6 +10,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --background: white;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
+
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+body.dark-theme {
+  --background: #121212;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --accent: darkred;
+
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 code {
@@ -17,7 +34,7 @@ code {
     monospace;
 }
 
-:root {
+/* :root {
   --background: white;
   --text-primary: black;
   --text-secondary: royalblue;
@@ -31,7 +48,7 @@ code {
   --accent: darkred;
   background: var(--background);
   color: var(--text-primary);
-}
+} */
 
 @media (max-width: 1200px) {
   .sidebar {

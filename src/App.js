@@ -11,13 +11,6 @@ import Comment from './components/Posts/Comment';
 import SearchHomePage from './components/Search/SearchHomePage';
 
 export default function App() {
-  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
-
-  function switchTheme(params) {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme)
-  }
 
   return (
     <BrowserRouter>

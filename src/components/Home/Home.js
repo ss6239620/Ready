@@ -102,7 +102,7 @@ export default function Home() {
             <div style={{ background: 'black', padding: 15, borderRadius: 10}}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
-                <a style={{ color: '#81BFDA', cursor: 'pointer' }}>Clear</a>
+                <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>
               </div>
               {
                 recentPost.map((item, key) => (

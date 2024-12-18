@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useLocalStorage from 'use-local-storage'
 import './../../index.css';
 import Navbar from './../Navigation/Navbar';
@@ -11,14 +11,19 @@ export default function Layout() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
 
-  function switchTheme(params) {
+  function switchTheme() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme)
+    setTheme(newTheme);
   }
+
+  // Apply the theme to the body class whenever the theme changes
+  useEffect(() => {
+    document.body.classList.toggle('dark-theme', theme === 'dark');
+  }, [theme]);
 
   return (
     <AppProviders>
-      <div className='root' data-theme={theme}>
+      <div className='root'>
         <Navbar />
         {/* <button onClick={switchTheme}>
         Switch to {theme === 'light' ? "Dark" : "Light"} Theme

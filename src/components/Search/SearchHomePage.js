@@ -6,10 +6,16 @@ import Underline from '../../utils/Underline';
 import { darkColorTheme } from '../../constant';
 import { searchPost } from '../../services/posts';
 import PostSummaryCard from '../../utils/cards/PostSummaryCard';
+import TribeSummaryCard from '../../utils/cards/TribeSummaryCard';
+import { recommendedSearch } from '../../services/tribe';
+import CommentSummaryCard from '../../utils/cards/CommentSummaryCard';
+import { searchComments } from '../../services/comment';
 
 export default function SearchHomePage() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [matchPosts, setMatchPosts] = useState([]);
+  const [matchTribe, setMatchTribe] = useState([]);
+  const [matchComment, setMatchComment] = useState([]);
   const [loading, setLoading] = useState(false)
 
   const [searchParams] = useSearchParams()
@@ -22,12 +28,47 @@ export default function SearchHomePage() {
       setLoading(false)
     }).catch(err => {
       console.log(err);
+      setLoading(false)
     })
   }
 
+  function fetchMatchedTribe(params) {
+    setLoading(true)
+    recommendedSearch(query).then((res) => {
+      setMatchTribe(res.data.data)
+      setLoading(false)
+    }).catch(err => {
+      console.log(err.response.data);
+      setLoading(false)
+    })
+  }
+
+  function fetchMatchedComments(params) {
+    setLoading(true)
+    searchComments(query).then((res) => {
+      setMatchComment(res.data.data)
+      setLoading(false)
+    }).catch(err => {
+      console.log(err.response.data);
+      setLoading(false)
+    })
+  }
+
+
+  function fetchMatches(params) {
+    if (selectedTab === 0) {
+      fetchMatchedPost();
+      fetchMatchedTribe();
+    } else if (selectedTab === 1) {
+      fetchMatchedTribe();
+    } else if (selectedTab === 2) {
+      fetchMatchedComments();
+    }
+  }
+
   useEffect(() => {
-    fetchMatchedPost()
-  }, [])
+    fetchMatches()
+  }, [selectedTab])
 
 
   function handleTabSwitch(tabNum) {
@@ -82,14 +123,57 @@ export default function SearchHomePage() {
           <SimpleDropdown title={"Safe Search off"} />
           <Underline color={darkColorTheme.divider} sizeInPx={'1px'} />
         </div>
-        <div className='div-center'>
+        {!loading ?
           <div>
-            {matchPosts.map((item, key) => (
-              <PostSummaryCard data={item} no_of_charactor={300} key={key} />
-            ))}
-          </div>
-        </div>
+            {selectedTab === 0 &&
+              <div className='div-center' style={{ gap: 15, alignItems: 'flex-start' }}>
+                <div style={{ flex: 1 }}>
+                  {matchPosts.map((item, key) => (
+                    <PostSummaryCard data={item} no_of_charactor={150} key={key} hoverEffect not_require />
+                  ))}
+                </div>
+                <div
+                  style={{
+                    position: 'sticky',
+                    top: 100,
+                    marginTop: 20,
+                  }}>
+                  <div className="slectDivContainer" style={{ background: 'black', padding: 15, borderRadius: 10, width: '100%', overflowY: 'auto', maxHeight: "calc(100vh - 100px)", }}>
+                    <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 0 }}>TRIBES</h5>
+                    {
+                      matchTribe.map((item, key) => (
+                        <div style={{ width: '100%', paddingBlock: 10 }}>
+                          <TribeSummaryCard key={key} no_of_charactor={25} hoverEffect data={item} style={{ padding: 10, width: 'auto' }} not_require />
+                        </div>
+                      ))
+                    }
+
+                    <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 0 }}>PEOPLE</h5>
+                  </div>
+                </div>
+
+              </div>
+            }
+            {selectedTab === 1 &&
+              < div >
+                {
+                  matchTribe.map((item, key) => (
+                    <TribeSummaryCard key={key} hoverEffect data={item} />
+                  ))
+                }
+              </div>
+            }
+            {selectedTab === 2 &&
+              <div>
+                {
+                  matchComment.map((item, key) => (
+                    <CommentSummaryCard key={key} postData={item.post_id} commentedUserData={item.created_by} commentData={item} hoverEffect />
+                  ))
+                }
+              </div>
+            }
+          </div> : <div>Loading....</div>}
       </div>
-    </div>
+    </div >
   )
 }

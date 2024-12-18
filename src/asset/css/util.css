@@ -43,7 +43,8 @@
 
 .bright-border-button-hover:hover {
   background-color: #201f1fb0;
-  border-radius: 30px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .icon-button-hover:hover {
