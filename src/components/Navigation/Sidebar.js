@@ -101,6 +101,7 @@ export default function Sidebar() {
       >
         {SideBarComponent.map((item, i) => (
           <div
+            key={i}
             className="slectDiv"
             onClick={() => navigate(`/${item.path}`)}
             style={{
