@@ -21,6 +21,8 @@ import { darkColorTheme } from "../../constant";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { getTrendingTodayPost } from '../../services/posts'
 import PostSummaryCard from '../../utils/cards/PostSummaryCard'
+import IconDropDown from "../../utils/dropdown/IconDropDown";
+import { profile_dropDown } from "../../asset/data/dropDownData";
 
 const SideBarModal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -183,7 +185,7 @@ export default function Navbar() {
                     <Search clicked={searchClicked} setclicked={setSearchClicked}>
                         {!loading &&
                             <div style={{ position: 'relative' }}>
-                                <div style={{ background: '#121212', position: 'absolute', paddingBlock: 15, width: '100%' , maxHeight: "calc(100vh - 100px)",overflowY:'auto',borderBottomLeftRadius:20}}>
+                                <div style={{ background: '#121212', position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20 }}>
                                     <Underline style={{ marginBlock: 10 }} />
                                     <div style={{ paddingInline: 15 }}>
                                         <div className="div-center" style={{}}>
@@ -227,11 +229,75 @@ export default function Navbar() {
                             <FaPlus size={25} style={{ marginInline: 10 }} />
                             <span>Create</span>
                         </div>
-                        <div style={{ marginInline: 10 }}>
+                        <div onClick={logout} style={{ marginInline: 10, cursor: 'pointer' }}>
                             <IoIosNotifications size={25} />
                         </div>
-                        <div onClick={logout} style={{ marginInline: 10 }}>
-                            <RiAccountCircleFill size={25} />
+                        <div style={{ marginInline: 10 }}>
+                            <IconDropDown Icon={RiAccountCircleFill} childStyle={{ width: 230, right: 0, top: 50, paddingBlock: 15, paddingInline: 20 }}>
+                                <div onClick={()=>navigate(`user/${user.user._id}`)} className="div-center profile-dropdown" style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <img
+                                            src={require('../../asset/img/logo.png')}
+                                            alt="communities-logo"
+                                            style={{
+                                                width: "35px", // Fixed size
+                                                height: "35px", // Fixed size
+                                                objectFit: "cover", // Ensures the aspect ratio is preserved
+                                                borderRadius: "50%", // Circular shape
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <h5
+                                            className="profile-dropdown-text"
+                                            style={{
+                                                marginInline: 3,
+                                                marginBlock: 0,
+                                                fontSize: 14,
+                                                fontWeight: 500,
+                                            }}
+                                        >
+                                            View Profile
+                                        </h5>
+                                        <h5
+                                            style={{
+                                                marginInline: 3,
+                                                marginBlock: 0,
+                                                fontSize: 12,
+                                                color: darkColorTheme.secondaryTextColor,
+                                                fontWeight: 400,
+                                            }}
+                                        >
+                                            u/{user.user.username}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div>
+                                    {profile_dropDown.map((item, key) => (
+                                        <div className="div-center" key={key} style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
+                                            <IconButton Icon={item.icon} size={25} />
+                                            <div>
+                                                <h5
+                                                    className="profile-dropdown-text"
+                                                    style={{
+                                                        marginInline: 3,
+                                                        marginBlock: 0,
+                                                        fontSize: 14,
+                                                        fontWeight: 500,
+                                                    }}
+                                                >
+                                                    {item.title}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </IconDropDown>
                         </div>
                     </div>
                 )}

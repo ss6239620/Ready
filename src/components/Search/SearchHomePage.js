@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import BigButton from '../../utils/buttons/BigButton';
 import SimpleDropdown from '../../utils/dropdown/SimpleDropdown';
@@ -10,65 +10,72 @@ import TribeSummaryCard from '../../utils/cards/TribeSummaryCard';
 import { recommendedSearch } from '../../services/tribe';
 import CommentSummaryCard from '../../utils/cards/CommentSummaryCard';
 import { searchComments } from '../../services/comment';
+import RadioInput from '../../utils/input/RadioInput';
+import { search_filter, search_filter_safe, search_filter_time } from '../../asset/data/dropDownData';
+import InfiniteScroll from '../../utils/InfiniteScroll';
 
 export default function SearchHomePage() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [matchPosts, setMatchPosts] = useState([]);
   const [matchTribe, setMatchTribe] = useState([]);
+  const [postSideData, setPostSideData] = useState([]);
   const [matchComment, setMatchComment] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [hasMore, setHasMore] = useState({
+    postHasMore: true,
+    tribeHasMore: true,
+    commentHasMore: true
+  })
+  const [loading, setLoading] = useState(false);
+  const [radioSelected1, setRadioSeleceted1] = useState(search_filter[0]);
+  const [radioSelected2, setRadioSeleceted2] = useState(search_filter_time[0]);
+  const [radioSelected3, setRadioSeleceted3] = useState(search_filter_safe[0]);
 
   const [searchParams] = useSearchParams()
   const query = searchParams.get('q');
 
-  function fetchMatchedPost(params) {
-    setLoading(true)
-    searchPost(query).then((res) => {
-      setMatchPosts(res.data.data)
-      setLoading(false)
+  const fetchMatchedPost = useCallback((page) => {
+    searchPost(query, page).then((res) => {
+      setMatchPosts(prev => [...prev, ...res.data.data])
+      setHasMore(prev => ({ ...prev, postHasMore: res.data.data.length > 0 }))
     }).catch(err => {
       console.log(err);
-      setLoading(false)
     })
-  }
+  }, []);
 
-  function fetchMatchedTribe(params) {
+  const fetchMatchedTribe = useCallback((page) => {
+    recommendedSearch(query, page).then((res) => {
+      setMatchTribe(prev => [...prev, ...res.data.data])
+      setHasMore(prev => ({ ...prev, tribeHasMore: res.data.data.length > 0 }))
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }, []);
+
+
+  const fetchMatchedComments = useCallback((page) => {
+    searchComments(query, page).then((res) => {
+      setMatchComment(prev => [...prev, ...res.data.data])
+      setHasMore(prev => ({ ...prev, commentHasMore: res.data.data.length > 0 }))
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }, []);
+
+  function fetchSideData(params) {
     setLoading(true)
-    recommendedSearch(query).then((res) => {
-      setMatchTribe(res.data.data)
+    recommendedSearch(query,1).then((res) => {
+      setPostSideData(res.data.data)
       setLoading(false)
     }).catch(err => {
       console.log(err.response.data);
       setLoading(false)
     })
-  }
-
-  function fetchMatchedComments(params) {
-    setLoading(true)
-    searchComments(query).then((res) => {
-      setMatchComment(res.data.data)
-      setLoading(false)
-    }).catch(err => {
-      console.log(err.response.data);
-      setLoading(false)
-    })
-  }
-
-
-  function fetchMatches(params) {
-    if (selectedTab === 0) {
-      fetchMatchedPost();
-      fetchMatchedTribe();
-    } else if (selectedTab === 1) {
-      fetchMatchedTribe();
-    } else if (selectedTab === 2) {
-      fetchMatchedComments();
-    }
   }
 
   useEffect(() => {
-    fetchMatches()
-  }, [selectedTab])
+    fetchSideData()
+  }, [])
+
 
 
   function handleTabSwitch(tabNum) {
@@ -118,14 +125,26 @@ export default function SearchHomePage() {
           />
         </div>
         <div className='div-center' style={{ marginBlock: 20, gap: 15 }}>
-          <SimpleDropdown title={"Relevance"} />
-          <SimpleDropdown title={"All time"} />
-          <SimpleDropdown title={"Safe Search off"} />
+          <SimpleDropdown title={radioSelected1} childStyle={{ width: 200 }}>
+            {search_filter.map((item, key) => (
+              <RadioInput key={key} style={{}} title={item} selected={radioSelected1} setSelected={setRadioSeleceted1} />
+            ))}
+          </SimpleDropdown>
+          <SimpleDropdown title={radioSelected2} childStyle={{ width: 200 }}>
+            {search_filter_time.map((item, key) => (
+              <RadioInput key={key} style={{}} title={item} selected={radioSelected2} setSelected={setRadioSeleceted2} />
+            ))}
+          </SimpleDropdown>
+          <SimpleDropdown title={`Safe Search ${radioSelected3}`} childStyle={{ width: 200 }}>
+            {search_filter_safe.map((item, key) => (
+              <RadioInput key={key} style={{}} title={item} selected={radioSelected3} setSelected={setRadioSeleceted3} />
+            ))}
+          </SimpleDropdown>
           <Underline color={darkColorTheme.divider} sizeInPx={'1px'} />
         </div>
-        {!loading ?
-          <div>
-            {selectedTab === 0 &&
+        <div>
+          {selectedTab === 0 &&
+            <InfiniteScroll fetchData={fetchMatchedPost} hasMoreData={hasMore.postHasMore}>
               <div className='div-center' style={{ gap: 15, alignItems: 'flex-start' }}>
                 <div style={{ flex: 1 }}>
                   {matchPosts.map((item, key) => (
@@ -141,9 +160,9 @@ export default function SearchHomePage() {
                   <div className="slectDivContainer" style={{ background: 'black', padding: 15, borderRadius: 10, width: '100%', overflowY: 'auto', maxHeight: "calc(100vh - 100px)", }}>
                     <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 0 }}>TRIBES</h5>
                     {
-                      matchTribe.map((item, key) => (
-                        <div style={{ width: '100%', paddingBlock: 10 }}>
-                          <TribeSummaryCard key={key} no_of_charactor={25} hoverEffect data={item} style={{ padding: 10, width: 'auto' }} not_require />
+                      postSideData.map((item, key) => (
+                        <div key={key} style={{ width: '100%', paddingBlock: 10 }}>
+                          <TribeSummaryCard no_of_charactor={25} hoverEffect data={item} style={{ padding: 10, width: 'auto' }} not_require />
                         </div>
                       ))
                     }
@@ -153,26 +172,29 @@ export default function SearchHomePage() {
                 </div>
 
               </div>
-            }
-            {selectedTab === 1 &&
-              < div >
-                {
-                  matchTribe.map((item, key) => (
-                    <TribeSummaryCard key={key} hoverEffect data={item} />
-                  ))
-                }
-              </div>
-            }
-            {selectedTab === 2 &&
-              <div>
-                {
-                  matchComment.map((item, key) => (
-                    <CommentSummaryCard key={key} postData={item.post_id} commentedUserData={item.created_by} commentData={item} hoverEffect />
-                  ))
-                }
-              </div>
-            }
-          </div> : <div>Loading....</div>}
+            </InfiniteScroll>
+          }
+          {selectedTab === 1 &&
+            <InfiniteScroll fetchData={fetchMatchedTribe} hasMoreData={hasMore.tribeHasMore}>
+
+              {
+                matchTribe.map((item, key) => (
+                  <TribeSummaryCard key={key} hoverEffect data={item} />
+                ))
+              }
+            </InfiniteScroll>
+          }
+          {selectedTab === 2 &&
+            <InfiniteScroll fetchData={fetchMatchedComments} hasMoreData={hasMore.commentHasMore}>
+
+              {
+                matchComment.map((item, key) => (
+                  <CommentSummaryCard key={key} postData={item.post_id} commentedUserData={item.created_by} commentData={item} hoverEffect />
+                ))
+              }
+            </InfiniteScroll>
+          }
+        </div>
       </div>
     </div >
   )
