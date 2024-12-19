@@ -8,7 +8,7 @@ const api = axios.create({
 
 const getAllPostComment = (post_id) => api.get(`/comments/${post_id}`);
 
-const searchComments = (q) => api.get(`/searchcomment/?q=${q}`);
+const searchComments = (q,page) => api.get(`/searchcomment/?q=${q}&page=${page}&limit=${5}`);
 
 const postComment = (comment_text, post_id) => api.post(`/postcomment`, {
     comment_text: comment_text,

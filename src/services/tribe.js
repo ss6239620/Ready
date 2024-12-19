@@ -18,7 +18,7 @@ const getAllJoinedTribe = () => api.get(`/getalljoinedtribe`);
 
 const getAllTribe = () => api.get(`/getalltribe`);
 
-const recommendedSearch = (q) => api.get(`/recommendedsearch?q=${q}`);
+const recommendedSearch = (q,page) => api.get(`/recommendedsearch?q=${q}&page=${page}&limit=${5}`);
 
 const isJoinedTribe = (id) => api.get(`/isjoinedtribe/${id}`);
 

@@ -40,3 +40,11 @@
     display: none;
   }
 }
+
+.profile-dropdown-text{
+  color: #ffffffae;
+}
+
+.profile-dropdown-text:hover{
+  color: #fff;
+}

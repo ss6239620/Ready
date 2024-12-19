@@ -9,6 +9,7 @@ import TribeHomePage from './components/Tribe/TribeHomePage';
 import CreatePost from './components/Posts/CreatePost';
 import Comment from './components/Posts/Comment';
 import SearchHomePage from './components/Search/SearchHomePage';
+import UserHomePage from './components/Profile/UserHomePage';
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="tribe/:id" element={<TribeHomePage />} />
           <Route path="comment/:tribeid/:postid" element={<Comment />} />
           <Route path="createpost" element={<CreatePost />} />
+          <Route path="user/:id" element={<UserHomePage />} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
       </Routes>

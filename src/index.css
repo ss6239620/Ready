@@ -96,7 +96,7 @@ body.modal-open {
 .main-content {
   margin-top: 60px; /* Push the content below the fixed navbar */
   height: 100%;
-  background-color: var(--background);
+  /* background-color: var(--background); */
 }
 
 /* Custom scrollbar styling for WebKit browsers */

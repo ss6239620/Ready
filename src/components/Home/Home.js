@@ -9,6 +9,7 @@ import { darkColorTheme } from '../../constant';
 import { truncateText } from '../../utils/CommonFunction';
 import '../../asset/css/Home.css'
 import '../../asset/css/Sidebar.css'
+import InfiniteScroll from '../../utils/InfiniteScroll';
 
 export default function Home() {
   const [postData, setPostData] = useState([]);
@@ -20,37 +21,18 @@ export default function Home() {
 
   const { user } = useUser();
 
-  const fetchHomeFeed = useCallback(() => {
-    setPostLoading(true);
+  const fetchHomeFeed = useCallback((page) => {
+    console.log('fetched....',page);
+
     getHomeFeed(page, 2)
       .then((res) => {
-        setPostData(prevData => [...prevData, ...res.data.data]); // Append new posts
+        setPostData((prevData) => [...prevData, ...res.data.data]); // Append new posts
         setHasMore(res.data.data.length > 0);
       })
       .catch((err) => {
         console.log(err.response.data);
-      })
-      .finally(() => {
-        setPostLoading(false);
       });
-  }, [page]);
-
-  useEffect(() => {
-    fetchHomeFeed();
-  }, [page, fetchHomeFeed]);
-
-  const handleScroll = () => {
-    if (!postLoading && hasMore &&
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.scrollHeight - 20) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [postLoading, hasMore]);
+  }, []);
 
   function fetchRecentPost(params) {
     setLoading(true)
@@ -62,10 +44,12 @@ export default function Home() {
     })
   }
 
-  useEffect(() => {
-    fetchRecentPost()
-  }, [])
 
+  
+
+  useEffect(() => {
+    fetchRecentPost();
+  }, [])
 
   return (
     <div className="main-content" style={{ paddingLeft: 100, paddingBlock: 5, display: 'flex' }}>
@@ -73,9 +57,9 @@ export default function Home() {
         <div style={{ display: 'flex' }}>
           <SimpleDropdown title={'Best'} />
         </div>
-        <div>
+        <InfiniteScroll fetchData={fetchHomeFeed} hasMoreData={hasMore}>
           {postData.map((item, index) => (
-            <div style={{ marginBlock: 5,marginInline:10 }} key={item.id}>
+            <div style={{ marginBlock: 5, marginInline: 10 }} key={index}>
               <Underline style={{ marginBlock: 5, paddingInline: 10 }} color={darkColorTheme.divider} />
               <PostCard
                 data={item}
@@ -84,8 +68,8 @@ export default function Home() {
               />
             </div>
           ))}
-        </div>
-        {postLoading && <div>Loading...</div>}
+        </InfiniteScroll>
+        {/* {postLoading && <div>Loading...</div>} */}
         {!hasMore && <div>No More Posts To Show</div>}
       </div>
       {!loading ?
@@ -99,14 +83,14 @@ export default function Home() {
               position: 'fixed',
               width: '22%'
             }}>
-            <div style={{ background: 'black', padding: 15, borderRadius: 10}}>
+            <div style={{ background: 'black', padding: 15, borderRadius: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
                 <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>
               </div>
               {
                 recentPost.map((item, key) => (
-                    <PostSummaryCard key={key} data={item} /> 
+                  <PostSummaryCard key={key} data={item} />
                 ))
               }
             </div>
