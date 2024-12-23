@@ -227,7 +227,7 @@ export default function ChatRoom() {
 
       {/* center content  */}
       <div
-        className='slectDivContainer'
+        className='slectDivContainer' 
         style={{
           display: 'flex',
           flex: 1,
