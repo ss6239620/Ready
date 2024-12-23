@@ -24,7 +24,7 @@ export default function SearchHomePage() {
     postHasMore: true,
     tribeHasMore: true,
     commentHasMore: true
-  })
+  });
   const [loading, setLoading] = useState(false);
   const [radioSelected1, setRadioSeleceted1] = useState(search_filter[0]);
   const [radioSelected2, setRadioSeleceted2] = useState(search_filter_time[0]);
@@ -55,6 +55,7 @@ export default function SearchHomePage() {
   const fetchMatchedComments = useCallback((page) => {
     searchComments(query, page).then((res) => {
       setMatchComment(prev => [...prev, ...res.data.data])
+      console.log(res.data.data);
       setHasMore(prev => ({ ...prev, commentHasMore: res.data.data.length > 0 }))
     }).catch(err => {
       console.log(err.response.data);

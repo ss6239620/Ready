@@ -105,3 +105,52 @@ input[type="radio"]:checked + .custom-radio::after {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.div-hover-bg-change:hover{
+  background: #212121;
+  cursor: pointer;
+}
+
+
+/* Wrapper for alignment */
+.custom-checkbox {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Hide the default checkbox */
+.hidden-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Custom checkbox appearance */
+.custom-checkbox-box {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-radius: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Checked state */
+.custom-checkbox-box.checked {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+/* Checkmark styling */
+.custom-checkbox-box.checked:after {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}

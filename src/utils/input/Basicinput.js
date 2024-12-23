@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../asset/css/util.css'
 
-export default function Basicinput({ placeHolder, style, value, setFormValues, name,isRequired }) {
+export default function Basicinput({ placeHolder, style, value, setFormValues, name, isRequired, onChangeFunc }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -9,6 +9,9 @@ export default function Basicinput({ placeHolder, style, value, setFormValues, n
       ...prevValues,
       [name]: value,
     }));
+    if (onChangeFunc) {
+      onChangeFunc()
+    }
   };
 
   return (
@@ -24,6 +27,7 @@ export default function Basicinput({ placeHolder, style, value, setFormValues, n
       className='basicInput-external-div'
     >
       <input
+        autoComplete='off'
         style={{
           width: "100%",
           border: "none",

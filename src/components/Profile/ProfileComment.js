@@ -3,12 +3,16 @@ import BigButton from '../../utils/buttons/BigButton'
 import IconButton from '../../utils/buttons/IconButton'
 import { BiUpvote } from 'react-icons/bi';
 import { FaPlus, FaRegComment, FaShare } from 'react-icons/fa';
-import { darkColorTheme } from '../../constant';
+import { darkColorTheme, FILE_URL } from '../../constant';
 import '../../asset/css/util.css'
 import Underline from '../../utils/Underline';
+import { formatTimeDifference, truncateText } from '../../utils/CommonFunction';
 
-export default function ProfileComment({ hoverEffect }) {
+export default function ProfileComment({ hoverEffect, data }) {
     const hoverEffect_style = hoverEffect ? "bright-border-button-hover" : '';
+    const reply_or_commented = data.parent_comment_ids ? true : false;
+    const created_at = formatTimeDifference(data?.created_at)
+    const user = JSON.parse(localStorage.getItem("user"));
     return (
         <>
             <Underline
@@ -23,7 +27,7 @@ export default function ProfileComment({ hoverEffect }) {
                     }}
                 >
                     <img
-                        src={require('../../asset/img/logo.png')}
+                        src={`${FILE_URL}/${data?.post_id?.posted_tribe_id?.tribeProfileImage}`}
                         alt=""
                         style={{
                             width: "35px",
@@ -45,10 +49,10 @@ export default function ProfileComment({ hoverEffect }) {
                                 color: darkColorTheme.secondaryTextColor,
                             }}
                         >
-                            t/unexpected
+                            t/{data?.post_id?.posted_tribe_id?.tribeName}
                         </h4>
                         <div style={{ background: darkColorTheme.secondaryTextColor, padding: 2, borderRadius: 20, }} />
-                        <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat?</a>
+                        <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>{truncateText(data?.post_id?.content_title, 60)}</a>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 5 }}>
@@ -61,29 +65,31 @@ export default function ProfileComment({ hoverEffect }) {
                                     color: darkColorTheme.secondaryTextColor,
                                 }}
                             >
-                                ss6239620
+                                {user.user.username}
                             </h4>
-                            <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>replied to</a>
-                            <h4
-                                style={{
-                                    fontSize: 14,
-                                    marginBlock: 0,
-                                    fontWeight: 500,
-                                    color: darkColorTheme.secondaryTextColor,
-                                }}
-                            >
-                                rm998703
-                            </h4>
-                            <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>11 day ago</a>
+                            <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>{reply_or_commented ? 'replied to' : 'commented'}</a>
+                            {reply_or_commented &&
+                                <h4
+                                    style={{
+                                        fontSize: 14,
+                                        marginBlock: 0,
+                                        fontWeight: 500,
+                                        color: darkColorTheme.secondaryTextColor,
+                                    }}
+                                >
+                                    {data.parent_comment_ids.created_by.username}
+                                </h4>
+                            }
+                            <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>{created_at} ago</a>
                         </div>
                     </div>
                     <div style={{ marginTop: 15 }}>
-                        <a style={{ color: darkColorTheme.primaryTextColor, fontSize: 14 }}> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nihil corporis sed laboriosam provident tenetur rerum deleniti nisi ut. Nihil dignissimos sit, libero fugit magni iusto iure provident sapiente. Consectetur, illo!</a>
+                        <a style={{ color: darkColorTheme.primaryTextColor, fontSize: 14 }}> {truncateText(data?.comment_text, 150)}</a>
                     </div>
                     <div className='div-center' style={{ marginTop: 10 }}>
                         <div className='div-center' style={{ background: '#3c3c3cb0', borderRadius: 30 }}>
                             <IconButton Icon={BiUpvote} size={17} />
-                            <h5 style={{ marginInline: 5, marginBlock: 0 }}>0</h5>
+                            <h5 style={{ marginInline: 5, marginBlock: 0 }}>{data?.total_comment_vote}</h5>
                             <IconButton Icon={BiUpvote} size={17} />
                         </div>
                         <div style={{ background: '#3c3c3cb0', borderRadius: 30, marginInline: 15 }}>
