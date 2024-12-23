@@ -19,9 +19,8 @@ export default function UserProvider({ children }) {
             if (cookieExpireDate <= new Date()) {
                 console.log('logout....');
                 logout()
-            } else {
-                setUser(jsonData);
             }
+            setUser(jsonData)
         }
     }, []);
 

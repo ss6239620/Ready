@@ -12,7 +12,9 @@ const createPost = (form) => api.post(`/createpost`, form, {
     },
 })
 
-const getPost = (postId) => api.get(`/getpost/${postId}`)
+const getPost = (postId) => api.get(`/getpost/${postId}`);
+
+const getAllUserPosts = (page) => api.get(`/alluserpost?page=${page}&limit=${5}`);
 
 const getAllPostOfTribe = (id) => api.get(`/gettribePost/${id}`)
 
@@ -31,4 +33,4 @@ const makeVote = (post_id, vote) => api.post(`/postvote`, {
     post_id: post_id
 })
 
-export { createPost, getAllPostOfTribe, getPost, getHomeFeed, makeVote, getRecentPost, getTrendingTodayPost, searchPost }
+export { createPost, getAllPostOfTribe, getAllUserPosts, getPost, getHomeFeed, makeVote, getRecentPost, getTrendingTodayPost, searchPost }

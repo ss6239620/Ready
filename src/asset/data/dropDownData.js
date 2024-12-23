@@ -15,22 +15,27 @@ export const search_filter_safe = [
 
 export const profile_dropDown = [
     {
+        id:'edit_avtar',
         title: 'Edit Avtar',
         icon: IoShirtOutline
     },
     {
+        id:'acheivements',
         title: 'Acheivements',
         icon: IoTrophyOutline
     },
     {
+        id:'dark_mode',
         title: 'Dark Mode',
         icon: CiDark
     },
     {
+        id:'log_out',
         title: 'Log Out',
         icon: CiLogout
     },
     {
+        id:'settings',
         title: 'Settings',
         icon: CiSettings
     }

@@ -229,12 +229,12 @@ export default function Navbar() {
                             <FaPlus size={25} style={{ marginInline: 10 }} />
                             <span>Create</span>
                         </div>
-                        <div onClick={logout} style={{ marginInline: 10, cursor: 'pointer' }}>
+                        <div style={{ marginInline: 10, cursor: 'pointer' }}>
                             <IoIosNotifications size={25} />
                         </div>
                         <div style={{ marginInline: 10 }}>
                             <IconDropDown Icon={RiAccountCircleFill} childStyle={{ width: 230, right: 0, top: 50, paddingBlock: 15, paddingInline: 20 }}>
-                                <div onClick={()=>navigate(`user/${user.user._id}`)} className="div-center profile-dropdown" style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
+                                <div onClick={() => navigate(`user/${user.user._id}`)} className="div-center profile-dropdown" style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
                                     <div
                                         style={{
                                             display: "flex",
@@ -279,7 +279,7 @@ export default function Navbar() {
                                 </div>
                                 <div>
                                     {profile_dropDown.map((item, key) => (
-                                        <div className="div-center" key={key} style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
+                                        <div onClick={item.id === 'log_out' ? logout : null} className="div-center" key={key} style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
                                             <IconButton Icon={item.icon} size={25} />
                                             <div>
                                                 <h5

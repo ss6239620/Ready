@@ -8,7 +8,9 @@ const api = axios.create({
 
 const getAllPostComment = (post_id) => api.get(`/comments/${post_id}`);
 
-const searchComments = (q,page) => api.get(`/searchcomment/?q=${q}&page=${page}&limit=${5}`);
+const getAllUserComment = (page) => api.get(`/allusercomment?page=${page}&limit=${5}`);
+
+const searchComments = (q, page) => api.get(`/searchcomment/?q=${q}&page=${page}&limit=${5}`);
 
 const postComment = (comment_text, post_id) => api.post(`/postcomment`, {
     comment_text: comment_text,
@@ -20,4 +22,4 @@ const replyToComment = (comment_text, comment_id) => api.post(`/replytocomment`,
     comment_id: comment_id
 })
 
-export { getAllPostComment, postComment,replyToComment,searchComments }
+export { getAllPostComment, getAllUserComment, postComment, replyToComment, searchComments }

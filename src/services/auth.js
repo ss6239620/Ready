@@ -17,6 +17,10 @@ const test = () => api.get(`/test`)
 
 const logoutService = () => api.post(`/logout`)
 
+const searchUser = (q, page) => api.get(`/usersearch?q=${q}&page=${page}&limit=${5}`);
+
+const getUserInfo = (id) => api.get(`/getuserinfo/${id}`);
+
 
 // const signup = (email,username, password,identity,interests) => api.post(`/signup`, {
 //     email: email,
@@ -32,4 +36,4 @@ const signup = (form) => api.post(`/signup`, form, {
     },
 })
 
-export { googleAuth,login,signup ,test,logoutService}
+export { googleAuth, login, signup, test, logoutService, searchUser, getUserInfo }

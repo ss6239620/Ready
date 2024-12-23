@@ -1,24 +1,58 @@
-import React, { useState } from 'react'
-import { darkColorTheme } from '../../constant';
+import React, { useCallback, useState } from 'react'
+import { darkColorTheme, FILE_URL } from '../../constant';
 import BigButton from '../../utils/buttons/BigButton';
 import ButtonWIthBorder from '../../utils/buttons/ButtonWIthBorder';
 import SimpleDropdown from '../../utils/dropdown/SimpleDropdown';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '../../utils/buttons/IconButton';
 import ProfileComment from './ProfileComment';
 import { FaPlus } from 'react-icons/fa';
+import { getAllUserPosts } from '../../services/posts';
+import { getAllUserComment } from '../../services/comment';
+import InfiniteScroll from '../../utils/InfiniteScroll';
+import PostCard from '../../utils/cards/PostCard';
 
 export default function UserHomePage() {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(1);
+  const [hasMore, setHasMore] = useState({
+    postHasMore: true,
+    commentHasMore: true
+  });
+  const [data, setData] = useState({
+    postData: [],
+    commentData: []
+  });
 
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const fetchAllUserPosts = useCallback((page) => {
+    getAllUserPosts(page).then((res) => {
+      setData(prevData => ({
+        ...prevData, postData: [...prevData.postData, ...res.data.data]
+      }))
+      setHasMore(prev => ({ ...prev, postHasMore: res.data.data.length > 0 }))
+    }).catch(err => {
+      console.log(err);
+    })
+  }, []);
+
+  const fetchAllUserComment = useCallback((page) => {
+    getAllUserComment(page).then((res) => {
+      setData(prevData => ({
+        ...prevData, commentData: [...prevData.commentData, ...res.data.data]
+      }))
+      console.log(res.data.data);
+
+      setHasMore(prev => ({ ...prev, commentHasMore: res.data.data.length > 0 }))
+    }).catch(err => {
+      console.log(err.response.data);
+    })
+  }, []);
 
   function handleTabSwitch(tabNum) {
     setSelectedTab(tabNum);
   }
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   return (
     <div className='div-center' style={{ marginInline: 80, marginTop: 80, gap: 10 }}>
@@ -34,12 +68,12 @@ export default function UserHomePage() {
             <div style={{ background: 'red', padding: 12, position: 'absolute', borderEndEndRadius: 20, top: 0, left: 0 }} />
             <div style={{ background: 'red', padding: 12, position: 'absolute', borderStartStartRadius: 20, bottom: 0, right: 0 }} />
             <img
-              src={require('../../asset/img/logo.png')}
+              src={`${FILE_URL}/${user.user?.profile_avtar}`}
               alt="communities-logo"
               style={{
                 width: "100px", // Fixed size
                 height: "130px", // Fixed size
-                objectFit: "fill", // Ensures the aspect ratio is preserved
+                objectFit: "cover", // Ensures the aspect ratio is preserved
                 borderRadius: 15,
                 padding: 7
               }}
@@ -71,16 +105,6 @@ export default function UserHomePage() {
         </div>
         <div style={{ marginBlock: 30 }}>
           <div style={{ display: "flex", gap: 10 }}>
-            <BigButton
-              style={{
-                background: selectedTab === 0 ? darkColorTheme.divider : null,
-                borderRadius: 50,
-                paddingInline: 25,
-                padding: 0
-              }}
-              title={"Overview"}
-              onClick={() => handleTabSwitch(0)}
-            />
             <BigButton
               style={{
                 background: selectedTab === 1 ? darkColorTheme.divider : null,
@@ -133,8 +157,28 @@ export default function UserHomePage() {
           </div>
 
           <div>
-           <ProfileComment hoverEffect />
-           
+            {selectedTab === 1 &&
+              <InfiniteScroll fetchData={fetchAllUserPosts} hasMoreData={hasMore.postHasMore}>
+                {data.postData.map((item, key) => (
+                  <PostCard
+                    data={item}
+                    tribeInfo={item.posted_tribe_id}
+                    hoverEfftect
+                    key={key}
+                  />
+                ))}
+              </InfiniteScroll>
+            }
+          </div>
+
+          <div>
+            {selectedTab === 2 &&
+              <InfiniteScroll fetchData={fetchAllUserComment} hasMoreData={hasMore.commentHasMore}>
+                {data.commentData.map((item, key) => (
+                  <ProfileComment key={key} hoverEffect data={item} />
+                ))}
+              </InfiniteScroll>
+            }
           </div>
 
         </div>

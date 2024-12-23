@@ -1,5 +1,4 @@
 import React from 'react'
-import useLocalStorage from 'use-local-storage'
 import './index.css';
 import Home from './components/Home/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -10,6 +9,10 @@ import CreatePost from './components/Posts/CreatePost';
 import Comment from './components/Posts/Comment';
 import SearchHomePage from './components/Search/SearchHomePage';
 import UserHomePage from './components/Profile/UserHomePage';
+import ChatLayout from './components/Chat/ChatLayout';
+import ChatRoom from './components/Chat/ChatRoom';
+import StartChat from './components/Chat/StartChat';
+import ChatUser from './components/Chat/ChatUser';
 
 export default function App() {
 
@@ -26,6 +29,12 @@ export default function App() {
           <Route path="createpost" element={<CreatePost />} />
           <Route path="user/:id" element={<UserHomePage />} />
           {/* <Route path="*" element={<NoPage />} /> */}
+        </Route>
+        {/* Route for chat that takes up the entire screen */}
+        <Route path="chat" element={<ChatLayout />} >
+          <Route path='room/:id' element={<ChatRoom />} />
+          <Route path='room/create' element={<StartChat />} />
+          <Route path='user/:id' element={<ChatUser />} />
         </Route>
       </Routes>
     </BrowserRouter>
