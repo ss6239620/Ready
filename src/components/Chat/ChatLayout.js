@@ -4,6 +4,7 @@ import './../../index.css';
 import { Outlet } from 'react-router-dom';
 import ChatSidebar from './ChatSidebar';
 import { AppProviders } from '../../AppProviders';
+import { ChatRoomProvider } from '../../Context/ChatRoomContext';
 
 export default function Layout() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -21,14 +22,16 @@ export default function Layout() {
 
   return (
     <AppProviders>
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: '0 0 20%' }}> {/* Fixed width for the sidebar */}
-          <ChatSidebar />
+      <ChatRoomProvider>
+        <div style={{ display: 'flex' }}>
+          <div style={{ flex: '0 0 20%' }}> {/* Fixed width for the sidebar */}
+            <ChatSidebar />
+          </div>
+          <div style={{ flex: 1 }}> {/* Take remaining space */}
+            <Outlet />
+          </div>
         </div>
-        <div style={{ flex: 1 }}> {/* Take remaining space */}
-          <Outlet />
-        </div>
-      </div>
+      </ChatRoomProvider>
     </AppProviders>
   )
 }

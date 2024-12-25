@@ -221,8 +221,8 @@ export default function Navbar() {
                 )}
 
                 {user && (
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div style={{ marginInline: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                        <div style={{ marginInline: 10,cursor:'pointer' }}>
                             <IoChatbubbleEllipsesOutline size={25} />
                         </div>
                         <div onClick={() => navigate(`/createpost`)} style={{ cursor: 'pointer', marginInline: 10, display: 'flex', alignItems: 'center' }}>

@@ -72,7 +72,7 @@ function ChatMessage({ data }) {
   )
 }
 
-export default function ChatRoom() {
+export default function ChatRoom({ room_id }) {
   const [formValues, setFormValues] = useState({
     message: ''
   });
@@ -85,8 +85,8 @@ export default function ChatRoom() {
 
   const socketRef = useRef(null);
 
-  const { id } = useParams(); //chat room id
-
+  let { id } = useParams(); //chat room id
+  id = id ? id : room_id
   const { user } = useUser();
 
   const { updateChatroom } = useChatroom()
@@ -227,7 +227,7 @@ export default function ChatRoom() {
 
       {/* center content  */}
       <div
-        className='slectDivContainer' 
+        className='slectDivContainer'
         style={{
           display: 'flex',
           flex: 1,

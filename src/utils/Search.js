@@ -15,7 +15,7 @@ export default function Search({ style, placeholder, children, setclicked, click
 
     const handleClickOutside = (event) => {
         if (searchRef.current && !searchRef.current.contains(event.target)) {
-            setclicked(false)
+            if (setclicked) setclicked(false)
         }
     }
 
