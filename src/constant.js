@@ -21,3 +21,4 @@ if (process.env.REACT_APP_NODE_ENV === 'development') {
 export const API_URL = api_url
 export const FILE_URL = file_url
 export const SOCKET_URL = socket_url
+
