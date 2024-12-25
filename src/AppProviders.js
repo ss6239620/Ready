@@ -7,10 +7,8 @@ import { ChatRoomProvider } from './Context/ChatRoomContext';
 export const AppProviders = ({ children }) => {
   return (
     <UserProvider>
-      <ChatRoomProvider>
         {/* any new provider  */}
         {children}
-      </ChatRoomProvider>
     </UserProvider>
   );
 };

@@ -81,7 +81,8 @@ export default function Home() {
               overflowY: "auto",
               maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
               position: 'fixed',
-              width: '22%'
+              width: '22%',
+              zIndex:0
             }}>
             <div style={{ background: 'black', padding: 15, borderRadius: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
