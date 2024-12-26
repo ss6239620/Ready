@@ -8,7 +8,7 @@ export const darkColorTheme = {
 }
 let api_url, file_url,socket_url
 
-if (process.env.REACT_APP_NODE_ENV === 'production') {
+if (process.env.REACT_APP_NODE_ENV === 'development') {
     api_url = process.env.REACT_APP_LOCAL_API_URL
     file_url = process.env.REACT_APP_LOCAL_FILE_URL
     socket_url = process.env.REACT_APP_LOCAL_FILE_URL
