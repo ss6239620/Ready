@@ -8,7 +8,7 @@ import FileInput from "../../utils/input/FileInput";
 import BackGroundDropDown from "../../utils/dropdown/BackGroundDropDown";
 import { getAllJoinedTribe } from "../../services/tribe";
 import { createPost } from "../../services/posts";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export default function CreatePost() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -23,14 +23,23 @@ export default function CreatePost() {
     content_link: ""
   })
 
+  const [searchParams] = useSearchParams()
+  const tribe_id = searchParams.get('id');
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = `Submit to Tribe`
     getAllJoinedTribe()
       .then((res) => {
         setJoinedTribe(res.data.data);
-        console.log(res.data.data);
-        
+
+        if (tribe_id) {
+          const matchingTribe = res.data.data.find((tribe) => tribe._id === tribe_id);
+          if (matchingTribe) {
+            setSelectedTribe(matchingTribe);
+          }
+        }
         setIsLoading(false);
       })
       .catch((err) => {
@@ -46,7 +55,7 @@ export default function CreatePost() {
 
     if (selectedTab === 0) {
       formData.append('content_type', 'TEXT');
-      formData.append('content_body', formValues.content_body)      
+      formData.append('content_body', formValues.content_body)
     }
     if (selectedTab === 1) {
       if (postMedia) {
@@ -79,7 +88,7 @@ export default function CreatePost() {
     }
     return (
       <div
-       
+
         style={{
           background: darkColorTheme.secondaryColor,
           marginInline: 15,
@@ -88,7 +97,7 @@ export default function CreatePost() {
           borderRadius: 10,
           paddingInline: 10,
           paddingBlock: 20,
-          marginTop:20
+          marginTop: 5
         }}
       >
         <div>
@@ -183,7 +192,7 @@ export default function CreatePost() {
           <BrightBorderButtonOnHover style={{ padding: 13 }} title={"Drafts"} />
         </div>
         <BackGroundDropDown
-          style={{ width: "25%",marginBlock:10 }}
+          style={{ width: "25%", marginBlock: 10 }}
           title={"Select a tribe"}
           children={<TribeSelectionHandler />}
           selectedTribe={selectedTribe}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import RippleEffect from './RippleEffect'
 
 const InfiniteScroll = ({ fetchData, hasMoreData, children }) => {
   const [loading, setLoading] = useState(false);
@@ -48,7 +49,7 @@ const InfiniteScroll = ({ fetchData, hasMoreData, children }) => {
   return (
     <div>
       {children}
-      {loading && <div>Loading...</div>}
+      {!loading && <div style={{display:'flex',justifyContent:'center',marginTop:50}}><RippleEffect alt={'loader'} src={require('../asset/img/logo.png')} size={80} /></div>}
     </div>
   );
 };

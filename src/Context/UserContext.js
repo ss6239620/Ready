@@ -13,22 +13,22 @@ export default function UserProvider({ children }) {
     useEffect(() => {
         // Check if user is in localStorage
         const savedUser = localStorage.getItem("user");
-        if (savedUser) {
-            const jsonData = JSON.parse(savedUser)
+        const jsonData = JSON.parse(savedUser)
+        setUser(jsonData)
+        if (jsonData) {
             const cookieExpireDate = new Date(jsonData.user.cookieExpire)
             if (cookieExpireDate <= new Date()) {
                 console.log('logout....');
                 logout()
             }
-            setUser(jsonData)
         }
     }, []);
 
     const logout = () => {
         logoutService().then(() => {
             setUser(null);
-
             localStorage.removeItem("user");
+            localStorage.removeItem("room_id");
         }).catch((err) => {
             console.log('Not able to logout');
         })

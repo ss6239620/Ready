@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { darkColorTheme, FILE_URL } from '../../constant';
 import BigButton from '../../utils/buttons/BigButton';
 import ButtonWIthBorder from '../../utils/buttons/ButtonWIthBorder';
@@ -53,6 +53,11 @@ export default function UserHomePage() {
   }
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title=`${user.user.username} - Tribe`
+  }, [])
+  
 
   return (
     <div className='div-center' style={{ marginInline: 80, marginTop: 80, gap: 10 }}>

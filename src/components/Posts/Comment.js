@@ -97,6 +97,7 @@ export default function Comment() {
     getPost(postid)
       .then((res) => {
         setPostData(res.data.data);
+        document.title=`${res.data.data.content_title}`
       })
       .catch((err) => {
         console.log(err);
@@ -148,6 +149,9 @@ export default function Comment() {
               : comment.reply_creator.username
           } // Assuming this is the user's ID, adjust accordingly
           onReplyClick={() => setReplyVisible(comment._id)}
+          profile={depth === 0
+              ? comment?.creator?.profile_avtar
+              : comment?.reply_creator?.profile_avtar}
         />
         {replyVisible === comment._id && <ReplyInput comment_id={comment._id} handleCLose={handleCLose} />}
         {comment.replies && comment.replies.length > 0 && (
@@ -228,7 +232,7 @@ export default function Comment() {
               )}
             </div>
           </div>
-          <div style={{ flex: "0.4", marginLeft: 15 }}>
+          <div style={{ position: 'sticky', top: 70, left: 0, alignSelf: 'flex-start',width:'25%' }}>
             <TribeSideInfo tribeDetail={tribeDetail} />
           </div>
         </div>

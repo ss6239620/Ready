@@ -48,6 +48,7 @@ export default function Home() {
   
 
   useEffect(() => {
+    document.title = 'Tribe -Welcome to Tribe Your Community Hub';
     fetchRecentPost();
   }, [])
 
@@ -73,16 +74,18 @@ export default function Home() {
         {!hasMore && <div>No More Posts To Show</div>}
       </div>
       {!loading ?
-        <div style={{ flex: 0.5, }}>
           <div
             className="slectDivContainer main-content"
             style={{
               marginBlock: 10,
               overflowY: "auto",
-              maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
-              position: 'fixed',
-              width: '22%',
-              zIndex:0
+              maxHeight: "calc(100vh - 90px)", // Adjust based on the header/footer size
+              position: 'sticky',
+              // width: '100%',
+              zIndex:0,
+              flex:0.5,
+              top:60,
+              bottom:0
             }}>
             <div style={{ background: 'black', padding: 15, borderRadius: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -95,7 +98,6 @@ export default function Home() {
                 ))
               }
             </div>
-          </div>
         </div> : <div>Loading...</div>
       }
     </div>
