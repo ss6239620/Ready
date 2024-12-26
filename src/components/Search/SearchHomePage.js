@@ -74,6 +74,7 @@ export default function SearchHomePage() {
   }
 
   useEffect(() => {
+    document.title=`${query} - Tribe Search!`
     fetchSideData()
   }, [])
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ButtonWIthBorder from "../../utils/buttons/ButtonWIthBorder";
 import { FaPlus } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
@@ -21,6 +21,8 @@ export default function TribeHomePage({ }) {
 
     const { id } = useParams();
 
+    const navigate = useNavigate()
+
     function isUserJoinedTribe(params) {
         isJoinedTribe(id).then((res) => {
             setIsJoined(res.data.data)
@@ -32,6 +34,7 @@ export default function TribeHomePage({ }) {
 
     function fetchTribeDetail(params) {
         getTribeDetails(id).then((res) => {
+            document.title = `${res.data.data.tribeName}`
             setTribeDetail(res.data.data);
             setIsLoading(false);
         })
@@ -73,8 +76,12 @@ export default function TribeHomePage({ }) {
         });
     }
 
+    function handleCreatepostClick() {
+        navigate(`/createpost?id=${tribeDetail._id}`)
+    }
+
     return (
-        <div className='main-content' style={{ paddingInline: "6%", paddingBlock: 20,background:darkColorTheme.secondaryColor }}>
+        <div className='main-content' style={{ paddingInline: "6%", paddingBlock: 20, background: darkColorTheme.secondaryColor }}>
             {!isLoading &&
                 <>
                     <div>
@@ -143,7 +150,7 @@ export default function TribeHomePage({ }) {
                                     alignItems: 'center'
                                 }}
                             >
-                                <ButtonWIthBorder iconSize={20} title={'Create Post'} Icon={FaPlus} style={{ background: 'transparent', marginInline: 10 }} />
+                                <ButtonWIthBorder onClick={handleCreatepostClick} iconSize={20} title={'Create Post'} Icon={FaPlus} style={{ background: 'transparent', marginInline: 10 }} />
                                 {isJoined &&
                                     <ButtonWIthBorder iconSize={20} Icon={IoNotificationsSharp} style={{ background: 'transparent', marginInline: 10, }} />
                                 }
@@ -165,7 +172,9 @@ export default function TribeHomePage({ }) {
                                 ))}
                             </div>
                         </div>
-                        <TribeSideInfo tribeDetail={tribeDetail} style={{  }} />
+                        <div style={{ position: 'sticky', top: 70, left: 0, alignSelf: 'flex-start', width: '25%' }}>
+                            <TribeSideInfo tribeDetail={tribeDetail} style={{}} />
+                        </div>
                     </div>
                 </>
             }

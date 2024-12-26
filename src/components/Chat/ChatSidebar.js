@@ -76,7 +76,7 @@ export default function ChatSidebar() {
                     {
                         !loading ?
                             chatrooms.map((item, key) => (
-                                <ChatCard key={key} data={item} />
+                                <ChatCard key={key} data={item}  />
                             ))
                             :
                             <div>Loading....</div>

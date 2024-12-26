@@ -85,7 +85,7 @@ export default function Sidebar() {
         maxHeight: "100vh",
         position: 'fixed',
         background: '#101010',
-        top: 0,
+        top: 5,
         maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
         overflowY: "auto",  // Make this section scrollable
         left: 0,
@@ -179,24 +179,22 @@ export default function Sidebar() {
               >
                 <div
                   style={{
-                    width: "35px",
-                    height: "35px",
                     display: "flex",
                     alignItems: "center",
                   }}
                 >
                   <img
-                    src={`${FILE_URL}/${item.tribeProfileImage}`}
+                    src={`${FILE_URL}/${item?.tribeProfileImage}`}
                     alt=""
                     style={{
-                      width: "90%",
-                      height: "90%",
+                      width: "35px",
+                      height: "35px",
                       objectFit: "cover",
                       borderRadius: "50%", // Optional: makes the image circular
                       display: "block", // Removes extra space under image
                     }}
                   />
-                  <a style={{ marginLeft: 10 }}>t/{item.tribeName}</a>
+                  <a style={{ marginLeft: 10 }}>t/{item?.tribeName}</a>
                 </div>
                 <div>
                   <MdOutlineStarOutline size={20} />

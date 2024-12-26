@@ -72,7 +72,7 @@ function ChatMessage({ data }) {
   )
 }
 
-export default function ChatRoom({ room_id }) {
+export default function ChatRoom({ }) {
   const [formValues, setFormValues] = useState({
     message: ''
   });
@@ -86,8 +86,7 @@ export default function ChatRoom({ room_id }) {
   const socketRef = useRef(null);
 
   let { id } = useParams(); //chat room id
-  id = id ? id : room_id
-  const { user } = useUser();
+  const user = JSON.parse(localStorage.getItem('user'))
 
   const { updateChatroom } = useChatroom()
 

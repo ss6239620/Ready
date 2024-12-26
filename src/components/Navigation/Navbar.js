@@ -36,7 +36,7 @@ const SideBarModal = ({ isOpen, onClose, children }) => {
 
     return (
         <div className="modal-overlay" onClick={handleOverlayClick}>
-            <div className="modal-content" style={{ width: "65%" }}>
+            <div  style={{ width: "65%",}}>
                 {children}
             </div>
         </div>
@@ -66,7 +66,9 @@ export default function Navbar() {
 
     const { user, logout } = useUser();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const ROOM_ID = localStorage.getItem('room_id');
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -93,6 +95,14 @@ export default function Navbar() {
     useEffect(() => {
         fetchTrendingTodayPost()
     }, [])
+
+    function handleChatNavigate(params) {
+        if (ROOM_ID) {
+            navigate(`/chat/room/${ROOM_ID}`)
+        } else {
+            navigate('/chat')
+        }
+    }
 
 
 
@@ -222,7 +232,7 @@ export default function Navbar() {
 
                 {user && (
                     <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                        <div style={{ marginInline: 10,cursor:'pointer' }}>
+                        <div onClick={handleChatNavigate} style={{ marginInline: 10, cursor: 'pointer' }}>
                             <IoChatbubbleEllipsesOutline size={25} />
                         </div>
                         <div onClick={() => navigate(`/createpost`)} style={{ cursor: 'pointer', marginInline: 10, display: 'flex', alignItems: 'center' }}>

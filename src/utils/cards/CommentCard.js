@@ -1,5 +1,5 @@
 import React from 'react'
-import { darkColorTheme } from '../../constant'
+import { darkColorTheme, FILE_URL } from '../../constant'
 import { CiCirclePlus } from "react-icons/ci";
 import IconButton from '../buttons/IconButton';
 import { FaRegComment, FaShare } from "react-icons/fa"
@@ -8,8 +8,10 @@ import BigButton from '../buttons/BigButton';
 import '../../asset/css/util.css'
 import { formatTimeDifference } from '../CommonFunction';
 
-export default function CommentCard({ style, onReplyClick, commentText, creatorName, created_at, total_comment_vote }) {
-    const created_time = formatTimeDifference(created_at)
+export default function CommentCard({ style, onReplyClick, commentText, creatorName, created_at, total_comment_vote,profile }) {
+    const created_time = formatTimeDifference(created_at);
+    console.log();
+    
     return (
         <div style={{ display: 'flex', ...style }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'center' }}>
@@ -22,7 +24,7 @@ export default function CommentCard({ style, onReplyClick, commentText, creatorN
                     }}
                 >
                     <img
-                        src={require('../../asset/img/logo.png')}
+                        src={`${FILE_URL}/${profile}`}
                         alt=""
                         style={{
                             width: "90%",
