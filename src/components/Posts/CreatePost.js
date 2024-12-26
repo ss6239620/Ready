@@ -29,6 +29,8 @@ export default function CreatePost() {
     getAllJoinedTribe()
       .then((res) => {
         setJoinedTribe(res.data.data);
+        console.log(res.data.data);
+        
         setIsLoading(false);
       })
       .catch((err) => {
@@ -149,7 +151,7 @@ export default function CreatePost() {
                 }}
               >
                 <img
-                  src={`${FILE_URL}/${item.tribeProfileImage}`}
+                  src={`${FILE_URL}/${item?.tribeProfileImage}`}
                   alt=""
                   style={{
                     width: "90%",
@@ -159,7 +161,7 @@ export default function CreatePost() {
                     display: "block", // Removes extra space under image
                   }}
                 />
-                <a style={{ marginLeft: 10 }}>t/{item.tribeName}</a>
+                <a style={{ marginLeft: 10 }}>t/{item?.tribeName}</a>
               </div>
             </div>
           ))}
