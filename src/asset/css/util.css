@@ -200,3 +200,18 @@ input[type="radio"]:checked + .custom-radio::after {
   }
 }
 
+
+/* quill editor css  */
+
+/* Remove border around the editor */
+.ql-container {
+  border: none !important;
+}
+
+/* Optionally, remove border around the toolbar as well */
+.ql-toolbar {
+  border: none !important;
+}
+
+/* quill editor css  end*/
+

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile,iconSize }) {
+export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile,iconSize ,labelStyle}) {
     const [isHovered, setIsHovered] = useState(false);
     const fileInputRef = useRef(null); // Reference for the file input
 
@@ -44,7 +44,7 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
                     <Icon size={iconSize?iconSize:25} />
                 </div>
             )}
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ flex: 1, display: 'flex', justifyContent: 'center',...labelStyle }}>
                 <a>{title}</a>
             </div>
 
