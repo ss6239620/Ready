@@ -32,7 +32,7 @@ export default function Layout() {
           <div className='sidebar' style={{  }}> {/* Fixed width for the sidebar */}
             <Sidebar />
           </div>
-          <div style={{flex:0.23}}></div>
+          <div className='sidebar' style={{flex:0.23}}></div>
           <div style={{ flex:1 }}> {/* Take remaining space */}
             <Outlet />
           </div>

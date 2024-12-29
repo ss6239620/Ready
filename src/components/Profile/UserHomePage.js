@@ -188,7 +188,7 @@ export default function UserHomePage() {
 
         </div>
       </div>
-      <div style={{ flex: 0.4, position: 'relative' }}>
+      <div style={{ flex: 0.4, position: 'relative',zIndex:1 }}>
         <div
           className="slectDivContainer main-content"
           style={{
@@ -196,7 +196,7 @@ export default function UserHomePage() {
             maxHeight: "calc(100vh - 90px)", // Adjust based on the header/footer size
             position: 'fixed',
             width: '21%',
-            top: 10
+            top: 10,
           }}>
           <div style={{ background: 'black', padding: 15, borderRadius: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

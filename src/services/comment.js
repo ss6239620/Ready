@@ -6,7 +6,7 @@ const api = axios.create({
     withCredentials: true,
 });
 
-const getAllPostComment = (post_id) => api.get(`/comments/${post_id}`);
+const getAllPostComment = (post_id, page) => api.get(`/getcomment/?id=${post_id}&page=${page}&limit=${5}`);
 
 const getAllUserComment = (page) => api.get(`/allusercomment?page=${page}&limit=${5}`);
 

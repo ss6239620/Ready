@@ -19,8 +19,6 @@ export default function Home() {
   const [recentPost, setRecentPost] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const { user } = useUser();
-
   const fetchHomeFeed = useCallback((page) => {
     console.log('fetched....',page);
 

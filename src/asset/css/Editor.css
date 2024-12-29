@@ -1,0 +1,49 @@
+.editor-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.toolbar button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Add a border for active state */
+.toolbar .active {
+  border: 2px solid #007bff; /* Use your desired color */
+  border-radius: 4px; /* Matches the button design */
+  background-color: #f0f8ff; /* Optional: Add a light background for clarity */
+}
+
+/* Add a border and background color to active icons */
+.icon-button-hover.active {
+  border: 2px solid #007bff; /* Border color */
+  background-color: #f0f8ff; /* Optional: background color */
+  border-radius: 50%;
+}
+
+.icon-button-hover {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+
+.toolbar button:hover {
+  background-color: #e0e0e0;
+}

@@ -122,7 +122,7 @@ export default function PostCard({ style, data, tribeInfo, hoverEfftect }) {
         {data?.content_type === 'TEXT' &&
           <p onClick={() => {handlePost(tribeInfo?._id, data?._id)}}  style={{cursor:'pointer'}}>{data?.content_body}</p>
         }
-        <div className='div-center' style={{}}>
+        <div className='div-center' style={{marginTop:10}}>
           <div className='div-center' style={{ background: '#3c3c3cb0', borderRadius: 30 }}>
             <IconButton Icon={BiUpvote} size={17} onClick={() => { handleVote(1) }} />
             <h5 style={{ marginInline: 5, marginBlock: 0 }}>{data?.total_vote}</h5>
