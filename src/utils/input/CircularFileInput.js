@@ -96,11 +96,11 @@ export default function CircularFileInput({ style, setFile, file }) {
                             }}
                         />
                         <div
+                            className="secondary-bg"
                             style={{
                                 position: "absolute",
                                 top: 5,
                                 right: 5,
-                                background: darkColorTheme.primaryColor,
                                 padding: 5,
                                 borderRadius: "50%",
                                 cursor: "pointer",

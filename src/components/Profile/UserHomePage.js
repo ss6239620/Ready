@@ -55,9 +55,9 @@ export default function UserHomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title=`${user.user.username} - Tribe`
+    document.title = `${user.user.username} - Tribe`
   }, [])
-  
+
 
   return (
     <div className='div-center' style={{ marginInline: 80, marginTop: 80, gap: 10 }}>
@@ -111,8 +111,8 @@ export default function UserHomePage() {
         <div style={{ marginBlock: 30 }}>
           <div style={{ display: "flex", gap: 10 }}>
             <BigButton
+              className={`${selectedTab === 1 ? 'secondary-bg' : ''}`}
               style={{
-                background: selectedTab === 1 ? darkColorTheme.divider : null,
                 borderRadius: 50,
                 paddingInline: 25,
               }}
@@ -120,8 +120,8 @@ export default function UserHomePage() {
               onClick={() => handleTabSwitch(1)}
             />
             <BigButton
+              className={`${selectedTab === 2 ? 'secondary-bg' : ''}`}
               style={{
-                background: selectedTab === 2 ? darkColorTheme.divider : null,
                 borderRadius: 50,
                 paddingInline: 25,
               }}
@@ -129,8 +129,8 @@ export default function UserHomePage() {
               onClick={() => handleTabSwitch(2)}
             />
             <BigButton
+              className={`${selectedTab === 3 ? 'secondary-bg' : ''}`}
               style={{
-                background: selectedTab === 3 ? darkColorTheme.divider : null,
                 borderRadius: 50,
                 paddingInline: 25,
               }}
@@ -138,8 +138,8 @@ export default function UserHomePage() {
               onClick={() => handleTabSwitch(3)}
             />
             <BigButton
+              className={`${selectedTab === 4 ? 'secondary-bg' : ''}`}
               style={{
-                background: selectedTab === 4 ? darkColorTheme.divider : null,
                 borderRadius: 50,
                 paddingInline: 25,
               }}
@@ -147,8 +147,8 @@ export default function UserHomePage() {
               onClick={() => handleTabSwitch(4)}
             />
             <BigButton
+              className={`${selectedTab === 5 ? 'secondary-bg' : ''}`}
               style={{
-                background: selectedTab === 5 ? darkColorTheme.divider : null,
                 borderRadius: 50,
                 paddingInline: 25,
               }}
@@ -188,7 +188,7 @@ export default function UserHomePage() {
 
         </div>
       </div>
-      <div style={{ flex: 0.4, position: 'relative',zIndex:1 }}>
+      <div style={{ flex: 0.4, position: 'relative', zIndex: 1 }}>
         <div
           className="slectDivContainer main-content"
           style={{
@@ -198,7 +198,7 @@ export default function UserHomePage() {
             width: '21%',
             top: 10,
           }}>
-          <div style={{ background: 'black', padding: 15, borderRadius: 10 }}>
+          <div className='fixed-bg' style={{ padding: 15, borderRadius: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
               <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>

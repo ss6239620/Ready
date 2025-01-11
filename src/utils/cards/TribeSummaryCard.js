@@ -48,11 +48,11 @@ export default function TribeSummaryCard({ hoverEffect, style, data, no_of_chara
                 <div style={{ display: 'flex', flexDirection: not_require ? 'column-reverse' : 'column' }}>
                     <div className="div-center" style={{ marginTop: 5 }}>
                         <h5
+                            className='secondary-text'
                             style={{
                                 marginInline: 3,
                                 marginBlock: 0,
                                 fontSize: 12,
-                                color: darkColorTheme.secondaryTextColor,
                                 fontWeight: 400,
                             }}
                         >
@@ -60,18 +60,17 @@ export default function TribeSummaryCard({ hoverEffect, style, data, no_of_chara
                         </h5>
                         <div
                             style={{
-                                background: darkColorTheme.secondaryTextColor,
                                 padding: 1,
                                 borderRadius: 20,
                                 marginInline: 3,
                             }}
                         />
                         <h5
+                            className='secondary-text'
                             style={{
                                 marginInline: 3,
                                 marginBlock: 0,
                                 fontSize: 12,
-                                color: darkColorTheme.secondaryTextColor,
                                 fontWeight: 400,
                             }}
                         >
@@ -79,11 +78,11 @@ export default function TribeSummaryCard({ hoverEffect, style, data, no_of_chara
                         </h5>
                     </div>
                     <h5
+                        className='secondary-text'
                         style={{
                             marginInline: 3,
                             marginBlock: 2,
                             fontSize: 14,
-                            color: darkColorTheme.secondaryTextColor,
                             fontWeight: 500,
                         }}
                     >

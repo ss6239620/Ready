@@ -4,7 +4,7 @@ import BigButton from "../../utils/buttons/BigButton";
 import Basicinput from "../../utils/input/Basicinput";
 import Checkbox from "../../utils/input/Checkbox";
 import { searchUser } from "../../services/auth";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { chatRoomExist } from "../../services/chat";
 
 
@@ -32,7 +32,6 @@ function UserAddCard({ data, isSelected, onToggle }) {
                         marginBlock: 5,
                         fontSize: 13.5,
                         fontWeight: 400,
-                        color: darkColorTheme.primaryTextColor,
                     }}
                 >
                     {data?.username}
@@ -55,7 +54,7 @@ export default function StartChat() {
     const [data, setData] = useState([])
     const [selectedUsers, setSelectedUsers] = useState([]);
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     function fetchUser(e) {
         const query = formValues.username;
@@ -85,10 +84,10 @@ export default function StartChat() {
     }
 
     function handleClick(params) {
-        chatRoomExist(selectedUsers[0]._id).then((res)=>{
-            if(res.data.data){
+        chatRoomExist(selectedUsers[0]._id).then((res) => {
+            if (res.data.data) {
                 navigate(`/chat/room/${res.data.data._id}`)
-            }else{
+            } else {
                 navigate(`/chat/user/${selectedUsers[0]._id}`)
             }
         })
@@ -107,14 +106,13 @@ export default function StartChat() {
                 height: "100%",
             }}
         >
-            <div style={{ background: "black", padding: 10 }}>
+            <div className="fixed-bg" style={{ padding: 10 }}>
                 <h4
                     style={{
                         marginInline: 3,
                         marginBlock: 5,
                         fontSize: 13.5,
                         fontWeight: 700,
-                        color: darkColorTheme.primaryTextColor,
                     }}
                 >
                     New Chat
@@ -125,7 +123,6 @@ export default function StartChat() {
                     flex: 1,
                     display: "flex",
                     justifyContent: "center",
-                    backgroundColor: darkColorTheme.divider,
                 }}
             >
                 <div style={{ marginBlock: 15, width: "50%" }}>
@@ -134,7 +131,6 @@ export default function StartChat() {
                         name={"username"}
                         value={formValues.username}
                         placeHolder={"Type username(s)"}
-                        style={{ backgroundColor: darkColorTheme.secondaryColor }}
                     />
                     <h4
                         style={{
@@ -142,14 +138,13 @@ export default function StartChat() {
                             marginBlock: 10,
                             fontSize: 13.5,
                             fontWeight: 400,
-                            color: darkColorTheme.primaryTextColor,
                         }}
                     >
                         Search for people username and chat with them.
                     </h4>
                     <div
+                        className="secondary-bg"
                         style={{
-                            backgroundColor: darkColorTheme.secondaryColor,
                             paddingInline: 10,
                             paddingBlock: 8,
                             borderRadius: 10,
@@ -164,7 +159,6 @@ export default function StartChat() {
                                             marginBlock: 3,
                                             fontSize: 13.5,
                                             fontWeight: 700,
-                                            color: darkColorTheme.primaryTextColor,
                                         }}
                                     >
                                         Suggested
@@ -196,38 +190,37 @@ export default function StartChat() {
                 }}
             >{
                     selectedUsers.length < 2 ?
-
                         <BigButton
+                            className={'accent-bg'}
                             title={"Start Chat"}
                             onClick={handleClick}
                             style={{
                                 borderRadius: 30,
                                 paddingInline: 10,
                                 paddingBlock: 8,
-                                background: darkColorTheme.accentColor,
                                 padding: "0",
                             }}
                         />
                         :
                         <BigButton
+                            className={'accent-bg'}
                             title={"Start Group Chat"}
                             style={{
                                 borderRadius: 30,
                                 paddingInline: 10,
                                 paddingBlock: 8,
-                                background: darkColorTheme.accentColor,
                                 padding: "0",
                             }}
                         />
                 }
                 <BigButton
+                    className={'secondary-bg'}
                     title={"cancel"}
                     style={{
                         borderRadius: 30,
                         paddingInline: 12,
                         paddingBlock: 8,
                         padding: "0",
-                        background: darkColorTheme.divider,
                     }}
                 />
             </div>

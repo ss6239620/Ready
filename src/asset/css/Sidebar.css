@@ -5,7 +5,7 @@
 }
 
 .slectDiv:hover{
-    background-color: #3c3c3cb0;
+    background-color: var(--color-hover);
 }
 
 

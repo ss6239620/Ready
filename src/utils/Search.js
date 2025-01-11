@@ -62,9 +62,9 @@ export default function Search({ style, placeholder, children, setclicked, click
             <form
                 onSubmit={handleSubmit}
                 onClick={() => searchQuery.length === 0 ? setclicked((prev) => !prev) : null}
-                className="search-container"
+                className="search-container secondary-bg"
                 style={{
-                    background: "#3c3c3cb0",
+                    // background: "#3c3c3cb0",
                     borderRadius: 30,
                     padding: 12,
                     display: "flex",
@@ -75,11 +75,11 @@ export default function Search({ style, placeholder, children, setclicked, click
             >
                 <CiSearch />
                 <input
+                    className="primary-text"
                     style={{
                         border: "none",
                         background: "transparent",
                         outline: "none",
-                        color: "white", // Change to your text color
                         marginLeft: 8,
                         flex: 1, // Makes the input expand to fill available space
                     }}
@@ -92,8 +92,8 @@ export default function Search({ style, placeholder, children, setclicked, click
             </form>
             {searchQuery.length > 0 &&
                 <div style={{ position: 'relative' }}>
-                    <div style={{ background: '#121212', position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20, paddingInline: 15 }}>
-                        <h4 style={{ marginBlock: 0, color: darkColorTheme.secondaryTextColor }}>Tribes</h4>
+                    <div className="primary-bg" style={{  position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20, paddingInline: 15 }}>
+                        <h4 style={{ marginBlock: 0,  }}>Tribes</h4>
                         {recommendation.map((item, key) => (
                             <div onClick={() => handlTribeClick(item._id)} key={key} style={{ display: 'flex', alignItems: 'center', marginBlock: 15, cursor: 'pointer' }}>
                                 <div
@@ -116,7 +116,7 @@ export default function Search({ style, placeholder, children, setclicked, click
                                         }}
                                     />
                                 </div>
-                                <h5 style={{ marginInline: 3, marginBlock: 0, fontSize: 14, color: darkColorTheme.secondaryTextColor, fontWeight: 400, }}>t/{item.tribeName}</h5>
+                                <h5 style={{ marginInline: 3, marginBlock: 0, fontSize: 14, fontWeight: 400, }}>t/{item.tribeName}</h5>
                             </div>
                         ))}
                     </div>

@@ -29,7 +29,7 @@ export default function BackGroundDropDown({ title, children, style, selectedTri
     return (
         <div ref={dropdownRef} style={{}}>
             {!clicked &&
-                <div onClick={() => clicked ? setClicked(false) : setClicked(true)} style={{ cursor: "pointer", display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 10, background: darkColorTheme.secondaryColor, borderRadius: 30, ...style }}>
+                <div className='secondary-bg' onClick={() => clicked ? setClicked(false) : setClicked(true)} style={{ cursor: "pointer", display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 10, borderRadius: 30, ...style }}>
                     <div
                         style={{
                             width: "35px",

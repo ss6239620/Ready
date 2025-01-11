@@ -63,7 +63,6 @@ export default function PostCard({ style, data, tribeInfo, hoverEfftect }) {
               />
             </div>
             <h5 onClick={handlTribeClick} style={{ marginInline: 3, marginBlock: 0,cursor:'pointer' }}>t/{tribeInfo?.tribeName}</h5>
-            <div style={{ background: darkColorTheme.secondaryTextColor, padding: 3, borderRadius: 20, marginInline: 3 }} />
             <a style={{ marginInline: 3, color: darkColorTheme.secondaryTextColor, fontSize: 13 }}>{created_time} ago</a>
           </div>
           <IconButton Icon={HiDotsHorizontal} size={20} />
@@ -123,15 +122,15 @@ export default function PostCard({ style, data, tribeInfo, hoverEfftect }) {
           <p onClick={() => {handlePost(tribeInfo?._id, data?._id)}}  style={{cursor:'pointer'}}>{data?.content_body}</p>
         }
         <div className='div-center' style={{marginTop:10}}>
-          <div className='div-center' style={{ background: '#3c3c3cb0', borderRadius: 30 }}>
+          <div className='div-center secondary-bg' style={{  borderRadius: 30 }}>
             <IconButton Icon={BiUpvote} size={17} onClick={() => { handleVote(1) }} />
             <h5 style={{ marginInline: 5, marginBlock: 0 }}>{data?.total_vote}</h5>
             <IconButton Icon={BiUpvote} size={17} onClick={() => { handleVote(0) }} />
           </div>
-          <div style={{ background: '#3c3c3cb0', borderRadius: 30, marginInline: 15 }}>
+          <div className='secondary-bg' style={{  borderRadius: 30, marginInline: 15 }}>
             <BigButton onClick={() => {handlePost(tribeInfo?._id, data?._id)}} Icon={FaRegComment} iconSize={20} style={{ background: 'none' }} title={`1`} />
           </div>
-          <div style={{ background: '#3c3c3cb0', borderRadius: 30 }}>
+          <div className='secondary-bg' style={{  borderRadius: 30 }}>
             <BigButton Icon={FaShare} iconSize={20} style={{ background: 'none' }} title={`share`} />
           </div>
         </div>

@@ -87,15 +87,15 @@ export default function ProfileComment({ hoverEffect, data }) {
                         <a style={{ color: darkColorTheme.primaryTextColor, fontSize: 14 }}> {truncateText(data?.comment_text, 150)}</a>
                     </div>
                     <div className='div-center' style={{ marginTop: 10 }}>
-                        <div className='div-center' style={{ background: '#3c3c3cb0', borderRadius: 30 }}>
+                        <div className='secondary-bg div-center' style={{ borderRadius: 30 }}>
                             <IconButton Icon={BiUpvote} size={17} />
                             <h5 style={{ marginInline: 5, marginBlock: 0 }}>{data?.total_comment_vote}</h5>
                             <IconButton Icon={BiUpvote} size={17} />
                         </div>
-                        <div style={{ background: '#3c3c3cb0', borderRadius: 30, marginInline: 15 }}>
+                        <div className='secondary-bg' style={{ borderRadius: 30, marginInline: 15 }}>
                             <BigButton Icon={FaRegComment} iconSize={20} style={{ background: 'none' }} title={`1`} />
                         </div>
-                        <div style={{ background: '#3c3c3cb0', borderRadius: 30 }}>
+                        <div className='secondary-bg' style={{ borderRadius: 30 }}>
                             <BigButton Icon={FaShare} iconSize={20} style={{ background: 'none' }} title={`share`} />
                         </div>
                     </div>

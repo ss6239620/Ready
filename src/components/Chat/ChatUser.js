@@ -44,14 +44,13 @@ export default function ChatUser() {
     return (
         <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             <div style={{ width: '100%', }}>
-                <div className='div-center' style={{ justifyContent: 'space-between', borderBottom: `0.1px solid ${darkColorTheme.divider}`, paddingInline: 15, paddingBlock: 8, backgroundColor: "#101010", }}>
+                <div className='div-center secondary-bg' style={{ justifyContent: 'space-between', borderBottom: `0.1px solid ${darkColorTheme.divider}`, paddingInline: 15, paddingBlock: 8, }}>
                     <div>
                         <h4
                             style={{
                                 marginBlock: 0,
                                 fontSize: 13,
                                 fontWeight: 700,
-                                color: darkColorTheme.primaryTextColor,
                             }}
                         >
                             {userInfo?.username}
@@ -74,15 +73,14 @@ export default function ChatUser() {
             >
 
 
-                <div style={{
-                    padding: 5, background: darkColorTheme.divider, borderRadius: 10, marginBlock: 20
+                <div className='secondary-bg' style={{
+                    padding: 5,  borderRadius: 10, marginBlock: 20
                 }}>
                     <a
                         style={{
                             marginBlock: 0,
                             fontSize: 12,
                             fontWeight: 400,
-                            color: darkColorTheme.primaryTextColor,
                         }}
                     >
                         Send an invite message to start chatting! 👋
@@ -92,10 +90,10 @@ export default function ChatUser() {
 
             {/* bottom content  */}
             <div style={{ bottom: 0, width: '100%', }}>
-                <div className='div-center' style={{ paddingInline: 10, paddingBlock: 15, borderTop: `0.1px solid ${darkColorTheme.divider}`, backgroundColor: "#101010", justifyContent: 'space-between', gap: 10 }}>
+                <div className='div-center secondary-bg' style={{ paddingInline: 10, paddingBlock: 15, borderTop: `0.1px solid ${darkColorTheme.divider}`,  justifyContent: 'space-between', gap: 10 }}>
                     <IconButton Icon={SlCamera} size={23} style={{ padding: 12 }} />
                     <div style={{ flex: 1 }}>
-                        <Basicinput setFormValues={setFormValue} value={formValue.message} name={'message'} placeHolder={'message'} style={{ padding: 15, background: darkColorTheme.divider }} />
+                        <Basicinput setFormValues={setFormValue} value={formValue.message} name={'message'} placeHolder={'message'} style={{ padding: 15, }} />
                     </div>
                     <IconButton Icon={IoSendSharp} size={23} style={{ padding: 12 }} onClick={handleClick} />
                 </div>

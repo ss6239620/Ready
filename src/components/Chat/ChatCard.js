@@ -18,7 +18,7 @@ export default function ChatCard({ style, data }) {
         navigate(`/chat/room/${data?._id}`)
     }
     return (
-        <div onClick={handleNavigate} className='div-center div-hover-bg-change' style={{ gap: 8, padding: 10, backgroundColor: room_id === data?._id ? '#212121' : null, ...style }}>
+        <div onClick={handleNavigate} className={`div-center div-hover-bg-change ${ room_id === data?._id ?'selected-chat':''}`} style={{ gap: 8, padding: 10,borderRadius:10, ...style }}>
             <img
                 src={`${FILE_URL}/${data?.chat_room_picture}`}
                 alt=""
@@ -38,7 +38,6 @@ export default function ChatCard({ style, data }) {
                             marginBlock: 5,
                             fontSize: 13.5,
                             fontWeight: 700,
-                            color: darkColorTheme.primaryTextColor,
                         }}
                     >
                         {data?.chat_room_name}
@@ -49,7 +48,6 @@ export default function ChatCard({ style, data }) {
                             marginBlock: 5,
                             fontSize: 13.5,
                             fontWeight: 400,
-                            color: darkColorTheme.secondaryTextColor,
                         }}
                     >
                         {latest_msg_time} ago
@@ -61,7 +59,6 @@ export default function ChatCard({ style, data }) {
                         marginBlock: 5,
                         fontSize: 13.5,
                         fontWeight: 400,
-                        color: darkColorTheme.secondaryTextColor,
                     }}
                 >
                     {truncateText(data?.latest_message?.message, 35)}

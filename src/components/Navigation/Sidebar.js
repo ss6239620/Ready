@@ -24,7 +24,7 @@ const SideBarComponent = [
   {
     title: "Popular",
     icon: MdTrendingUp,
-    path: "home",
+    path: "popular",
   },
   {
     title: "Explore",
@@ -76,20 +76,19 @@ export default function Sidebar() {
 
   return (
     <div
-      className="slectDivContainer main-content"
+      className="slectDivContainer main-content primaery-bg divider-right"
       style={{
-        borderRight: "0.1px solid #FFFFFF19",
         paddingInline: 20,
         paddingBlock: 20,
         overflowY: "auto",
         maxHeight: "100vh",
         position: 'fixed',
-        background: '#101010',
         top: 5,
         maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
         overflowY: "auto",  // Make this section scrollable
         left: 0,
         width: 240,
+        // zIndex:0
       }}
     >
       <CreateTribe isOpen={tribeModal} setModal={setTribeModal} />
@@ -120,7 +119,7 @@ export default function Sidebar() {
         ))}
       </div>
       <div style={{}}>
-        <div style={{ border: "0.1px solid #FFFFFF19", marginBlock: 10 }}></div>
+        <div className="divider-bottom" style={{ marginBlock: 10 }}></div>
         <div
           onClick={() =>
             communityDropDownClicked

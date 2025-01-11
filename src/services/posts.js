@@ -22,6 +22,10 @@ const getHomeFeed = (page, limit) => api.get(`/homefeed`, {
     params: { page, limit }
 })
 
+const getPopularFeed = (page, limit) => api.get(`/popularpost`, {
+    params: { page, limit }
+})
+
 const getRecentPost = () => api.get(`/recentpost`)
 
 const getTrendingTodayPost = () => api.get(`/trendingtoday`)
@@ -33,4 +37,4 @@ const makeVote = (post_id, vote) => api.post(`/postvote`, {
     post_id: post_id
 })
 
-export { createPost, getAllPostOfTribe, getAllUserPosts, getPost, getHomeFeed, makeVote, getRecentPost, getTrendingTodayPost, searchPost }
+export { createPost, getAllPostOfTribe, getAllUserPosts, getPost, getHomeFeed, makeVote, getRecentPost, getTrendingTodayPost, searchPost,getPopularFeed }
