@@ -18,18 +18,20 @@ const getAllJoinedTribe = () => api.get(`/getalljoinedtribe`);
 
 const getAllTribe = () => api.get(`/getalltribe`);
 
-const recommendedSearch = (q,page) => api.get(`/recommendedsearch?q=${q}&page=${page}&limit=${5}`);
+const recommendedSearch = (q, page) => api.get(`/recommendedsearch?q=${q}&page=${page}&limit=${5}`);
 
 const isJoinedTribe = (id) => api.get(`/isjoinedtribe/${id}`);
+
+const isUserCreatedTribe = (id) => api.get(`/isUserCreatedTribe/${id}`);
 
 const getTribeDetails = (id) => api.get(`/gettribedetails/${id}`);
 
 const joinTribe = (tribeid) => api.post(`/jointribe`, {
     tribeid: tribeid
-})
+});
 
 const leaveTribe = (tribeid) => api.post(`/leavetribe`, {
     tribeid: tribeid
 })
 
-export { createTribe, getAllJoinedTribe, getTribeDetails, joinTribe, isJoinedTribe, getAllTribe, leaveTribe, recommendedSearch }
+export { createTribe, getAllJoinedTribe, getTribeDetails, joinTribe, isJoinedTribe, getAllTribe, leaveTribe, recommendedSearch, isUserCreatedTribe }

@@ -3,7 +3,6 @@ import { darkColorTheme } from '../../constant'
 import '../../asset/css/util.css'
 
 export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile, iconSize }) {
-    const [isHovered, setIsHovered] = useState(false);
     const fileInputRef = useRef(null); // Reference for the file input
 
 
@@ -25,7 +24,7 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
 
     return (
         <div
-            className={`button-with-border `}
+            className={`button-with-border`}
             style={{
                 paddingInline:10,paddingBlock:8,
                 borderRadius: 30,
@@ -34,12 +33,9 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: "red",
-                border: isHovered ? '1px solid #fff' : `1px solid gray `,
+                background: "red",  
                 ...style,
             }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             onClick={handleButtonClick} // Prevent onClick if disabled
         >
             {Icon && (

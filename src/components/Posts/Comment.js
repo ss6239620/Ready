@@ -91,14 +91,15 @@ function ReplyInput({ comment_id, handleCLose, style }) {
         </div>
         <div className="div-center" style={{}}>
           <BigButton
+            className={'secondary-bg'}
             onClick={handleCLose}
             title={"cancel"}
-            style={{ marginRight: 10, background: "#666", }}
+            style={{ marginRight: 10, }}
             labelStyle={{ fontSize: 13 }}
           />
           <BigButton
+            className={'accent-bg'}
             title={"comment"}
-            style={{ background: darkColorTheme.secondaryTextColor }}
             onClick={() => ReplyToComment(comment_id)}
             labelStyle={{ fontSize: 13 }}
           />
@@ -256,13 +257,14 @@ export default function Comment() {
                   <div>T</div>
                   <div className="div-center" style={{ paddingBlock: 10 }}>
                     <BigButton
+                      className={'secondary-bg'}
                       onClick={() => setShowComment(false)}
                       title={"cancel"}
-                      style={{ marginRight: 10, background: "#666" }}
+                      style={{ marginRight: 10 }}
                     />
                     <BigButton
+                      className={'accent-bg'}
                       title={"comment"}
-                      style={{ background: darkColorTheme.secondaryTextColor }}
                       onClick={AddComment}
                     />
                   </div>

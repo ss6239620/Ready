@@ -18,8 +18,8 @@ export default function Tribe({ isOpen, setModal }) {
         topics: []
     })
 
-      // Add/remove `modal-open` class when `isOpen` changes
-      useEffect(() => {
+    // Add/remove `modal-open` class when `isOpen` changes
+    useEffect(() => {
         if (isOpen) {
             document.body.classList.add('modal-open');
         } else {
@@ -72,6 +72,7 @@ export default function Tribe({ isOpen, setModal }) {
                     borderRadius: '2%', width: '50%', height: '75%', display: 'flex',  // Use flexbox for layout
                     flexDirection: 'column',  // Stack elements vertically
                     justifyContent: 'space-between',  // Distribute space between items, pushing the button to the bottom
+                    position:'relative',
                 }}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -86,7 +87,7 @@ export default function Tribe({ isOpen, setModal }) {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', height: '75%', }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', height: '85%', }}>
                     <div className="slectDivContainer" style={{ flex: '1 0 10%', overflowY: "auto", paddingInline: 10, paddingBlock: 5 }}>
                         <Basicinput setFormValues={setformValues} name={'tribeName'} value={formValues.tribeName} placeHolder={'Tribe name'} />
                         <Biginput setFormValues={setformValues} name={'tribeDescription'} value={formValues.tribeDescription} placeHolder={'Tribe description'} style={{ marginBlock: 30, height: '40%' }} />
@@ -95,26 +96,26 @@ export default function Tribe({ isOpen, setModal }) {
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                             <a>Tribe Banner</a>
-                            <div style={{display:'flex'}}>
+                            <div style={{ display: 'flex' }}>
                                 {tribeBannerImage && <a>{tribeBannerImage?.name}</a>}
-                                <BigButton setFile={setTribeBanner} title={'Add'} Icon={LuImage} style={{ background: darkColorTheme.divider, padding: 5 }} />
+                                <BigButton className={'secondary-bg'} setFile={setTribeBanner} title={'Add'} Icon={LuImage} style={{  padding: 5 }} />
                             </div>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <a>Tribe Icon</a>
-                            <div style={{display:'flex'}}>
+                            <div style={{ display: 'flex' }}>
                                 {tribeProfileImage && <a>{tribeProfileImage?.name}</a>}
-                                <BigButton setFile={setTribeProfileImage} title={'Add'} Icon={LuImage} style={{ background: darkColorTheme.divider, padding: 5 }} />
+                                <BigButton className={'secondary-bg'} setFile={setTribeProfileImage} title={'Add'} Icon={LuImage} style={{  padding: 5 }} />
                             </div>
                         </div>
                     </div>
                     <div style={{ flex: 1 }}>
                         <div
+                            className="card"
                             style={{
                                 margin: 20,
                                 borderRadius: 20,
                                 boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
-                                background: 'black',
                                 overflow: 'hidden', // Ensures border radius applies to inner content
                             }}
                         >
@@ -164,12 +165,7 @@ export default function Tribe({ isOpen, setModal }) {
                     </div>
 
                 </div>
-
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div></div>
-                    <BigButton onClick={handleClick} title={'Create Tribe'} style={{ background: darkColorTheme.accentColor, borderRadius: 30, width: '15%' }} />
-                </div>
-
+                <BigButton className={'accent-bg'} onClick={handleClick} title={'Create Tribe'} style={{  borderRadius: 30, width: '15%', color: 'white',position:'absolute',bottom:20,right:20 }} />
             </div>
         </div>
 

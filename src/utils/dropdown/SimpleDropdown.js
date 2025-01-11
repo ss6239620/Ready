@@ -26,7 +26,7 @@ export default function SimpleDropdown({ title, children, style, childStyle }) {
                 <IoChevronDown size={15} style={{ marginLeft: 5 }} />
             </div>
             {clicked &&
-                <div style={{ position: 'absolute', zIndex: 100, top: 40, background: '#212121', borderRadius: 10, ...childStyle }}>
+                <div className='card' style={{ position: 'absolute', zIndex: 100, top: 40, borderRadius: 10, ...childStyle }}>
                     {children}
                 </div>
             }

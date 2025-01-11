@@ -17,7 +17,6 @@ export default function Basicinput({ placeHolder, style, value, setFormValues, n
   return (
     <div
       style={{
-        // background: "#3c3c3cb0",
         borderRadius: 30,
         padding: 20,
         display: "flex",
@@ -27,13 +26,13 @@ export default function Basicinput({ placeHolder, style, value, setFormValues, n
       className='basicInput-external-div'
     >
       <input
+        className='primary-text'
         autoComplete='off'
         style={{
           width: "100%",
           border: "none",
           background: "transparent",
           outline: "none",
-          color: "white",
         }}
         type="text"
         placeholder={`${placeHolder}*`}

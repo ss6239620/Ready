@@ -64,7 +64,7 @@ export default function SearchHomePage() {
 
   function fetchSideData(params) {
     setLoading(true)
-    recommendedSearch(query,1).then((res) => {
+    recommendedSearch(query, 1).then((res) => {
       setPostSideData(res.data.data)
       setLoading(false)
     }).catch(err => {
@@ -74,7 +74,7 @@ export default function SearchHomePage() {
   }
 
   useEffect(() => {
-    document.title=`${query} - Tribe Search!`
+    document.title = `${query} - Tribe Search!`
     fetchSideData()
   }, [])
 
@@ -89,8 +89,8 @@ export default function SearchHomePage() {
       <div style={{ padding: '20px 100px 0 80px' }}>
         <div style={{ display: "flex", gap: 20 }}>
           <BigButton
+            className={`${selectedTab === 0 ? 'secondary-bg' : ''}`}
             style={{
-              background: selectedTab === 0 ? darkColorTheme.divider : null,
               borderRadius: 50,
               paddingInline: 25,
               padding: 0
@@ -99,8 +99,8 @@ export default function SearchHomePage() {
             onClick={() => handleTabSwitch(0)}
           />
           <BigButton
+            className={`${selectedTab === 1 ? 'secondary-bg' : ''}`}
             style={{
-              background: selectedTab === 1 ? darkColorTheme.divider : null,
               borderRadius: 50,
               paddingInline: 25,
             }}
@@ -108,8 +108,8 @@ export default function SearchHomePage() {
             onClick={() => handleTabSwitch(1)}
           />
           <BigButton
+            className={`${selectedTab === 2 ? 'secondary-bg' : ''}`}
             style={{
-              background: selectedTab === 2 ? darkColorTheme.divider : null,
               borderRadius: 50,
               paddingInline: 25,
             }}
@@ -117,8 +117,8 @@ export default function SearchHomePage() {
             onClick={() => handleTabSwitch(2)}
           />
           <BigButton
+            className={`${selectedTab === 3? 'secondary-bg' : ''}`}
             style={{
-              background: selectedTab === 3 ? darkColorTheme.divider : null,
               borderRadius: 50,
               paddingInline: 25,
             }}
@@ -159,7 +159,7 @@ export default function SearchHomePage() {
                     top: 100,
                     marginTop: 20,
                   }}>
-                  <div className="slectDivContainer" style={{ background: 'black', padding: 15, borderRadius: 10, width: '100%', overflowY: 'auto', maxHeight: "calc(100vh - 100px)", }}>
+                  <div className="slectDivContainer fixed-bg" style={{ padding: 15, borderRadius: 10, width: '100%', overflowY: 'auto', maxHeight: "calc(100vh - 100px)", }}>
                     <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 0 }}>TRIBES</h5>
                     {
                       postSideData.map((item, key) => (

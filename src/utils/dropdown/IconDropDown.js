@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { darkColorTheme } from '../../constant'
-import { IoChevronDown } from "react-icons/io5";
 import IconButton from '../buttons/IconButton';
 
 export default function IconDropDown({ Icon, children, style, childStyle }) {
@@ -26,7 +24,7 @@ export default function IconDropDown({ Icon, children, style, childStyle }) {
                 <IconButton size={25} style={{ marginLeft: 5 }} Icon={Icon} />
             </div>
             {clicked &&
-                <div style={{ position: 'absolute', zIndex: 100, top: 40, background: '#212121', borderRadius: 10, ...childStyle }}>
+                <div className='card' style={{position: 'absolute', zIndex: 100, top: 40, borderRadius: 10, ...childStyle }}>
                     {children}
                 </div>
             }

@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useState, useEffect } from 'react'
 import { logoutService } from '../services/auth';
+import useLocalStorage from 'use-local-storage'
 
 const UserContext = createContext()
 
@@ -9,6 +10,19 @@ export const useUser = () => {
 
 export default function UserProvider({ children }) {
     const [user, setUser] = useState(null);
+
+    const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+
+    function switchTheme() {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    }
+
+    // Apply the theme to the body class whenever the theme changes
+    useEffect(() => {
+        document.body.classList.toggle('dark-theme', theme === 'dark');
+    }, [theme]);
 
     useEffect(() => {
         // Check if user is in localStorage
@@ -36,7 +50,7 @@ export default function UserProvider({ children }) {
 
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout }}>
+        <UserContext.Provider value={{ user, setUser, logout,switchTheme,theme }}>
             {children}
         </UserContext.Provider>
     )

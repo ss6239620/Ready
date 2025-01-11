@@ -1,19 +1,27 @@
 /* Smooth scrolling behavior */
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --background: white;
+  --secondary: #e5ebee;
+  --color-hover:#eaeced8c;
+  --fixed-bg-color: #eaeced8c;
   --text-primary: black;
-  --text-secondary: royalblue;
-  --accent: purple;
+  --text-secondary: #2525258c;
+  --divider: #00000033;
+  --accent: royalblue;
+  --shadow:#292a2a49;
 
   background: var(--background);
   color: var(--text-primary);
@@ -21,9 +29,14 @@ body {
 
 body.dark-theme {
   --background: #121212;
+  --secondary: #2a3236;
+  --color-hover:#201f1f;
+  --fixed-bg-color: #000000;
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
-  --accent: darkred;
+  --divider: #ffffff19;
+  --accent: royalblue;
+  --shadow:#0000009b;
 
   background: var(--background);
   color: var(--text-primary);
@@ -34,22 +47,6 @@ code {
     monospace;
 }
 
-/* :root {
-  --background: white;
-  --text-primary: black;
-  --text-secondary: royalblue;
-  --accent: purple;
-}
-
-[data-theme="dark"] {
-  --background: #121212;
-  --text-primary: #ffffff;
-  --text-secondary: #b3b3b3;
-  --accent: darkred;
-  background: var(--background);
-  color: var(--text-primary);
-} */
-
 @media (max-width: 1200px) {
   .sidebar {
     display: none;
@@ -58,6 +55,48 @@ code {
 
 body.modal-open {
   overflow: hidden;
+}
+
+.primary-bg {
+  background-color: var(--background);
+}
+.secondary-bg {
+  background-color: var(--secondary);
+}
+.accent-bg {
+  background-color: var(--accent);
+}
+.fixed-bg {
+  background-color: var(--fixed-bg-color);
+}
+
+.primary-text{
+  color: var(--text-primary);
+}
+.secondary-text{
+  color: var(--text-secondary);
+}
+.divider-bottom {
+  border-bottom: 1px solid var(--divider);
+}
+
+.divider-right {
+  border-right: 1px solid var(--divider);
+}
+.divider-top {
+  border-top: 1px solid var(--divider);
+}
+.divider-left {
+  border-left: 1px solid var(--divider);
+}
+
+.border {
+  border: 1px solid var(--divider);
+}
+
+.card{
+  background-color: var(--background);
+  box-shadow: 1px 8px 8px var(--shadow);
 }
 
 /* Modal.css */
@@ -72,7 +111,7 @@ body.modal-open {
 }
 
 .modal-content {
-  background: #212121;
+  background: var(--background);
   padding: 20px;
   border-radius: 8px;
   width: 480px;

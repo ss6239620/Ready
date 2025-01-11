@@ -1,13 +1,20 @@
 .basicInput-external-div:hover {
-  border: 1px solid #fff;
+  border: 1px solid var(--divider);
 }
 
 .basicInput-external-div {
   border: 1px solid #666;
 }
 
+.button-with-border{
+  border: 1px solid var(--text-primary);
+}
+.button-with-border:hover{
+  border:1px solid var(--divider)
+}
+
 .basicInput-external-div input::placeholder {
-  color: #ccc; /* Placeholder text color */
+  color: var(--text-secondary); /* Placeholder text color */
   font-size: 15px; /* Adjust font size */
   opacity: 1; /* Ensure visibility (1 means fully visible) */
 }
@@ -37,18 +44,18 @@
 }
 
 .simple-drop-down:hover {
-  background-color: #212121;
+  background-color: var(--color-hover);
   border-radius: 40px;
 }
 
 .bright-border-button-hover:hover {
-  background-color: #201f1fb0;
+  background-color: var(--color-hover);
   border-radius: 20px;
   cursor: pointer;
 }
 
 .icon-button-hover:hover {
-  background-color: #252424b0;
+  background-color: var(--color-hover);
 }
 
 .comment-vertical-bar{
@@ -82,7 +89,7 @@ input[type="radio"] {
 .custom-radio {
   width: 15px;
   height: 15px;
-  border: 1px solid #fff;
+  border: 1px solid var(--text-primary);
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -91,14 +98,14 @@ input[type="radio"] {
 /* Checked state */
 input[type="radio"]:checked + .custom-radio {
   /* background-color: #007bff; */
-  border-color: #fff;
+  border-color: var(--text-primary);
 }
 
 input[type="radio"]:checked + .custom-radio::after {
   content: '';
   width: 10px;
   height: 10px;
-  background-color: white;
+  background-color: var(--text-primary);
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -107,8 +114,12 @@ input[type="radio"]:checked + .custom-radio::after {
 }
 
 .div-hover-bg-change:hover{
-  background: #212121;
+  background: var(--color-hover);
   cursor: pointer;
+}
+
+.selected-chat{
+  background-color: var(--divider);
 }
 
 
@@ -200,18 +211,11 @@ input[type="radio"]:checked + .custom-radio::after {
   }
 }
 
-
-/* quill editor css  */
-
-/* Remove border around the editor */
-.ql-container {
-  border: none !important;
+.popular-carousel-card {
+  background-size: 100%;
+  cursor: pointer;
 }
 
-/* Optionally, remove border around the toolbar as well */
-.ql-toolbar {
-  border: none !important;
+.popular-carousel-card:hover {
+  background-size: 120%;
 }
-
-/* quill editor css  end*/
-

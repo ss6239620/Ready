@@ -32,7 +32,6 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
                 transition: 'opacity 0.3s',
                 display: 'flex',
                 alignItems: 'center',
-                background: "red",
                 ...style,
             }}
             onMouseEnter={() => setIsHovered(true)}

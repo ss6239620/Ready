@@ -4,7 +4,7 @@ import ButtonWIthBorder from "../../utils/buttons/ButtonWIthBorder";
 import { FaPlus } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { TbDots } from "react-icons/tb";
-import { getTribeDetails, isJoinedTribe, joinTribe, leaveTribe } from '../../services/tribe'
+import { getTribeDetails, isJoinedTribe, isUserCreatedTribe, joinTribe, leaveTribe } from '../../services/tribe'
 import { GiCakeSlice } from "react-icons/gi";
 import { darkColorTheme, FILE_URL } from "../../constant";
 import { BsGlobe2 } from "react-icons/bs";
@@ -12,12 +12,14 @@ import { LuDot } from "react-icons/lu";
 import { getAllPostOfTribe } from "../../services/posts";
 import PostCard from "../../utils/cards/PostCard";
 import TribeSideInfo from "./TribeSideInfo";
+import BigButton from "../../utils/buttons/BigButton";
 
 export default function TribeHomePage({ }) {
     const [tribeDetail, setTribeDetail] = useState([]);
     const [isLoading, setIsLoading] = useState(true); // Loading state
     const [posts, setPosts] = useState([]);
-    const [isJoined, setIsJoined] = useState(false)
+    const [isJoined, setIsJoined] = useState(false);
+    const [userCreatedTribe, setUserCreatedTribe] = useState(false)
 
     const { id } = useParams();
 
@@ -45,8 +47,9 @@ export default function TribeHomePage({ }) {
     }
 
     useEffect(() => {
-        fetchTribeDetail()
-        isUserJoinedTribe()
+        fetchTribeDetail();
+        isUserJoinedTribe();
+        user_created_tribe();
     }, [id])
 
     useEffect(() => {
@@ -76,12 +79,20 @@ export default function TribeHomePage({ }) {
         });
     }
 
+    function user_created_tribe(params) {
+        isUserCreatedTribe(id).then((res) => {
+            setUserCreatedTribe(res.data.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     function handleCreatepostClick() {
         navigate(`/createpost?id=${tribeDetail._id}`)
     }
 
     return (
-        <div className='main-content' style={{ paddingInline: "6%", paddingBlock: 20, background: darkColorTheme.secondaryColor }}>
+        <div className='main-content' style={{ paddingInline: "6%", paddingBlock: 20, }}>
             {!isLoading &&
                 <>
                     <div>
@@ -106,13 +117,13 @@ export default function TribeHomePage({ }) {
                             }}
                         >
                             <div
+                            className="secondary-bg"
                                 style={{
                                     width: 100,
                                     height: 100,
                                     borderRadius: "50%",
                                     position: "absolute",
                                     top: "25%",
-                                    background: darkColorTheme.secondaryColor,
                                     display: "flex",
                                     justifyContent: 'center',
                                     alignItems: 'center'
@@ -158,6 +169,9 @@ export default function TribeHomePage({ }) {
                                     <ButtonWIthBorder onClick={leave_tribe} title={'Joined'} style={{ background: 'transparent', marginInline: 10, }} />
                                     :
                                     <ButtonWIthBorder onClick={join_tribe} title={'Join'} style={{ background: 'transparent', marginInline: 10, }} />
+                                }
+                                {userCreatedTribe &&
+                                    <BigButton className={'accent-bg'} onClick={()=>navigate(`/mod/${id}/queue`)} title={'Mod Tools'} style={{  marginInline: 10, borderRadius: 30 ,color:'white'}} />
                                 }
                                 <ButtonWIthBorder iconSize={25} Icon={TbDots} style={{ background: 'transparent', marginInline: 10, }} />
                             </div>

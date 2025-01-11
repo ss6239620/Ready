@@ -69,7 +69,6 @@ export default function PostSummaryCard({
                   marginInline: 3,
                   marginBlock: 0,
                   fontSize: 14,
-                  color: darkColorTheme.secondaryTextColor,
                   fontWeight: 400,
                 }}
               >
@@ -83,7 +82,6 @@ export default function PostSummaryCard({
                 marginInline: 3,
                 marginBlock: 5,
                 fontSize: not_require ? 18 : 15,
-                color: not_require?darkColorTheme.primaryTextColor:darkColorTheme.secondaryTextColor,
                 fontWeight: "bold",
                 cursor: 'pointer'
               }}
@@ -123,15 +121,14 @@ export default function PostSummaryCard({
               marginInline: 3,
               marginBlock: 0,
               fontSize: 14,
-              color: darkColorTheme.secondaryTextColor,
               fontWeight: 400,
             }}
           >
             1.1k <span>upvotes</span>
           </h5>
           <div
+            className="secondary-text"
             style={{
-              background: darkColorTheme.secondaryTextColor,
               padding: 1,
               borderRadius: 20,
               marginInline: 3,
@@ -142,7 +139,6 @@ export default function PostSummaryCard({
               marginInline: 3,
               marginBlock: 0,
               fontSize: 14,
-              color: darkColorTheme.secondaryTextColor,
               fontWeight: 400,
             }}
           >

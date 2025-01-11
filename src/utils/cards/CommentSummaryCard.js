@@ -60,7 +60,7 @@ export default function CommentSummaryCard({ style, postData, commentData, comme
                     {truncateText(postData.content_title, 90)}
                 </h3>
             </div>
-            <div style={{ background: 'black', padding: 20, borderRadius: 15, marginBlock: 10 }}>
+            <div className='fixed-bg' style={{  padding: 20, borderRadius: 15, marginBlock: 10 }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div
                         style={{
@@ -115,7 +115,7 @@ export default function CommentSummaryCard({ style, postData, commentData, comme
                 <div
                     style={{
                         background: darkColorTheme.secondaryTextColor,
-                        padding: 1,
+                        padding: 2,
                         borderRadius: 20,
                         marginInline: 3,
                     }}

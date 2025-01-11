@@ -38,7 +38,6 @@ function ChatMessage({ data }) {
                 marginBlock: 0,
                 fontSize: 14.5,
                 fontWeight: 700,
-                color: darkColorTheme.primaryTextColor,
               }}
             >
               {data.sender.username}
@@ -49,7 +48,6 @@ function ChatMessage({ data }) {
                 marginBlock: 0,
                 fontSize: 13.5,
                 fontWeight: 400,
-                color: darkColorTheme.secondaryTextColor,
               }}
             >
               {msg_time} ago
@@ -61,7 +59,6 @@ function ChatMessage({ data }) {
               marginBlock: 5,
               fontSize: 14.5,
               fontWeight: 400,
-              color: darkColorTheme.primaryTextColor,
             }}
           >
             {data.message}
@@ -196,14 +193,13 @@ export default function ChatRoom({ }) {
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <div style={{ width: '100%', }}>
-        <div className='div-center' style={{ justifyContent: 'space-between', borderBottom: `0.1px solid ${darkColorTheme.divider}`, paddingInline: 15, paddingBlock: 8, backgroundColor: "#101010", }}>
+        <div className='div-center secondary-bg' style={{ justifyContent: 'space-between', borderBottom: `0.1px solid ${darkColorTheme.divider}`, paddingInline: 15, paddingBlock: 8, }}>
           <div>
             <h4
               style={{
                 marginBlock: 0,
                 fontSize: 13,
                 fontWeight: 700,
-                color: darkColorTheme.primaryTextColor,
               }}
             >
               {chatRoomdetails.chat_room_name}
@@ -213,7 +209,6 @@ export default function ChatRoom({ }) {
                 marginBlock: 0,
                 fontSize: 12,
                 fontWeight: 400,
-                color: darkColorTheme.secondaryTextColor,
               }}
             >
               r/{chatRoomdetails.chat_room_name}
@@ -247,10 +242,10 @@ export default function ChatRoom({ }) {
 
       {/* bottom content  */}
       <div style={{ bottom: 0, width: '100%', }}>
-        <div className='div-center' style={{ paddingInline: 10, paddingBlock: 15, borderTop: `0.1px solid ${darkColorTheme.divider}`, backgroundColor: "#101010", justifyContent: 'space-between', gap: 10 }}>
+        <div className='div-center secondary-bg' style={{ paddingInline: 10, paddingBlock: 15, borderTop: `0.1px solid ${darkColorTheme.divider}`,  justifyContent: 'space-between', gap: 10 }}>
           <IconButton Icon={SlCamera} size={23} style={{ padding: 12 }} />
           <div style={{ flex: 1 }}>
-            <Basicinput setFormValues={setFormValues} value={formValues.message} name={'message'} placeHolder={'message'} style={{ padding: 15, background: darkColorTheme.divider }} onChangeFunc={handleInputChange} />
+            <Basicinput setFormValues={setFormValues} value={formValues.message} name={'message'} placeHolder={'message'} style={{ padding: 15,  }} onChangeFunc={handleInputChange} />
           </div>
           <IconButton onClick={sendMessage} Icon={IoSendSharp} size={23} style={{ padding: 12 }} />
         </div>

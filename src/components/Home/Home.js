@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useUser } from "../../Context/UserContext";
 import SimpleDropdown from '../../utils/dropdown/SimpleDropdown';
 import Underline from '../../utils/Underline';
 import { getHomeFeed, getRecentPost } from '../../services/posts';
 import PostCard from '../../utils/cards/PostCard';
 import PostSummaryCard from '../../utils/cards/PostSummaryCard';
 import { darkColorTheme } from '../../constant';
-import { truncateText } from '../../utils/CommonFunction';
 import '../../asset/css/Home.css'
 import '../../asset/css/Sidebar.css'
 import InfiniteScroll from '../../utils/InfiniteScroll';
@@ -20,8 +18,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
 
   const fetchHomeFeed = useCallback((page) => {
-    console.log('fetched....',page);
-
     getHomeFeed(page, 2)
       .then((res) => {
         setPostData((prevData) => [...prevData, ...res.data.data]); // Append new posts
@@ -51,7 +47,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="main-content" style={{ paddingLeft: 100, paddingBlock: 5, display: 'flex' }}>
+    <div className="main-content" style={{ paddingInline: 70, paddingBlock: 5, display: 'flex',gap:10 }}>
       <div style={{ flex: 1 }}>
         <div style={{ display: 'flex' }}>
           <SimpleDropdown title={'Best'} />
@@ -77,15 +73,14 @@ export default function Home() {
             style={{
               marginBlock: 10,
               overflowY: "auto",
-              maxHeight: "calc(100vh - 90px)", // Adjust based on the header/footer size
+              maxHeight: "calc(100vh - 90px)",
               position: 'sticky',
-              // width: '100%',
               zIndex:0,
-              flex:0.5,
+              flex:0.44,
               top:60,
-              bottom:0
+              bottom:0,
             }}>
-            <div style={{ background: 'black', padding: 15, borderRadius: 10 }}>
+            <div className='fixed-bg' style={{ padding: 15, borderRadius: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
                 <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>

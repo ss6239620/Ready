@@ -5,7 +5,7 @@ import { BsGlobe2 } from 'react-icons/bs'
 
 export default function TribeSideInfo({ tribeDetail, style }) {
     return (
-        <div style={{  flex: 1, background: 'black', borderRadius: 5, paddingInline: 20, paddingBlock: 10,...style }}>
+        <div className='fixed-bg' style={{  flex: 1, borderRadius: 10, paddingInline: 20, paddingBlock: 10,...style }}>
             <div>
                 <div>
                     <h4 style={{ marginBlock: 5 }}>Subheading</h4>

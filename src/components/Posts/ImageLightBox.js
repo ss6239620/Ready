@@ -78,10 +78,10 @@ export default function ImageLightBox({ isOpen, setModal, source }) {
                         zIndex: 2,
                     }}
                 />
-                <div onClick={() => setModal(false)} style={{
+                <div className="primary-bg" onClick={() => setModal(false)} style={{
                     position: 'absolute',
                     top: 20, right: 20,
-                    zIndex: 2, padding: 5, background: darkColorTheme.primaryColor, borderRadius: '50%', border: '2px solid #fff', cursor: 'pointer'
+                    zIndex: 2, padding: 5, borderRadius: '50%', border: '2px solid #fff', cursor: 'pointer'
                 }}>
                     <IconButton Icon={RxCross1} size={30} />
                 </div>

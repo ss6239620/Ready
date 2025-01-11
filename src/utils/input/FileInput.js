@@ -127,11 +127,10 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
                             />
                         </div>
                     )}
-                    <div style={{
+                    <div className="secondary-bg" style={{
                         position: 'absolute',
                         top: 10,
                         right: 10,
-                        background: darkColorTheme.primaryColor,
                         padding: 5,
                         borderRadius: '50%',
                         cursor: 'pointer',

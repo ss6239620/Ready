@@ -15,7 +15,6 @@ import PasswordStage from "../Auth/Signup/PasswordStage";
 import AboutStage from "../Auth/Signup/AboutStage";
 import InterestStage from "../Auth/Signup/InterestStage";
 import { useUser } from "../../Context/UserContext";
-import { test } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
 import { darkColorTheme } from "../../constant";
 import { FaArrowTrendUp } from "react-icons/fa6";
@@ -23,6 +22,7 @@ import { getTrendingTodayPost } from '../../services/posts'
 import PostSummaryCard from '../../utils/cards/PostSummaryCard'
 import IconDropDown from "../../utils/dropdown/IconDropDown";
 import { profile_dropDown } from "../../asset/data/dropDownData";
+import { CiLight } from "react-icons/ci";
 
 const SideBarModal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -36,7 +36,7 @@ const SideBarModal = ({ isOpen, onClose, children }) => {
 
     return (
         <div className="modal-overlay" onClick={handleOverlayClick}>
-            <div  style={{ width: "65%",}}>
+            <div style={{ width: "65%", }}>
                 {children}
             </div>
         </div>
@@ -64,7 +64,7 @@ export default function Navbar() {
     const [searchClicked, setSearchClicked] = useState(false)
 
 
-    const { user, logout } = useUser();
+    const { user, logout, switchTheme, theme } = useUser();
 
     const navigate = useNavigate();
 
@@ -105,10 +105,21 @@ export default function Navbar() {
     }
 
 
+    function handleFucntion(id) {
+        if (id === 'log_out') {
+            logout();
+        }
+        if (id === 'dark_mode') {
+            switchTheme();
+        }
+    }
+
+
 
     return (
         <div>
             <div
+                className="primary-bg divider-bottom"
                 style={{
                     position: "fixed", // Fix the navbar to the top
                     top: 0,
@@ -119,9 +130,7 @@ export default function Navbar() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    borderBottom: "0.1px solid #FFFFFF19",
-                    zIndex: 10, // Ensure navbar stays on top
-                    backgroundColor: "#101010",
+                    zIndex: 100, // Ensure navbar stays on top
                 }}
             >
                 <SideBarModal isOpen={isModalOpen} onClose={closeModal}>
@@ -195,7 +204,7 @@ export default function Navbar() {
                     <Search clicked={searchClicked} setclicked={setSearchClicked}>
                         {!loading &&
                             <div style={{ position: 'relative' }}>
-                                <div style={{ background: '#121212', position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20 }}>
+                                <div className="primary-bg" style={{ position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20 }}>
                                     <Underline style={{ marginBlock: 10 }} />
                                     <div style={{ paddingInline: 15 }}>
                                         <div className="div-center" style={{}}>
@@ -279,7 +288,6 @@ export default function Navbar() {
                                                 marginInline: 3,
                                                 marginBlock: 0,
                                                 fontSize: 12,
-                                                color: darkColorTheme.secondaryTextColor,
                                                 fontWeight: 400,
                                             }}
                                         >
@@ -289,19 +297,19 @@ export default function Navbar() {
                                 </div>
                                 <div>
                                     {profile_dropDown.map((item, key) => (
-                                        <div onClick={item.id === 'log_out' ? logout : null} className="div-center" key={key} style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
-                                            <IconButton Icon={item.icon} size={25} />
+                                        <div className="div-center" key={key} style={{ gap: 10, marginBlock: 10 }}>
+                                            <IconButton onClick={() => handleFucntion(item.id)} Icon={theme === 'dark' && item.id === 'dark_mode' ? CiLight : item.icon} size={25} />
                                             <div>
                                                 <h5
-                                                    className="profile-dropdown-text"
+                                                    // className="profile-dropdown-text"
                                                     style={{
                                                         marginInline: 3,
                                                         marginBlock: 0,
                                                         fontSize: 14,
-                                                        fontWeight: 500,
+                                                        fontWeight: 400,
                                                     }}
                                                 >
-                                                    {item.title}
+                                                    {theme === 'dark' && item.id === 'dark_mode'?'Light Mode':item.title}
                                                 </h5>
                                             </div>
                                         </div>

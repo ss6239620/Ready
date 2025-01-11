@@ -12,7 +12,7 @@ function RadioInput({ style, title, selected, setSelected }) {
     const selected_radio = selected === title
 
     return (
-        <div style={{ ...style, background: selected_radio ? darkColorTheme.divider : '', paddingInline: 15, paddingBlock: 8, }}>
+        <div className={`${selected_radio ? 'secondary-bg' : ''}`} style={{ ...style, paddingInline: 15, paddingBlock: 8, }}>
             <label className="radio-container">
                 <input
                     type="radio"

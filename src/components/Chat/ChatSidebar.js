@@ -19,7 +19,7 @@ export default function ChatSidebar() {
     const { chatrooms, loading } = useChatroom();
 
     return (
-        <div className='slectDivContainer' style={{ borderRight: `0.1px solid ${darkColorTheme.divider}`, overflowY: 'scroll', height: '100vh', position: 'sticky', top: 0 }}>
+        <div className='slectDivContainer divider-right' style={{  overflowY: 'scroll', height: '100vh', position: 'sticky', top: 0 }}>
             <div className='div-center' style={{ justifyContent: 'space-between', padding: 10, }}>
                 <div className='div-center' style={{ gap: 8 }}>
                     <img
@@ -39,7 +39,6 @@ export default function ChatSidebar() {
                             marginBlock: 5,
                             fontSize: 18,
                             fontWeight: 700,
-                            color: darkColorTheme.primaryTextColor,
                         }}
                     >
                         Chats
@@ -63,7 +62,6 @@ export default function ChatSidebar() {
                                 marginBlock: 5,
                                 fontSize: 13.5,
                                 fontWeight: 700,
-                                color: darkColorTheme.primaryTextColor,
                             }}
                         >
                             Discover Chat Channels

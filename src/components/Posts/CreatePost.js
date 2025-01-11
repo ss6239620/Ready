@@ -88,9 +88,8 @@ export default function CreatePost() {
     }
     return (
       <div
-
+        className="secondary-bg"
         style={{
-          background: darkColorTheme.secondaryColor,
           marginInline: 15,
           overflowY: "auto",
           height: 400,
@@ -115,8 +114,6 @@ export default function CreatePost() {
           >
             <div
               style={{
-                width: "35px",
-                height: "35px",
                 display: "flex",
                 alignItems: "center",
               }}
@@ -125,8 +122,8 @@ export default function CreatePost() {
                 src={require('../../asset/img/logo.png')}
                 alt=""
                 style={{
-                  width: "90%",
-                  height: "90%",
+                  width: "35px",
+                  height: "35px",
                   objectFit: "cover",
                   borderRadius: "50%", // Optional: makes the image circular
                   display: "block", // Removes extra space under image
@@ -153,8 +150,6 @@ export default function CreatePost() {
             >
               <div
                 style={{
-                  width: "35px",
-                  height: "35px",
                   display: "flex",
                   alignItems: "center",
                 }}
@@ -163,8 +158,8 @@ export default function CreatePost() {
                   src={`${FILE_URL}/${item?.tribeProfileImage}`}
                   alt=""
                   style={{
-                    width: "90%",
-                    height: "90%",
+                    width: "35px",
+                    height: "35px",
                     objectFit: "cover",
                     borderRadius: "50%", // Optional: makes the image circular
                     display: "block", // Removes extra space under image
@@ -204,7 +199,6 @@ export default function CreatePost() {
                 padding: 13,
                 borderRadius: 0,
                 marginInline: 10,
-                color: "white",
               }}
               title={"Text"}
               bottomLine={selectedTab === 0 ? true : false}
@@ -259,11 +253,12 @@ export default function CreatePost() {
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <BigButton
+              className={'accent-bg'}
               title={"Post"}
               style={{
-                background: darkColorTheme.accentColor,
                 borderRadius: 10,
                 paddingInline: 15,
+                color: 'white'
               }}
               onClick={handleClick}
             />
