@@ -11,28 +11,16 @@ import { chatRoomExist } from "../../services/chat";
 function UserAddCard({ data, isSelected, onToggle }) {
     return (
         <div
-            className="div-center"
-            style={{ justifyContent: "space-between", paddingInline: 15 }}
+            className="div-center-justify px-[15px]"
         >
-            <div className="div-center" style={{ gap: 10, marginBlock: 15 }}>
+            <div className="div-center gap-3 my-4" >
                 <img
                     src={`${FILE_URL}/${data?.profile_avtar}`}
                     alt=""
-                    style={{
-                        width: "30px",
-                        height: "30px",
-                        objectFit: "cover",
-                        borderRadius: "50%",
-                        display: "block",
-                    }}
+                    className="img-small-style"
                 />
                 <a
-                    style={{
-                        marginInline: 3,
-                        marginBlock: 5,
-                        fontSize: 13.5,
-                        fontWeight: 400,
-                    }}
+                    className='small-text-small-weight'
                 >
                     {data?.username}
                 </a>
@@ -99,33 +87,18 @@ export default function StartChat() {
 
     return (
         <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "100%",
-            }}
+        className="flex justify-between flex-col h-[100%]"
         >
-            <div className="fixed-bg" style={{ padding: 10 }}>
+            <div className="fixed-bg p-3" >
                 <h4
-                    style={{
-                        marginInline: 3,
-                        marginBlock: 5,
-                        fontSize: 13.5,
-                        fontWeight: 700,
-                    }}
+                    className="small-text-large-weight"
                 >
                     New Chat
                 </h4>
             </div>
-            <div
-                style={{
-                    flex: 1,
-                    display: "flex",
-                    justifyContent: "center",
-                }}
+            <div className="flex justify-center flex-1"
             >
-                <div style={{ marginBlock: 15, width: "50%" }}>
+                <div className="my-4 w-[50%]">
                     <Basicinput
                         setFormValues={setformValues}
                         name={"username"}
@@ -133,33 +106,18 @@ export default function StartChat() {
                         placeHolder={"Type username(s)"}
                     />
                     <h4
-                        style={{
-                            marginInline: 23,
-                            marginBlock: 10,
-                            fontSize: 13.5,
-                            fontWeight: 400,
-                        }}
+                        className="small-text-small-weight mx-[23px!important] my-[10px!important] "
                     >
                         Search for people username and chat with them.
                     </h4>
                     <div
-                        className="secondary-bg"
-                        style={{
-                            paddingInline: 10,
-                            paddingBlock: 8,
-                            borderRadius: 10,
-                        }}
+                        className="secondary-bg py-2 px-3 rounded-lg "
                     >
                         {data.length === 0 ?
                             <>
                                 <div>
                                     <h4
-                                        style={{
-                                            marginInline: 2,
-                                            marginBlock: 3,
-                                            fontSize: 13.5,
-                                            fontWeight: 700,
-                                        }}
+                                        className="small-text-large-weight"
                                     >
                                         Suggested
                                     </h4>
@@ -182,46 +140,24 @@ export default function StartChat() {
             </div>
 
             <div
-                style={{
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                    padding: 15,
-                    gap: 10,
-                }}
+            className="flex flex-row-reverse p-4 gap-3"
             >{
                     selectedUsers.length < 2 ?
                         <BigButton
-                            className={'accent-bg'}
+                            className={'accent-bg text-[#fff] rounded-[30px!important] px-3 py-2'}
                             title={"Start Chat"}
                             onClick={handleClick}
-                            style={{
-                                borderRadius: 30,
-                                paddingInline: 10,
-                                paddingBlock: 8,
-                                padding: "0",
-                            }}
                         />
                         :
                         <BigButton
-                            className={'accent-bg'}
                             title={"Start Group Chat"}
-                            style={{
-                                borderRadius: 30,
-                                paddingInline: 10,
-                                paddingBlock: 8,
-                                padding: "0",
-                            }}
+                            className={'accent-bg text-[#fff] rounded-[30px!important] px-3 py-2'}
+
                         />
                 }
                 <BigButton
-                    className={'secondary-bg'}
+                    className={'secondary-bg rounded-[30px!important] px-3 py-2'}
                     title={"cancel"}
-                    style={{
-                        borderRadius: 30,
-                        paddingInline: 12,
-                        paddingBlock: 8,
-                        padding: "0",
-                    }}
                 />
             </div>
         </div>

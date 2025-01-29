@@ -62,7 +62,7 @@ export default function CircularFileInput({ style, setFile, file }) {
                             }}
                         >
                             <FaCloudUploadAlt size={20} />
-                            <p style={{ fontSize: 13, fontWeight: 100, marginBlock: 5 }}>
+                            <p  className="small-text-normal-weight secondary-text">
                                 Upload Photo
                             </p>
                         </div>
@@ -87,13 +87,7 @@ export default function CircularFileInput({ style, setFile, file }) {
                         <img
                             src={URL.createObjectURL(file)}
                             alt="Uploaded file"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover",
-                                display: "block", // Removes extra space under image
-                                borderRadius: "50%", // Keeps the circular shape
-                            }}
+                            className="img-small-style w-[100%!important] h-[100%!important] "
                         />
                         <div
                             className="secondary-bg"

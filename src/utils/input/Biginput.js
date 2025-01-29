@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../asset/css/util.css';
 
-export default function Biginput({ placeHolder, style, value, setFormValues, name, minHeight }) {
+export default function Biginput({ placeHolder, style, value, setFormValues, name, minHeight,className }) {
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -15,12 +15,10 @@ export default function Biginput({ placeHolder, style, value, setFormValues, nam
 
   return (
     <div
-      className="basicInput-external-div secondary-bg"
+      className={`basicInput-external-div secondary-bg ${className} div-center`}
       style={{
         borderRadius: 30,
         padding: 20,
-        display: "flex",
-        alignItems: "center",
         ...style,
       }}
     >

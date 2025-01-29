@@ -14,6 +14,7 @@ import { FaPlus } from "react-icons/fa6";
 import CreateTribe from "../Tribe/CreateTribe";
 import { getAllJoinedTribe, getAllTribe } from "../../services/tribe";
 import { darkColorTheme, FILE_URL } from "../../constant";
+import {truncateText} from '../../utils/CommonFunction'
 
 const SideBarComponent = [
   {
@@ -76,87 +77,56 @@ export default function Sidebar() {
 
   return (
     <div
-      className="slectDivContainer main-content primaery-bg divider-right"
-      style={{
-        paddingInline: 20,
-        paddingBlock: 20,
-        overflowY: "auto",
-        maxHeight: "100vh",
-        position: 'fixed',
-        top: 5,
-        maxHeight: "calc(100vh - 100px)", // Adjust based on the header/footer size
-        overflowY: "auto",  // Make this section scrollable
-        left: 0,
-        width: 240,
-        // zIndex:0
-      }}
+      className="slectDivContainer main-content primaery-bg divider-right fixed-component p-5 top-[5px] max-h-[calc(100vh-65px)] left-0 w-[280px] "
     >
       <CreateTribe isOpen={tribeModal} setModal={setTribeModal} />
       <div
-        style={{
-
-          paddingBottom: "20px", // Optional: Add some space at the bottom
-        }}
+        className="pb-5"
       >
         {SideBarComponent.map((item, i) => (
           <div
             key={i}
-            className="slectDiv"
+            className="slectDiv div-center self-center"
             onClick={() => navigate(`/${item.path}`)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              alignSelf: "center",
-            }}
           >
             <item.icon size={25} />
-            <div style={{ marginInline: 15 }}>
-              <a >
+            <div className="mx-4" >
+              <a className="medium-text-normal-weight" >
                 {item.title}
               </a>
             </div>
           </div>
         ))}
       </div>
-      <div style={{}}>
-        <div className="divider-bottom" style={{ marginBlock: 10 }}></div>
+      <div>
+        <div className="divider-bottom my-3"></div>
         <div
           onClick={() =>
             communityDropDownClicked
               ? setCommunityDropDownClicked(false)
               : setCommunityDropDownClicked(true)
           }
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-          className="slectDiv"
+          className="slectDiv div-center-justify"
         >
           <div>
-            <a>Tribes</a>
+            <a className="large-text-normal-weight" >Tribes</a>
           </div>
           <MdKeyboardArrowUp size={25} />
         </div>
         <div
           onClick={() => setTribeModal(true)}
-          className="slectDiv"
-          style={{ padding: 5, marginBottom: 10 }}
+          className="slectDiv p-[5px] mb-2"
         >
           <BigButton
             Icon={FaPlus}
+            className={'p-[5px!important] bg-[transparent]'}
             title={"Create a tribe"}
-            style={{ padding: 5, background: "transparent" }}
           />
         </div>
-        <div style={{ display: communityDropDownClicked ? "none" : "block" }}>
+        <div className={`${communityDropDownClicked?'hidden':'block'}`} >
           {isLoading && (
             <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                padding: "10px",
-              }}
+            className="flex justify-center p-[5px!important]"
             >
               <div className="loader">Loading...</div>{" "}
               {/* You can replace with a spinner component or icon */}
@@ -167,33 +137,17 @@ export default function Sidebar() {
               <div
                 onClick={() => navigate(`/tribe/${item._id}`)}
                 key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  paddingBlock: 5,
-                  marginBlock: 5,
-                }}
-                className="slectDiv"
+                className="slectDiv div-center-justify p-[9px!important] m-1"
               >
                 <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
+                  className="div-center gap-2"
                 >
                   <img
                     src={`${FILE_URL}/${item?.tribeProfileImage}`}
                     alt=""
-                    style={{
-                      width: "35px",
-                      height: "35px",
-                      objectFit: "cover",
-                      borderRadius: "50%", // Optional: makes the image circular
-                      display: "block", // Removes extra space under image
-                    }}
+                    className="img-small-style"
                   />
-                  <a style={{ marginLeft: 10 }}>t/{item?.tribeName}</a>
+                  <a className="medium-text-normal-weight">t/{truncateText(item?.tribeName,12)}</a>
                 </div>
                 <div>
                   <MdOutlineStarOutline size={20} />

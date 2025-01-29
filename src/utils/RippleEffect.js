@@ -8,7 +8,7 @@ const RippleEffect = ({ src, alt, size = 200 }) => {
       className="ripple-container"
       style={{ width: size, height: size }}
     >
-      <img src={src} alt={alt} className="ripple-image" style={{ width: "100%", height: "100%" }} />
+      <img src={src} alt={alt} className="ripple-image w-[100%] h-[100%] " />
       <div className="ripple-ring"></div>
     </div>
   );

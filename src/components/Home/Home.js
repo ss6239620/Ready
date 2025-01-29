@@ -47,15 +47,15 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="main-content" style={{ paddingInline: 70, paddingBlock: 5, display: 'flex',gap:10 }}>
-      <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex' }}>
+    <div className="main-content px-[70px] py-[5px] flex gap-10" >
+      <div className='flex-1'>
+        <div className='flex' >
           <SimpleDropdown title={'Best'} />
         </div>
         <InfiniteScroll fetchData={fetchHomeFeed} hasMoreData={hasMore}>
           {postData.map((item, index) => (
-            <div style={{ marginBlock: 5, marginInline: 10 }} key={index}>
-              <Underline style={{ marginBlock: 5, paddingInline: 10 }} color={darkColorTheme.divider} />
+            <div className='my-[5px] mx-[10px]' key={index}>
+              <Underline className='my-[5px] px-[10px]' color={darkColorTheme.divider} />
               <PostCard
                 data={item}
                 tribeInfo={item.posted_tribe_id}
@@ -69,21 +69,11 @@ export default function Home() {
       </div>
       {!loading ?
           <div
-            className="slectDivContainer main-content"
-            style={{
-              marginBlock: 10,
-              overflowY: "auto",
-              maxHeight: "calc(100vh - 90px)",
-              position: 'sticky',
-              zIndex:0,
-              flex:0.44,
-              top:60,
-              bottom:0,
-            }}>
-            <div className='fixed-bg' style={{ padding: 15, borderRadius: 10 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
-                <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>
+            className="slectDivContainer main-content sticky-component my-[10px] max-h-[calc(100vh-100px)] flex-[0.44] top-[60px] bottom-[10px] ">
+            <div className='fixed-bg p-[15px] rounded-[10px] '>
+              <div className='div-center justify-between'>
+                <h5 className='medium-text-normal-weight secondary-text my-[15px]' >RECENT POSTS</h5>
+                <a className='cursor-pointer accent-text'>Clear</a>
               </div>
               {
                 recentPost.map((item, key) => (

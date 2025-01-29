@@ -13,11 +13,41 @@ import { SiAutomattic } from "react-icons/si";
 import { IoIosBrush } from "react-icons/io";
 import { GoTrophy } from "react-icons/go";
 
+export const routeMap = {
+    // overview 
+    'queue': { list: 'overview', key: 0 },
+    'modmail': { list: 'overview', key: 1 },
+    'scheduledposts': { list: 'overview', key: 2 },
+    'restrictusers': { list: 'overview', key: 3 },
+    'modandmember': { list: 'overview', key: 4 },
+    'insight': { list: 'overview', key: 5 },
+
+    // moderations 
+    'rules': { list: 'moderation', key: 0 },
+    'saved-responses': { list: 'moderation', key: 1 },
+    'mod-log': { list: 'moderation', key: 2 },
+    'auto-mod': { list: 'moderation', key: 3 },
+    'safety-filters': { list: 'moderation', key: 4 },
+    'automation': { list: 'moderation', key: 5 },
+
+    // content 
+    'wiki': { list: 'content', key: 0 },
+
+    // settings 
+    'generalsetting': { list: 'setting', key: 0 },
+    'poastandcomments': { list: 'setting', key: 1 },
+    'lookandfeel': { list: 'setting', key: 2 },
+    'communityguide': { list: 'setting', key: 3 },
+    'notification': { list: 'setting', key: 4 },
+    'achievements': { list: 'setting', key: 5 },
+}
+
 export const modSidebarOverviewELemnet = [
     {
         title: 'Queues',
         icon: GrNotes,
-        external_link: false
+        external_link: false,
+        route: 'queue',
     },
     {
         title: 'Mod Mail',
@@ -50,6 +80,7 @@ export const modSidebarModerationELemnet = [
     {
         title: 'Rules',
         icon: CgNotes,
+        route: 'rules',
         external_link: false
     },
     {
@@ -121,6 +152,6 @@ export const modSidebarSettingELemnet = [
     },
 ]
 
-export const modQueuesAllcontentDropdown=['All content','Posts and comments','Posts','Comments','Awards']
+export const modQueuesAllcontentDropdown = ['All content', 'Posts and comments', 'Posts', 'Comments', 'Awards']
 
-export const modQueuesNewestFirstDropdown=['Newest First','Oldest First','Most Reported First']
+export const modQueuesNewestFirstDropdown = ['Newest First', 'Oldest First', 'Most Reported First']

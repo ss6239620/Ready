@@ -1,34 +1,23 @@
 import React, { useState } from "react";
-import { darkColorTheme } from "../../../constant";
 import BigButton from "../../../utils/buttons/BigButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaMeta } from "react-icons/fa6";
 import Basicinput from "../../../utils/input/Basicinput";
 import { useGoogleLogin } from "@react-oauth/google";
 import { googleAuth, login } from "../../../services/auth";
-import { useNavigate } from "react-router-dom";
-import { useUser } from '../../../Context/UserContext'
+import { useLogin } from "../../../hooks/authHook";
+import FailAlert from "../../../utils/Alert/FailAlert";
+import { validateEmail } from "../../../utils/CommonFunction";
 
 export default function Login({ isOpen, setModal }) {
     const [formValues, setFormValues] = useState({
         password: "",
         email: "",
     });
-    const { setUser } = useUser()
-    const [error, setError] = useState('')
-
-    function handleClick(params) {
-        login(formValues.email, formValues.password)
-            .then((res) => {
-                setUser(res.data.data);
-                localStorage.setItem("user", JSON.stringify(res.data.data));
-
-                setModal(false)
-                window.location.reload()
-            }).catch((err) => {
-                setError(err.response.data.error)
-            })
-    }
+    const { mutate, isPending, isError, error } = useLogin(
+        formValues.email,
+        formValues.password,
+    );
 
     const handleOverlayClick = (event) => {
         // Close modal only if clicking on the overlay, not the modal content
@@ -65,25 +54,21 @@ export default function Login({ isOpen, setModal }) {
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            className="modal-overlay div-center-justify-center"
             onClick={handleOverlayClick}
         >
-            <div className="modal-content" style={{}}>
-                <div style={{ paddingInline: 30 }}>
-                    <h2 style={{ marginBlock: 10 }}>Log In</h2>
-                    <div>
+            <div className="modal-content px-[30px!important]">
+                <div>
+                    {isError && <FailAlert title={error} />}
+                    <h2 className="large-text-large-weight mx-[0px!important]" >Log In</h2>
+                    <div className="my-2">
                         <a>
                             By continuing, you agree to our{" "}
-                            <span style={{ color: "#648EFC", cursor: "pointer" }}>
+                            <span className={'accent-text-style cursor-pointer '}>
                                 User Agreement
                             </span>{" "}
                             and acknowledge that you understand the{" "}
-                            <span style={{ color: "#648EFC", cursor: "pointer" }}>
+                            <span className={'accent-text-style cursor-pointer '}>
                                 Privacy Policy
                             </span>{" "}
                             .
@@ -93,29 +78,25 @@ export default function Login({ isOpen, setModal }) {
                         Icon={FcGoogle}
                         onClick={googleLogin}
                         title={"Continue With google"}
-                        style={{ background: "#fff", color: "black", marginBlock: 10 }}
+                        className={'secondary-bg primary-text my-3 rounded-3xl '}
                     />
                     <BigButton
                         Icon={FaMeta}
                         title={"Continue With Meta"}
-                        style={{ background: "#fff", color: "black", marginBlock: 10 }}
+                        className={'secondary-bg primary-text my-3 rounded-3xl'}
                     />
                     <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginBlock: 10,
-                        }}
+                        className="div-center-justify-center my-3"
                     >
-                        <div style={{ border: "1px solid #FFFFFF19", width: "100%" }} />
-                        <span style={{ marginInline: 10 }}>OR</span>
-                        <div style={{ border: "1px solid #FFFFFF19", width: "100%" }} />
+                        <div className="divider-bottom w-[100%]" />
+                        <span className="mx-3" >OR</span>
+                        <div className="divider-bottom w-[100%]" />
                     </div>
                     <Basicinput
                         placeHolder={"Email"}
-                        style={{ marginBlock: 20 }}
+                        // className={'my-5'}
                         value={formValues.email}
+                        validationFunc={validateEmail}
                         setFormValues={setFormValues}
                         name="email"
                     />
@@ -124,23 +105,25 @@ export default function Login({ isOpen, setModal }) {
                         value={formValues.password}
                         setFormValues={setFormValues}
                         name="password"
-                        style={{ marginBlock: 20 }}
+                        className={'my-5'}
+                        type={'password'}
                     />
-                    {error && <p style={{ margin: 0, padding: 0, textAlign: 'center', color: 'red' }}>{error}</p>}
-                    <div style={{ marginTop: 10, marginBottom: 10 }}>
-                        <span style={{ color: "#648EFC", cursor: "pointer" }}>
+                    <div className="my-3" >
+                        <span className={'accent-text-style cursor-pointer '}>
                             Forgot password?
                         </span>
                     </div>
-                    <div style={{ marginBottom: 30 }}>
+                    <div className="mb-7" >
                         <a>New to Reddit? </a>
-                        <span style={{ color: "#648EFC", cursor: "pointer" }}>Sign Up</span>
+                        <span className={'accent-text-style cursor-pointer '}>Sign Up</span>
                     </div>
+                    {/* Loading Spinner or Text */}
                     <BigButton
-                        onClick={handleClick}
+                        onClick={() => mutate(formValues.email, formValues.password)}
                         title={"Log in"}
-                        style={{ borderRadius: 50, background: isLoginDisabled ? 'grey' : 'red' }}
+                        className={`rounded-[50px!important] ${isLoginDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
                         disabled={isLoginDisabled}
+                        loading={isPending}
                     />
                 </div>
             </div>

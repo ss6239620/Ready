@@ -30,53 +30,39 @@ export default function AboutStage({ isOpen, setModal, setNextModal, setPrevious
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            className="modal-overlay div-center-justify-center "
             onClick={handleOverlayClick}
         >
             <div
-                className="modal-content"
-                style={{
-                    height: '80%', display: 'flex',  // Use flexbox for layout
-                    flexDirection: 'column',  // Stack elements vertically
-                    justifyContent: 'space-between',  // Distribute space between items, pushing the button to the bottom
-                }}
+                className="modal-content flex justify-between h-[80%] flex-col "
             >
                 <div>
-                    <div onClick={handlePrevious} style={{}}>
+                    <div onClick={handlePrevious}>
                         <IoIosArrowRoundBack className="back-button" size={40} />
                     </div>
-                    <div style={{ paddingInline: 40 }}>
-                        <h2 style={{ marginBlock: 10 }}>About you</h2>
+                    <div className="px-10" >
+                        <h2 className="large-text-large-weight">About you</h2>
                         <div>
-                            <a style={{ fontSize: 15 }}>
+                            <a className="medium-text-normal-weight secondary-text]">
                                 Tell us about yourself to improve your recommendations and ads.
                             </a>
                         </div>
-                        <div style={{ marginBlock: 30, textAlign: 'center' }}>
+                        <div className="mx-[30px] text-center ">
                             <a >How do you identify? </a>
                         </div>
-                        <div style={{ paddingInline: 20 }}>
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Woman" })} title={'Woman'} style={{ background: '#FFFFFF19', borderRadius: 50, marginBlock: 8 }} />
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Man" })} title={'Man'} style={{ background: '#FFFFFF19', borderRadius: 50, marginBlock: 8 }} />
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Non-binary" })} title={'Non-binary'} style={{ background: '#FFFFFF19', borderRadius: 50, marginBlock: 8 }} />
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Prefer not to say" })} title={'I prefer not to say'} style={{ background: '#FFFFFF19', borderRadius: 50, marginBlock: 8 }} />
+                        <div className="px-5" >
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Woman" })} title={'Woman'} className={'secondary-bg rounded-[50px!important] my-2 '}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Man" })} title={'Man'} className={'secondary-bg rounded-[50px!important] my-2 '}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Non-binary" })} title={'Non-binary'}className={'secondary-bg rounded-[50px!important] my-2 '}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Prefer not to say" })} title={'I prefer not to say'}className={'secondary-bg rounded-[50px!important] my-2 '}  />
                         </div>
                     </div>
                 </div>
-                <div style={{ paddingInline: 30 }}>
+                <div className="px-7" >
                     <BigButton
                         title={"Continue"}
                         disabled={isDisabled}
-                        style={{
-                            background: "red",
-                            borderRadius: 50,
-                            background: isDisabled ? "grey" : "red",
-                        }}
+                        className={`rounded-[50px!important] ${isDisabled ?'bg-[var(--divider)]':'bg-[var(--teritory)]' }`}
                         onClick={handleClick}
                     />
                 </div>

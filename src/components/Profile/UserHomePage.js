@@ -60,104 +60,63 @@ export default function UserHomePage() {
 
 
   return (
-    <div className='div-center' style={{ marginInline: 80, marginTop: 80, gap: 10 }}>
-      <div style={{ flex: 1, }}>
-        <div className='div-center' style={{ alignItems: 'flex-end', gap: 20 }}>
+    <div className='div-center mx-20 gap-3 mt-20' >
+      <div className='flex-1' >
+        <div className='div-center items-end gap-5 '>
           <div
-            style={{
-              borderRadius: 10,
-              background: 'red',
-              position: 'relative'
-            }}
+            className='rounded-lg bg-[var(--teritory)] relative'
           >
-            <div style={{ background: 'red', padding: 12, position: 'absolute', borderEndEndRadius: 20, top: 0, left: 0 }} />
-            <div style={{ background: 'red', padding: 12, position: 'absolute', borderStartStartRadius: 20, bottom: 0, right: 0 }} />
+            <div className='bg-[var(--teritory)] p-3 absolute rounded-ee-2xl top-0 left-0 ' />
+            <div className='bg-[var(--teritory)] p-3 absolute rounded-ss-2xl right-0 bottom-0 ' />
             <img
               src={`${FILE_URL}/${user.user?.profile_avtar}`}
               alt="communities-logo"
-              style={{
-                width: "100px", // Fixed size
-                height: "130px", // Fixed size
-                objectFit: "cover", // Ensures the aspect ratio is preserved
-                borderRadius: 15,
-                padding: 7
-              }}
+              className="img-small-style w-[100px!important] h-[130px!important] rounded-[15px!important] p-2 "
             />
           </div>
           <div>
             <h4
-              style={{
-                marginInline: 3,
-                marginBlock: 5,
-                fontSize: 23,
-                fontWeight: "bold",
-              }}
+              className='extra-large-text-extra-large-weight'
             >
               {user.user.username}
             </h4>
             <h5
-              style={{
-                marginInline: 3,
-                marginBlock: 0,
-                fontSize: 14,
-                color: darkColorTheme.secondaryTextColor,
-                fontWeight: 400,
-              }}
+              className='small-text-normal-weight secondary-text'
             >
               u/{user.user.username}
             </h5>
           </div>
         </div>
-        <div style={{ marginBlock: 30 }}>
-          <div style={{ display: "flex", gap: 10 }}>
+        <div className='my-8' >
+          <div className='flex gap-3' >
             <BigButton
-              className={`${selectedTab === 1 ? 'secondary-bg' : ''}`}
-              style={{
-                borderRadius: 50,
-                paddingInline: 25,
-              }}
+              className={`${selectedTab === 1 ? 'secondary-bg' : ''} rounded-[50px] px-[25px!important]`}
               title={"Posts"}
               onClick={() => handleTabSwitch(1)}
             />
             <BigButton
-              className={`${selectedTab === 2 ? 'secondary-bg' : ''}`}
-              style={{
-                borderRadius: 50,
-                paddingInline: 25,
-              }}
+              className={`${selectedTab === 2 ? 'secondary-bg' : ''} rounded-[50px] px-[25px!important]`}
               title={"Comments"}
               onClick={() => handleTabSwitch(2)}
             />
             <BigButton
-              className={`${selectedTab === 3 ? 'secondary-bg' : ''}`}
-              style={{
-                borderRadius: 50,
-                paddingInline: 25,
-              }}
+              className={`${selectedTab === 3 ? 'secondary-bg' : ''} rounded-[50px] px-[25px!important]`}
               title={"Hidden"}
               onClick={() => handleTabSwitch(3)}
             />
             <BigButton
-              className={`${selectedTab === 4 ? 'secondary-bg' : ''}`}
-              style={{
-                borderRadius: 50,
-                paddingInline: 25,
-              }}
+              className={`${selectedTab === 4 ? 'secondary-bg' : ''} rounded-[50px] px-[25px!important]`}
               title={"Upvoted"}
               onClick={() => handleTabSwitch(4)}
             />
             <BigButton
-              className={`${selectedTab === 5 ? 'secondary-bg' : ''}`}
-              style={{
-                borderRadius: 50,
-                paddingInline: 25,
-              }}
+              className={`${selectedTab === 5 ? 'secondary-bg' : ''} rounded-[50px] px-[25px!important]`}
               title={"Downvoted"}
               onClick={() => handleTabSwitch(5)}
             />
           </div>
-          <div className='div-center' style={{ gap: 10, alignItems: 'baseline' }}>
-            <ButtonWIthBorder onClick={() => navigate('/createpost')} iconSize={20} title={'Create Post'} Icon={FaPlus} style={{ background: 'transparent', marginTop: 20 }} />
+          <div className='div-center gap-3 mt-5' >
+            <ButtonWIthBorder onClick={() => navigate('/createpost')} iconSize={20} title={'Create Post'} Icon={FaPlus} />
             <SimpleDropdown title={'New'} />
           </div>
 
@@ -188,20 +147,13 @@ export default function UserHomePage() {
 
         </div>
       </div>
-      <div style={{ flex: 0.4, position: 'relative', zIndex: 1 }}>
+      <div className='flex-[0.4] relative z-[1]'>
         <div
-          className="slectDivContainer main-content"
-          style={{
-            overflowY: "auto",
-            maxHeight: "calc(100vh - 90px)", // Adjust based on the header/footer size
-            position: 'fixed',
-            width: '21%',
-            top: 10,
-          }}>
-          <div className='fixed-bg' style={{ padding: 15, borderRadius: 10 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
-              <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>
+          className="slectDivContainer main-content fixed-component max-h-[calc(100vh-90px)] top-3 w-[21%] ">
+          <div className='fixed-bg p-4 rounded-lg '>
+            <div className='div-center-justify'>
+              <h5 className='medium-text-large-weight secondary-text' >RECENT POSTS</h5>
+              <a className='accent-text cursor-pointer'>Clear</a>
             </div>
             <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, corporis labore? Ab voluptatem laborum, aut explicabo dicta tenetur fugiat dolores accusantium sint iusto atque dolore ullam enim, quo blanditiis cum. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, inventore placeat. Eius, doloribus, aut nam ipsam velit animi eligendi et ut aliquam facilis natus tempora fugit at repellendus consequuntur dicta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ducimus nam maxime id vitae in! Illo fugiat harum, quas nulla eius possimus! Error doloribus enim ad natus eum assumenda provident. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quasi, optio molestias, consequatur doloribus quas iure natus, non ab modi quidem. Doloremque beatae ut vitae nam, autem vel quis modi. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus rerum animi quisquam tenetur eaque consequuntur excepturi, in corrupti magnam, beatae inventore et eius accusamus repudiandae voluptatum itaque natus, atque voluptatibus.</div>
           </div>

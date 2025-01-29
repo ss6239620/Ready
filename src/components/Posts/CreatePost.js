@@ -88,84 +88,43 @@ export default function CreatePost() {
     }
     return (
       <div
-        className="secondary-bg"
-        style={{
-          marginInline: 15,
-          overflowY: "auto",
-          height: 400,
-          borderRadius: 10,
-          paddingInline: 10,
-          paddingBlock: 20,
-          marginTop: 5
-        }}
+        className="secondary-bg mx-[15px] overflow-y-auto h-[400px] rounded-xl px-[10px] py-5 mt-[5px] "
       >
         <div>
-          <a style={{ fontSize: 13 }}>Your Profile</a>
+          <a className="large-text-small-weight">Your Profile</a>
           <div
             // onClick={() => navigate(`/tribe/${item._id}`)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingBlock: 5,
-              marginBlock: 5,
-            }}
-            className="slectDiv"
+            className="slectDiv div-center-justify py-1 my-1"
           >
             <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
+              className="div-center"
             >
               <img
                 src={require('../../asset/img/logo.png')}
                 alt=""
-                style={{
-                  width: "35px",
-                  height: "35px",
-                  objectFit: "cover",
-                  borderRadius: "50%", // Optional: makes the image circular
-                  display: "block", // Removes extra space under image
-                }}
+                className="img-small-style"
               />
-              <a style={{ marginLeft: 10 }}>t/{'username'}</a>
+              <a className="medium-text-small-weight">t/{'username'}</a>
             </div>
           </div>
         </div>
-        <div style={{ marginTop: 20 }}>
-          <a style={{ fontSize: 13 }}>Your Tribes</a>
+        <div className="mt-5" >
+          <a className="large-text-small-weight">Your Tribes</a>
           {!isLoading && joinedTribe.map((item, index) => (
             <div
               key={index}
               onClick={() => handleSelcet(item)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingBlock: 5,
-                marginBlock: 5,
-              }}
-              className="slectDiv"
+              className="slectDiv div-center-justify py-1 my-1"
             >
               <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
+                className="div-center"
               >
                 <img
                   src={`${FILE_URL}/${item?.tribeProfileImage}`}
                   alt=""
-                  style={{
-                    width: "35px",
-                    height: "35px",
-                    objectFit: "cover",
-                    borderRadius: "50%", // Optional: makes the image circular
-                    display: "block", // Removes extra space under image
-                  }}
+                  className="img-small-style"
                 />
-                <a style={{ marginLeft: 10 }}>t/{item?.tribeName}</a>
+                <a className="medium-text-small-weight">t/{item?.tribeName}</a>
               </div>
             </div>
           ))}
@@ -175,49 +134,41 @@ export default function CreatePost() {
   }
   return (
     <div className='main-content' >
-      <div style={{ paddingInline: "10%", paddingBlock: "2%", width: "60%" }}>
+      <div className="px-[10%] py-[2%] w-[80%] " >
         <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+          className="div-center-justify"
         >
-          <h2>Create Post</h2>
-          <BrightBorderButtonOnHover style={{ padding: 13 }} title={"Drafts"} />
+          <h2 className="large-text-normal-weight">Create Post</h2>
+          <BrightBorderButtonOnHover className={'p-3'} title={"Drafts"} />
         </div>
         <BackGroundDropDown
-          style={{ width: "25%", marginBlock: 10 }}
+          className={'w-[25%] my-3'}
           title={"Select a tribe"}
           children={<TribeSelectionHandler />}
           selectedTribe={selectedTribe}
         />
         <div>
-          <div style={{ display: "flex" }}>
+          <div className="flex" >
             <BrightBorderButtonOnHover
-              style={{
-                padding: 13,
-                borderRadius: 0,
-                marginInline: 10,
-              }}
+              className={'p-3 rounded-[0px!important] mx-3'}
               title={"Text"}
               bottomLine={selectedTab === 0 ? true : false}
               onClick={() => handleTabSwitch(0)}
             />
             <BrightBorderButtonOnHover
-              style={{ padding: 13, borderRadius: 0, marginInline: 10 }}
+              className={'p-3 rounded-[0px!important] mx-3'}
               title={"Image & Videos"}
               bottomLine={selectedTab === 1 ? true : false}
               onClick={() => handleTabSwitch(1)}
             />
             <BrightBorderButtonOnHover
-              style={{ padding: 13, borderRadius: 0, marginInline: 10 }}
+              className={'p-3 rounded-[0px!important] mx-3'}
               title={"Link"}
               bottomLine={selectedTab === 2 ? true : false}
               onClick={() => handleTabSwitch(2)}
             />
           </div>
-          <div style={{ marginTop: 20 }}>
+          <div className="mt-5" >
             <Basicinput
               setFormValues={setformValues}
               value={formValues.content_title}
@@ -230,12 +181,12 @@ export default function CreatePost() {
                 value={formValues.content_body}
                 name={'content_body'}
                 placeHolder={"Body"}
-                style={{ marginBlock: 30, background: "none" }}
+                className={'my-7 bg-[transparent!important]'}
               />
             )}
             {selectedTab === 1 && (
               <FileInput
-                style={{ marginBlock: 30 }}
+                className={'my-7'}
                 setFile={setPostMedia}
                 file={postMedia}
                 fileTypes={["image", "video"]}
@@ -247,19 +198,14 @@ export default function CreatePost() {
                 value={formValues.content_link}
                 name={'content_link'}
                 placeHolder={"Link URL"}
-                style={{ marginBlock: 30 }}
+                className={'my-7'}
               />
             )}
           </div>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div className="flex justify-end">
             <BigButton
-              className={'accent-bg'}
+              className={'accent-bg text-[#fff] rounded-2xl px-5'}
               title={"Post"}
-              style={{
-                borderRadius: 10,
-                paddingInline: 15,
-                color: 'white'
-              }}
               onClick={handleClick}
             />
           </div>

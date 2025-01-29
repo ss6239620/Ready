@@ -92,102 +92,64 @@ export default function TribeHomePage({ }) {
     }
 
     return (
-        <div className='main-content' style={{ paddingInline: "6%", paddingBlock: 20, }}>
+        <div className='main-content px-[6%] py-5 '>
             {!isLoading &&
                 <>
-                    <div>
-                        <div style={{ width: "100%", height: 140 }}>
-                            <img
-                                src={`${FILE_URL}/${tribeDetail.tribeBannerImage}`}
-                                alt="Logo"
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    display: "block",
-                                    borderRadius: 10,
-                                }}
-                            />
-                        </div>
+                    <div className="relative">
+                        <img
+                            src={`${FILE_URL}/${tribeDetail.tribeBannerImage}`}
+                            alt="Logo"
+                            className="img-small-style w-[100%!important] h-[140px!important] rounded-[10px!important] "
+                        />
                         <div
-                            style={{
-                                display: "flex",
-                                paddingInline: 30,
-                                justifyContent: "space-between",
-                            }}
+                            className="flex justify-between px-7"
                         >
                             <div
-                            className="secondary-bg"
-                                style={{
-                                    width: 100,
-                                    height: 100,
-                                    borderRadius: "50%",
-                                    position: "absolute",
-                                    top: "25%",
-                                    display: "flex",
-                                    justifyContent: 'center',
-                                    alignItems: 'center'
-                                }}
+                                className="secondary-bg w-[100px] h-[100px] rounded-[50%] absolute top-[50%] div-center-justify-center "
                             >
                                 <img
                                     src={`${FILE_URL}/${tribeDetail.tribeProfileImage}`}
                                     alt="Logo"
-                                    style={{
-                                        width: "90%",
-                                        height: "90%",
-                                        objectFit: "cover",
-                                        display: "block", // Removes extra space under image
-                                        borderRadius: "50%",
-                                        padding: 3,
-                                    }}
+                                    className="img-small-style p-[5px] w-[100%!important] h-[100%!important] "
                                 />
                             </div>
                             <div
-                                style={{
-                                    marginLeft: "120px", // Push the other content away from the image
-                                    marginBlock: 10
-                                }}
+                            className="ml-[120px] my-3"
                             >
                                 <div>
-                                    <h1 style={{ marginBlock: 0 }}>t/{tribeDetail.tribeName}</h1>
+                                    <h1 className='extra-large-text-extra-large-weight'>t/{tribeDetail.tribeName}</h1>
                                 </div>
                             </div>
                             <div
-                                style={{
-                                    marginLeft: "20px", // Adjust for space between content
-                                    marginBlock: 10,
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center'
-                                }}
+                            className="div-center-justify my-2 ml-5 gap-4"
                             >
-                                <ButtonWIthBorder onClick={handleCreatepostClick} iconSize={20} title={'Create Post'} Icon={FaPlus} style={{ background: 'transparent', marginInline: 10 }} />
+                                <ButtonWIthBorder onClick={handleCreatepostClick} iconSize={20} title={'Create Post'} Icon={FaPlus} className={'bg-[transparent!important mx-2]'} />
                                 {isJoined &&
-                                    <ButtonWIthBorder iconSize={20} Icon={IoNotificationsSharp} style={{ background: 'transparent', marginInline: 10, }} />
+                                    <ButtonWIthBorder iconSize={20} Icon={IoNotificationsSharp} className={'bg-[transparent!important mx-2]'} />
                                 }
                                 {isJoined ?
-                                    <ButtonWIthBorder onClick={leave_tribe} title={'Joined'} style={{ background: 'transparent', marginInline: 10, }} />
+                                    <ButtonWIthBorder onClick={leave_tribe} title={'Joined'} className={'bg-[transparent!important mx-2]'} />
                                     :
-                                    <ButtonWIthBorder onClick={join_tribe} title={'Join'} style={{ background: 'transparent', marginInline: 10, }} />
+                                    <ButtonWIthBorder onClick={join_tribe} title={'Join'} className={'bg-[transparent!important mx-2]'} />
                                 }
                                 {userCreatedTribe &&
-                                    <BigButton className={'accent-bg'} onClick={()=>navigate(`/mod/${id}/queue`)} title={'Mod Tools'} style={{  marginInline: 10, borderRadius: 30 ,color:'white'}} />
+                                    <BigButton className={'accent-bg text-[#fff]  border-radius-large '} onClick={() => navigate(`/mod/${id}/queue`)} title={'Mod Tools'}  />
                                 }
-                                <ButtonWIthBorder iconSize={25} Icon={TbDots} style={{ background: 'transparent', marginInline: 10, }} />
+                                <ButtonWIthBorder iconSize={25} Icon={TbDots} className={'bg-[transparent!important] mx-2'} />
                             </div>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBlock: 40 }}>
-                        <div style={{ flex: '1 0 43%', paddingInline: 10 }}>
-                            <div style={{ borderBottom: "0.01px solid #FFFFFF55", marginBlock: 15 }} />
+                    <div className="flex justify-between my-10" >
+                        <div className="flex-[1_0_43%] px-2 ">
+                            <div className="border-bottom my-4" />
                             <div>
                                 {posts.map((item, index) => (
                                     <PostCard key={index} data={item} tribeInfo={tribeDetail} hoverEfftect />
                                 ))}
                             </div>
                         </div>
-                        <div style={{ position: 'sticky', top: 70, left: 0, alignSelf: 'flex-start', width: '25%' }}>
-                            <TribeSideInfo tribeDetail={tribeDetail} style={{}} />
+                        <div className="sticky top-[70px] left-0 self-start w-[25%] ">
+                            <TribeSideInfo tribeDetail={tribeDetail} />
                         </div>
                     </div>
                 </>

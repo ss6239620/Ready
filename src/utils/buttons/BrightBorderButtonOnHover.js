@@ -1,15 +1,15 @@
 import React from 'react'
 import '../../asset/css/util.css'
 
-export default function BrightBorderButtonOnHover({ style, title, onClick, bottomLine }) {
+export default function BrightBorderButtonOnHover({ style, title, onClick, bottomLine,className }) {
     function handleClick(params) {
         onClick && onClick()
     }
     return (
         <>
-            <div onClick={handleClick} style={{ padding: 13, borderRadius: 30, display: 'flex', flexDirection: 'column', justifyContent: 'center', ...style }} className='bright-border-button-hover'>
-                <h5 className='primary-text' style={{ padding: 0, margin: 0, marginBottom:8 }}>{title ? title : ''}</h5>
-                {bottomLine && <div className='accent-bg' style={{  height: 5, marginInline: 0.1, borderRadius: 10 }} />}
+            <div className={`${className} bright-border-button-hover div-center flex-col rounded-[30px] p-3 `} onClick={handleClick} style={{ ...style }}>
+                <h5 className='primary-text large-text-normal-weight' >{title ? title : ''}</h5>
+                {bottomLine && <div className='accent-bg h-[5px] mx-[0.1px] rounded-xl ' />}
             </div>
         </>
     )

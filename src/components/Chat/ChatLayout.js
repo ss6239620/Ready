@@ -23,11 +23,11 @@ export default function Layout() {
   return (
     <AppProviders>
       <ChatRoomProvider>
-        <div style={{ display: 'flex' }}>
-          <div style={{ flex: '0 0 20%' }}> {/* Fixed width for the sidebar */}
+        <div className='flex' >
+          <div className='flex-[0 0 25%]'> {/* Fixed width for the sidebar */}
             <ChatSidebar />
           </div>
-          <div style={{ flex: 1 }}> {/* Take remaining space */}
+          <div className='flex-1' > {/* Take remaining space */}
             <Outlet />
           </div>
         </div>

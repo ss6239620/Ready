@@ -4,7 +4,7 @@ import '../../asset/css/util.css'
 import { useNavigate } from 'react-router-dom';
 import { truncateText } from "../CommonFunction";
 
-export default function TribeSummaryCard({ hoverEffect, style, data, no_of_charactor, not_require }) {
+export default function TribeSummaryCard({ hoverEffect, style, data, no_of_charactor, not_require,className }) {
 
     const navigate = useNavigate()
     function handlTribeClick() {
@@ -13,78 +13,36 @@ export default function TribeSummaryCard({ hoverEffect, style, data, no_of_chara
 
     const hoverEffect_style = hoverEffect ? "bright-border-button-hover div-center" : 'div-center';
     return (
-        <div onClick={handlTribeClick} className={hoverEffect_style} style={{ width: '67%', padding: 15, ...style }}>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginRight: 10,
-                }}
-            >
-                <img
-                    src={`${FILE_URL}/${data.tribeProfileImage}`}
-                    alt="communities-logo"
-                    style={{
-                        width: "60px", // Fixed size
-                        height: "60px", // Fixed size
-                        objectFit: "cover", // Ensures the aspect ratio is preserved
-                        borderRadius: "50%", // Circular shape
-                    }}
-                />
-            </div>
+        <div onClick={handlTribeClick} className={`${hoverEffect_style} ${className} p-4`} style={{   ...style }}>
+            <img
+                src={`${FILE_URL}/${data.tribeProfileImage}`}
+                alt="communities-logo"
+                className='img-small-style  w-[60px!important] h-[60px!important] '
+            />
             <div>
                 <h4
-                    // className='text-underline'
-                    style={{
-                        marginInline: 3,
-                        marginBlock: 5,
-                        fontSize: not_require ? 17 : 21,
-                        fontWeight: "bold",
-                        cursor: 'pointer'
-                    }}
+                    className={`${not_require ? 'large-text-normal-weight' : 'medium-text-medium-weight'} cursor-pointer`}
                 >
                     t/{data.tribeName}
                 </h4>
-                <div style={{ display: 'flex', flexDirection: not_require ? 'column-reverse' : 'column' }}>
-                    <div className="div-center" style={{ marginTop: 5 }}>
+                <div className={`flex ${not_require?'flex-col-reverse':'flex-col'}`}>
+                    <div className="div-center mt-1 ">
                         <h5
-                            className='secondary-text'
-                            style={{
-                                marginInline: 3,
-                                marginBlock: 0,
-                                fontSize: 12,
-                                fontWeight: 400,
-                            }}
+                            className='primary-text small-text-small-weight'
                         >
-                            1.1k <span>upvotes</span>
+                            1.1k <span className='secondary-text'>upvotes</span>
                         </h5>
                         <div
-                            style={{
-                                padding: 1,
-                                borderRadius: 20,
-                                marginInline: 3,
-                            }}
+                             className="secondary-text p-[1px] rounded-2xl mx-1 "
                         />
                         <h5
-                            className='secondary-text'
-                            style={{
-                                marginInline: 3,
-                                marginBlock: 0,
-                                fontSize: 12,
-                                fontWeight: 400,
-                            }}
+                            className='primary-text small-text-small-weight'
                         >
-                            225 <span>comments</span>
+                            225 <span className='secondary-text'>comments</span>
                         </h5>
                     </div>
                     <h5
-                        className='secondary-text'
-                        style={{
-                            marginInline: 3,
-                            marginBlock: 2,
-                            fontSize: 14,
-                            fontWeight: 500,
-                        }}
+                        className='primarty-text medium-text-small-weight'
                     >
                         {truncateText(data.tribeDescription, no_of_charactor ? no_of_charactor : 150)}
                     </h5>

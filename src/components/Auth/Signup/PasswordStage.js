@@ -5,6 +5,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import Basicinput from "../../../utils/input/Basicinput";
 import '../../../asset/css/Signup.css'
 import CircularFileInput from "../../../utils/input/CircularFileInput";
+import { validatePassword, validateUserName } from "../../../utils/CommonFunction";
 
 
 export default function PasswordStage({ isOpen, setModal, setNextModal, setPreviousModal, formValues, setFormValues }) {
@@ -27,7 +28,7 @@ export default function PasswordStage({ isOpen, setModal, setNextModal, setPrevi
         setPreviousModal(true); // Go back to the previous modal (e.g., EmailStage)
     }
 
-    const isDisabled = !formValues.username || !formValues.password;
+    const isDisabled = !formValues.username || !formValues.password || !formValues.profileAvtar;
 
     const setProfileAvatar = (file) => {
         setFormValues((prev) => ({
@@ -38,65 +39,54 @@ export default function PasswordStage({ isOpen, setModal, setNextModal, setPrevi
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            className="modal-overlay div-center-justify-center"
             onClick={handleOverlayClick}
         >
             <div
-                className="modal-content"
-                style={{
-                    height: '80%', display: 'flex',  // Use flexbox for layout
-                    flexDirection: 'column',  // Stack elements vertically
-                    justifyContent: 'space-between',  // Distribute space between items, pushing the button to the bottom
-                }}
+                className="modal-content flex justify-between h-[80%] flex-col "
             >
                 <div>
-                    <div style={{}} onClick={handlePrevious}>
+                    <div onClick={handlePrevious}>
                         <IoIosArrowRoundBack className="back-button" size={40} />
                     </div>
-                    <div style={{ paddingInline: 40 }}>
-                        <h2 style={{ marginBlock: 10 }}>Create your username and password</h2>
+                    <div className="px-10" >
+                        <h2 className="large-text-large-weight mx-[0px!important]">Create your username and password</h2>
                         <div>
-                            <a style={{ fontSize: 15 }}>
+                            <a className="medium-text-normal-weight mx-[0px!important] my-[8px!important]" >
                                 Reddit is anonymous, so your username is what you’ll go by here. Choose wisely—because once you get a name, you can’t change it.
                             </a>
                         </div>
                         <CircularFileInput file={formValues.profileAvtar} setFile={setProfileAvatar} />
                         <Basicinput
                             placeHolder={"Username"}
-                            style={{ marginBlock: 20 }}
+                            className={'my-5'}
                             value={formValues.username}
                             setFormValues={setFormValues}
                             name="username"
+                            validationFunc={validateUserName}
                         />
                         <Basicinput
                             placeHolder={"Password"}
-                            style={{ marginBlock: 20 }}
+                            className={'my-5'}
                             value={formValues.password}
                             setFormValues={setFormValues}
                             name="password"
+                            validationFunc={validatePassword}
+                            type={'password'}
                         />
-                        <div style={{ marginBottom: 30 }}>
+                        <div className="mb-7" >
                             <a >Alredy A Member? </a>
-                            <span style={{ color: "#648EFC", cursor: "pointer" }}>
+                            <span className={'accent-text-style cursor-pointer '}>
                                 Log In
                             </span>
                         </div>
                     </div>
                 </div>
-                <div style={{ paddingInline: 30 }}>
+                <div className="px-8">
                     <BigButton
                         title={"Continue"}
                         disabled={isDisabled}
-                        style={{
-                            background: "red",
-                            borderRadius: 50,
-                            background: isDisabled ? "grey" : "red",
-                        }}
+                        className={`rounded-[50px!important] ${isDisabled ?'bg-[var(--divider)]':'bg-[var(--teritory)]' }`}
                         onClick={handleClick}
                     />
                 </div>

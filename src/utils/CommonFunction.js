@@ -35,4 +35,25 @@ function truncateText(text, maxLength) {
     }
 }
 
-export { formatTimeDifference,truncateText }
+const validateEmail = (email) => {
+    if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+        return 'Please enter a valid email address.';
+    }
+    return '';
+};
+
+const validateUserName = (value) => {
+    if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]{2,14}[a-zA-Z0-9]$/.test(value)) {
+        return 'Username must be 3-15 characters long and can only contain letters, digits, underscores, and hyphens.';
+    }
+    return '';
+};
+
+const validatePassword = (value) => {
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]|\\:;"'<>,.?/`~\-]).{8,}$/.test(value)) {
+        return 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.';
+    }
+    return '';
+};
+
+export { formatTimeDifference, truncateText, validateEmail,validateUserName,validatePassword }

@@ -5,7 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { darkColorTheme } from "../../constant";
 
 
-export default function FileInput({ fileTypes = [], style, setFile, file }) {
+export default function FileInput({ fileTypes = [], style, setFile, file,className }) {
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file && (fileTypes.length === 0 || fileTypes.some(type => file.type.includes(type)))) {
@@ -39,6 +39,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
 
     return (
         <div
+        className={`${className}`}
             style={{
                 border: file ? 'none' : '0.5px dashed #666',
                 borderRadius: 30,
@@ -54,7 +55,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file }) {
             {!file &&
                 <>
                     <div style={{ display: "flex", alignItems: "center", paddingBlock: 60 }}>
-                        <p style={{ marginInline: 20 }}>Drag and Drop or Upload Media</p>
+                        <p  className="large-text-normal-weight mx-5">Drag and Drop or Upload Media</p>
                         <FaCloudUploadAlt size={25} />
                     </div>
                     <input

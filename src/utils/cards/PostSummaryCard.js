@@ -36,55 +36,27 @@ export default function PostSummaryCard({
       <Underline
         color={darkColorTheme.divider}
         sizeInPx={0.3}
-        style={{ marginBlock: 20 }}
+        className={'my-5'}
       />
-      <div className={hoverEffect_style} style={{ marginBlock: 10, padding: hoverEffect ? 20 : 0, ...style }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  width: "35px",
-                  height: "35px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src={`${FILE_URL}/${data.posted_tribe_id.tribeProfileImage}`}
-                  alt=""
-                  style={{
-                    width: "90%",
-                    height: "90%",
-                    objectFit: "cover",
-                    borderRadius: "50%", // Optional: makes the image circular
-                    display: "block", // Removes extra space under image
-                  }}
-                />
-              </div>
+      <div className={`${hoverEffect_style} my-3 ${hoverEffect ? 'p-5' : 'p-0'} `} style={{  ...style }}>
+        <div className="div-justify" >
+          <div className="flex-1" >
+            <div className="div-center gap-1" >
+              <img
+                src={`${FILE_URL}/${data.posted_tribe_id.tribeProfileImage}`}
+                alt=""
+                className="img-small-style"
+              />
               <h5
                 onClick={handlTribeClick}
-                className="text-underline"
-                style={{
-                  marginInline: 3,
-                  marginBlock: 0,
-                  fontSize: 14,
-                  fontWeight: 400,
-                }}
+                className="text-underline medium-text-large-weight"
               >
-                t/{data.posted_tribe_id.tribeName}
+                t/{truncateText(data.posted_tribe_id.tribeName, 12)}
               </h5>
             </div>
             <h4
               onClick={handlPostClick}
-              // className='text-underline'
-              style={{
-                marginInline: 3,
-                marginBlock: 5,
-                fontSize: not_require ? 18 : 15,
-                fontWeight: "bold",
-                cursor: 'pointer'
-              }}
+              className={`${not_require ? 'large-text-normal-weight' : 'medium-text-normal-weight'} cursor-pointer`}
             >
               {truncateText(
                 data.content_title,
@@ -92,57 +64,27 @@ export default function PostSummaryCard({
               )}
             </h4>
           </div>
-          <div
-            style={{
-              width: "90px",
-              height: "90px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {data.content_type === "IMAGE" && (
-              <img
-                src={`${FILE_URL}/${data.content_path}`}
-                alt=""
-                style={{
-                  width: "90%",
-                  height: "90%",
-                  objectFit: "cover",
-                  borderRadius: 10,
-                  display: "block", // Removes extra space under image
-                }}
-              />
-            )}
-          </div>
+          {data.content_type === "IMAGE" && (
+            <img
+              src={`${FILE_URL}/${data.content_path}`}
+              alt=""
+              className="img-small-style w-[90px!important] h-[90px!important] rounded-[10px!important] "
+            />
+          )}
         </div>
-        <div className="div-center" style={{}}>
+        <div className="div-center" >
           <h5
-            style={{
-              marginInline: 3,
-              marginBlock: 0,
-              fontSize: 14,
-              fontWeight: 400,
-            }}
+            className="small-text-normal-weight"
           >
-            1.1k <span>upvotes</span>
+            1.1k <span className="small-text-small-weight">upvotes</span>
           </h5>
           <div
-            className="secondary-text"
-            style={{
-              padding: 1,
-              borderRadius: 20,
-              marginInline: 3,
-            }}
+            className="secondary-text p-[1px] rounded-2xl mx-1 "
           />
           <h5
-            style={{
-              marginInline: 3,
-              marginBlock: 0,
-              fontSize: 14,
-              fontWeight: 400,
-            }}
+            className="small-text-normal-weight"
           >
-            225 <span>comments</span>
+            225 <span className="small-text-small-weight">comments</span>
           </h5>
         </div>
       </div>

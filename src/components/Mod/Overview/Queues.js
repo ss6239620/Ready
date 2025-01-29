@@ -6,6 +6,7 @@ import { modQueuesAllcontentDropdown, modQueuesNewestFirstDropdown } from '../..
 import RadioInput from '../../../utils/input/RadioInput';
 import { FaAngleDown } from 'react-icons/fa';
 import ImageDropDown from '../../../utils/dropdown/ImageDropDown';
+import '../../../asset/css/mod.css'
 
 export default function Queues() {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -16,79 +17,58 @@ export default function Queues() {
         setSelectedTab(tabNum);
     }
     return (
-        <div className='main-content'>
-            <div className='div-center' style={{ padding: 15, justifyContent: 'space-between' }}>
-                <h1 style={{ marginBlock: 0 }}>Queue</h1>
+        <div className='main-content mod-padding'>
+            <div className='div-center-justify ' >
+                <h1 className='extra-large-text-large-weight'>Queue</h1>
                 <div>
                     somethings
                 </div>
             </div>
-            <div className='div-center' style={{ padding: 15, justifyContent: 'space-between' }}>
+            <div className='div-center-justify my-4' >
                 <div>
-                    <div style={{ display: "flex", gap: 10 }}>
+                    <div className='flex gap-3' >
                         <BigButton
-                            className={`${selectedTab === 0 ? 'secondary-bg' : ''}`}
-                            style={{
-                                borderRadius: 50,
-                                paddingInline: 15,
-                                padding: 0
-                            }}
+                            className={`${selectedTab === 0 ? 'secondary-bg' : ''} rounded-[50px!important] px-4`}
                             title={"Need Reviews"}
                             onClick={() => handleTabSwitch(0)}
                         />
                         <BigButton
-                            className={`${selectedTab === 1 ? 'secondary-bg' : ''}`}
-                            style={{
-                                borderRadius: 50,
-                                paddingInline: 15,
-                            }}
+                            className={`${selectedTab === 1 ? 'secondary-bg' : ''} rounded-[50px!important] px-4`}
                             title={"Reported"}
                             onClick={() => handleTabSwitch(1)}
                         />
                         <BigButton
-                            className={`${selectedTab === 2 ? 'secondary-bg' : ''}`}
-                            style={{
-                                borderRadius: 50,
-                                paddingInline: 15,
-                            }}
+                            className={`${selectedTab === 2 ? 'secondary-bg' : ''} rounded-[50px!important] px-4`}
                             title={"Removed"}
                             onClick={() => handleTabSwitch(2)}
                         />
                         <BigButton
-                            className={`${selectedTab === 3 ? 'secondary-bg' : ''}`}
-                            style={{
-                                borderRadius: 50,
-                                paddingInline: 15,
-                            }}
+                            className={`${selectedTab === 3 ? 'secondary-bg' : ''} rounded-[50px!important] px-4`}
                             title={"Edited"}
                             onClick={() => handleTabSwitch(3)}
                         />
                         <BigButton
-                            className={`${selectedTab === 4 ? 'secondary-bg' : ''}`}
-                            style={{
-                                borderRadius: 50,
-                                paddingInline: 15,
-                            }}
+                            className={`${selectedTab === 4 ? 'secondary-bg' : ''} rounded-[50px!important] px-4`}
                             title={"unmoderted"}
                             onClick={() => handleTabSwitch(4)}
                         />
                     </div>
                 </div>
-                <div className='div-center' style={{ gap: 20 }}>
-                    <ImageDropDown style={{ cursor: 'pointer' }} source={require('../../../asset/img/logo.png')} childStyle={{ right: 0, width: 170, padding: 10 }}>
+                <div className='div-center gap-5'>
+                    <ImageDropDown className='cursor-pointer' childClassName={'right-0 w-[170px] p-3'} source={require('../../../asset/img/logo.png')} >
 
                     </ImageDropDown>
-                    <SimpleDropdown title={contentFilter} childStyle={{ right: 0, width: 170, padding: 10 }}>
+                    <SimpleDropdown title={contentFilter} childClassName={'right-0 w-[170px] p-3'} >
                         {
                             modQueuesAllcontentDropdown.map((item, key) => (
-                                <RadioInput key={key} style={{}} title={item} selected={contentFilter} setSelected={setcontentFilter} />
+                                <RadioInput key={key}  title={item} selected={contentFilter} setSelected={setcontentFilter} />
                             ))
                         }
                     </SimpleDropdown>
-                    <SimpleDropdown title={timeFIlter} childStyle={{ right: 0, width: 170, padding: 10 }}>
+                    <SimpleDropdown title={timeFIlter} childClassName={'right-0 w-[170px] p-3'}>
                         {
                             modQueuesNewestFirstDropdown.map((item, key) => (
-                                <RadioInput key={key} style={{}} title={item} selected={timeFIlter} setSelected={settimeFIlter} />
+                                <RadioInput key={key}  title={item} selected={timeFIlter} setSelected={settimeFIlter} />
                             ))
                         }
                     </SimpleDropdown>

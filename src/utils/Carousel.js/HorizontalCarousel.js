@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function HorizontalCarousel({ items, renderItem, style }) {
+export default function HorizontalCarousel({ items, renderItem, style,className }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleItems, setVisibleItems] = useState(4); // Default to 4 visible items
 
@@ -33,15 +33,13 @@ export default function HorizontalCarousel({ items, renderItem, style }) {
     }, []);
 
     return (
-        <div style={{ width: '100%', overflow: 'hidden', ...style }}>
+        <div className={`${className} w-[100%] overflow-hidden `} style={{ ...style }}>
             {/* Previous button */}
             {currentIndex > 0 && (
                 <button
                     onClick={handlePrev}
+                    className='absolute top-[50%] left-3 bg-black/[.5] text-[#fff]  '
                     style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '10px',
                         transform: 'translateY(-50%)',
                         backgroundColor: 'rgba(0, 0, 0, 0.5)',
                         color: 'white',
@@ -59,22 +57,16 @@ export default function HorizontalCarousel({ items, renderItem, style }) {
 
             {/* Carousel slides */}
             <div
+            className='flex gap-3'
                 style={{
-                    display: 'flex',
                     transition: 'transform 0.3s ease',
                     transform: `translateX(-${currentIndex * 100}%)`,
-                    gap: 10,
                 }}
             >
                 {slides.map((slide, slideIndex) => (
                     <div
                         key={slideIndex}
-                        style={{
-                            display: 'flex',
-                            flexShrink: 0,
-                            width: '100%',
-                            gap: 10,
-                        }}
+                        className='flex flex-shrink-0 w-[100%] gap-3'
                     >
                         {slide.map((item, index) => renderItem(item, index))}
                     </div>

@@ -6,17 +6,16 @@ import Basicinput from "../../../utils/input/Basicinput";
 import "../../../asset/css/Signup.css";
 import { signup } from "../../../services/auth";
 import { useUser } from '../../../Context/UserContext'
+import { useSignUp } from "../../../hooks/authHook";
+import FailAlert from "../../../utils/Alert/FailAlert";
 
 function NameTags({ title, onClick }) {
     return (
         <div
             onClick={onClick}
-            style={{
-                border: `1px ${darkColorTheme.divider} solid`,
-                borderRadius: 20,
-            }}
+            className="border rounded-2xl cursor-pointer"
         >
-            <p style={{ paddingInline: 15, paddingBlock: 8, margin: 0 }}>{title}</p>
+            <p className="medium-text-normal-weight px-4 py-2" >{title}</p>
         </div>
     );
 }
@@ -28,8 +27,10 @@ export default function InterestStage({
     formValues,
     setFormValues,
 }) {
+    const [disabled, setdisabled] = useState(false)
     const { user, setUser, logout } = useUser()
-    const [error, setError] = useState('')
+
+    const { mutate, isPending, isError, error } = useSignUp();
 
     if (!isOpen) return null;
 
@@ -43,21 +44,13 @@ export default function InterestStage({
     function handleClick(params) {
         const formData = new FormData()
         formData.append('email', formValues.email);
-        formData.append('password', formValues.username);
-        formData.append('username', formValues.password);
+        formData.append('password', formValues.password);
+        formData.append('username', formValues.username);
         formData.append('identity', formValues.identity);
         formData.append('interests', formValues.interests);
         formData.append('profile_avtar', formValues.profileAvtar);
         // setModal(false)
-        signup(formData).then((res) => {
-            setUser(res.data.data);
-            localStorage.setItem("user", JSON.stringify(res.data.data));
-
-            setModal(false)
-            window.location.reload()
-        }).catch((err) => {
-            console.log(err.response.data.error)
-        })
+        mutate(formData);
     }
 
     function handlePrevious() {
@@ -77,62 +70,35 @@ export default function InterestStage({
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "fixed", // Make sure modal is centered and stays in place
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: to add a dark overlay
-            }}
+            className="modal-overlay div-center-justify-center"
             onClick={handleOverlayClick}
         >
             <div
-                className="modal-content"
-                style={{
-                    height: "80%", // Set height of modal
-                    display: "flex",
-                    flexDirection: "column", // Stack content vertically
-                    justifyContent: "space-between", // Space between header, content, and button
-                    overflow: "hidden", // Prevent overflowing outside the modal
-                    borderRadius: "10px", // Optional: for rounded corners
-                }}
+                className="modal-content flex justify-between h-[80%] flex-col "
             >
+                {isError && <FailAlert title={error} />}
                 {/* Modal Header (Back Button) */}
                 <div
                     onClick={handlePrevious}
-                    style={{
-                        padding: "5px 0px",
-                        borderBottom: `1px ${darkColorTheme.divider} solid`,
-                    }}
                 >
                     <IoIosArrowRoundBack className="back-button" size={40} />
                 </div>
 
                 {/* Scrollable Content Area */}
-                <div style={{ padding: "5px 40px", flex: 1, overflowY: "auto" }}>
-                    <h2 style={{ marginBlock: 5 }}>Interests</h2>
+                <div className="p-7 flex-1 overflow-y-auto" >
+                    <h2 className="large-text-large-weight mx-[0px!important] my-3">Interests</h2>
                     <div>
-                        <p style={{ fontSize: 15, margin: 0 }}>
+                        <p className="medium-text-normal-weight">
                             Pick things you'd like to see in your home feed.
                         </p>
                     </div>
                     <div>
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        <div className="div-center" >
                             <IoIosTrendingUp size={20} />
-                            <h4 style={{ marginInline: 10 }}>Trending</h4>
+                            <h4 className="large-text-large-weight mx-[10px!important]">Trending</h4>
                         </div>
                         <div
-                            style={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                rowGap: 10,
-                                columnGap: 5,
-                            }}
+                            className="flex flex-wrap gap-y-3 gap-x-1"
                         >
                             {[1, 2, 3, 4, 5, 6].map((data, index) => (
                                 <NameTags
@@ -143,16 +109,13 @@ export default function InterestStage({
                         </div>
                     </div>
                 </div>
-                <div style={{ paddingInline: 30 }}>
+                <div className="px-8" >
                     <BigButton
                         title={"Finish"}
                         disabled={isDisabled}
-                        style={{
-                            background: "red",
-                            borderRadius: 50,
-                            background: isDisabled ? "grey" : "red",
-                        }}
+                        className={`rounded-[50px!important] ${isDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
                         onClick={handleClick}
+                        loading={isPending}
                     />
                 </div>
             </div>

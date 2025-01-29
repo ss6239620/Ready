@@ -1,14 +1,18 @@
 // AppProviders.js
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import UserProvider from './Context/UserContext';
 import { ChatRoomProvider } from './Context/ChatRoomContext';
 
-// Wrapper component that combines all context providers
+
+const queryClient = new QueryClient();
 export const AppProviders = ({ children }) => {
   return (
-    <UserProvider>
+    <QueryClientProvider client={queryClient}>
+      <UserProvider>
         {/* any new provider  */}
         {children}
-    </UserProvider>
+      </UserProvider>
+    </QueryClientProvider>
   );
 };

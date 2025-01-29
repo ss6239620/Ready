@@ -42,16 +42,12 @@ export default function ChatUser() {
     }
 
     return (
-        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-            <div style={{ width: '100%', }}>
-                <div className='div-center secondary-bg' style={{ justifyContent: 'space-between', borderBottom: `0.1px solid ${darkColorTheme.divider}`, paddingInline: 15, paddingBlock: 8, }}>
+        <div className='h-[100vh] flex flex-col overflow-hidden '>
+            <div className='w-[100%]' >
+                <div className='div-center-justify divider-bottom px-4 py-2 secondary-bg' >
                     <div>
                         <h4
-                            style={{
-                                marginBlock: 0,
-                                fontSize: 13,
-                                fontWeight: 700,
-                            }}
+                            className='small-text-large-weight'
                         >
                             {userInfo?.username}
                         </h4>
@@ -62,26 +58,13 @@ export default function ChatUser() {
 
             {/* center content  */}
             <div
-                className='slectDivContainer'
-                style={{
-                    display: 'flex',
-                    flex: 1,
-                    flexDirection: 'column-reverse',
-                    overflowY: 'auto',
-                    paddingInline: 15,
-                }}
+                className='slectDivContainer flex flex-1 flex-col-reverse overflow-y-auto px-[15px]'
             >
 
 
-                <div className='secondary-bg' style={{
-                    padding: 5,  borderRadius: 10, marginBlock: 20
-                }}>
+                <div className='secondary-bg p-1 rounded-xl my-5' >
                     <a
-                        style={{
-                            marginBlock: 0,
-                            fontSize: 12,
-                            fontWeight: 400,
-                        }}
+                        className='small-text-small-weight'
                     >
                         Send an invite message to start chatting! 👋
                     </a>
@@ -89,13 +72,13 @@ export default function ChatUser() {
             </div>
 
             {/* bottom content  */}
-            <div style={{ bottom: 0, width: '100%', }}>
-                <div className='div-center secondary-bg' style={{ paddingInline: 10, paddingBlock: 15, borderTop: `0.1px solid ${darkColorTheme.divider}`,  justifyContent: 'space-between', gap: 10 }}>
-                    <IconButton Icon={SlCamera} size={23} style={{ padding: 12 }} />
-                    <div style={{ flex: 1 }}>
-                        <Basicinput setFormValues={setFormValue} value={formValue.message} name={'message'} placeHolder={'message'} style={{ padding: 15, }} />
+            <div className='bottom-0 w-[100%]' >
+                <div className='div-center-justify secondary-bg  p-[15px] divider-top gap-[10px]'>
+                    <IconButton className={'p-[12px!important]'} Icon={SlCamera} size={23}  />
+                    <div className='flex-1'>
+                        <Basicinput className={'p-[12px!important]'} setFormValues={setFormValue} value={formValue.message} name={'message'} placeHolder={'message'} />
                     </div>
-                    <IconButton Icon={IoSendSharp} size={23} style={{ padding: 12 }} onClick={handleClick} />
+                    <IconButton className={'p-[12px!important]'} Icon={IoSendSharp} size={23}  onClick={handleClick} />
                 </div>
             </div>
         </div>

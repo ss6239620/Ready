@@ -3,7 +3,7 @@ import { darkColorTheme, FILE_URL } from '../../constant'
 import { IoChevronDown } from "react-icons/io5";
 import Search from '../Search';
 
-export default function BackGroundDropDown({ title, children, style, selectedTribe }) {
+export default function BackGroundDropDown({ title, children, style, selectedTribe,className }) {
     const [clicked, setClicked] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -27,39 +27,24 @@ export default function BackGroundDropDown({ title, children, style, selectedTri
     }
 
     return (
-        <div ref={dropdownRef} style={{}}>
+        <div ref={dropdownRef} >
             {!clicked &&
-                <div className='secondary-bg' onClick={() => clicked ? setClicked(false) : setClicked(true)} style={{ cursor: "pointer", display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 10, borderRadius: 30, ...style }}>
-                    <div
-                        style={{
-                            width: "35px",
-                            height: "35px",
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
+                <div className={`secondary-bg ${className} cursor-pointer div-center-justify p-2 border-radius-large `} onClick={() => clicked ? setClicked(false) : setClicked(true)} style={{ ...style }}>
                         <img
                             src={selectedTribe ? `${FILE_URL}/${selectedTribe.tribeProfileImage}` : require('../../asset/img/logo.png')}
                             alt=""
-                            style={{
-                                width: "90%",
-                                height: "90%",
-                                objectFit: "cover",
-                                borderRadius: "50%", // Optional: makes the image circular
-                                display: "block", // Removes extra space under image
-                            }}
+                            className='img-small-style'
                         />
-                    </div>
-                    <h5 style={{ marginBlock: 0, color: darkColorTheme.secondaryTextColor, marginLeft: 5 }}>{selectedTribe ? selectedTribe.tribeName : title}</h5>
-                    <IoChevronDown size={15} style={{ marginLeft: 5 }} />
+                    <h5 className="small-text-normal-weight secondary-text" >{selectedTribe ? selectedTribe.tribeName : title}</h5>
+                    <IoChevronDown size={15} className='ml-1'  />
                 </div>
             }
             {clicked &&
                 <div >
-                    <Search style={{ width: '40%' }} />
+                    <Search className={'w-[40%!important]'}  />
                 </div>
             }
-            <div style={{ position: 'absolute', zIndex: 10, marginTop: 10, width: '21%' }}>
+            <div className='absolute z-10 mt-3 w-[21%]'>
                 {clicked && React.cloneElement(children, { closeDropDown })}
             </div>
         </div>
