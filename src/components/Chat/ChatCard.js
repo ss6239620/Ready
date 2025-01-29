@@ -18,48 +18,27 @@ export default function ChatCard({ style, data }) {
         navigate(`/chat/room/${data?._id}`)
     }
     return (
-        <div onClick={handleNavigate} className={`div-center div-hover-bg-change ${ room_id === data?._id ?'selected-chat':''}`} style={{ gap: 8, padding: 10,borderRadius:10, ...style }}>
+        <div onClick={handleNavigate} className={`div-center div-hover-bg-change ${room_id === data?._id ? 'selected-chat' : ''} gap-[8px] p-[10px] mx-2 rounded-[10px] `} style={{ ...style }}>
             <img
                 src={`${FILE_URL}/${data?.chat_room_picture}`}
                 alt=""
-                style={{
-                    width: "35px",
-                    height: "35px",
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                    display: "block",
-                }}
+                className='img-small-style'
             />
-            <div style={{ width: '100%' }}>
-                <div className='div-center' style={{ justifyContent: 'space-between', }}>
+            <div className='w-[100%]'>
+                <div className='div-center-justify' >
                     <h4
-                        style={{
-                            marginInline: 3,
-                            marginBlock: 5,
-                            fontSize: 13.5,
-                            fontWeight: 700,
-                        }}
+                        className='small-text-large-weight'
                     >
                         {data?.chat_room_name}
                     </h4>
                     <a
-                        style={{
-                            marginInline: 3,
-                            marginBlock: 5,
-                            fontSize: 13.5,
-                            fontWeight: 400,
-                        }}
+                        className='small-text-small-weight'
                     >
                         {latest_msg_time} ago
                     </a>
                 </div>
                 <a
-                    style={{
-                        marginInline: 3,
-                        marginBlock: 5,
-                        fontSize: 13.5,
-                        fontWeight: 400,
-                    }}
+                    className='small-text-small-weight'
                 >
                     {truncateText(data?.latest_message?.message, 35)}
                 </a>

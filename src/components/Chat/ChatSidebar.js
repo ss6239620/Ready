@@ -19,50 +19,34 @@ export default function ChatSidebar() {
     const { chatrooms, loading } = useChatroom();
 
     return (
-        <div className='slectDivContainer divider-right' style={{  overflowY: 'scroll', height: '100vh', position: 'sticky', top: 0 }}>
-            <div className='div-center' style={{ justifyContent: 'space-between', padding: 10, }}>
-                <div className='div-center' style={{ gap: 8 }}>
+        <div className='slectDivContainer divider-right h-[100vh] sticky overflow-y-auto top-0 ' >
+            <div className='div-center-justify p-3' >
+                <div className='div-center gap-2' >
                     <img
                         src={require('../../asset/img/logo.png')}
                         alt=""
-                        style={{
-                            width: "35px",
-                            height: "35px",
-                            objectFit: "cover",
-                            borderRadius: "50%", // Optional: makes the image circular
-                            display: "block", // Removes extra space under image
-                        }}
+                        className='img-small-style'
                     />
                     <h4
-                        style={{
-                            marginInline: 3,
-                            marginBlock: 5,
-                            fontSize: 18,
-                            fontWeight: 700,
-                        }}
+                        className='extra-large-text-large-weight'
                     >
                         Chats
                     </h4>
                 </div>
-                <div className='div-center' style={{ gap: 8 }}>
+                <div className='div-center gap-2' >
                     <IconButton Icon={RiChatNewLine} size={20} onClick={() => navigate('/chat/room/create')} />
-                    <div className='div-center bright-border-button-hover' style={{ gap: 2, padding: 8 }}>
+                    <div className='div-center bright-border-button-hover gap-1 p-2' >
                         <PiSlidersHorizontal size={20} />
                         <IoIosArrowDown size={20} />
                     </div>
                 </div>
             </div>
-            <div style={{ borderTop: `0.1px solid ${darkColorTheme.divider}`, marginTop: 20, }}>
-                <div className='div-center div-hover-bg-change' style={{ justifyContent: 'space-between', padding: 10, }}>
-                    <div className='div-center' style={{ gap: 2, padding: 8 }}>
+            <div className='divider-top' >
+                <div className='div-center-justify p-3 div-hover-bg-change'>
+                    <div className='div-center gap-2 p-2' >
                         <IoTelescope size={25} />
                         <h4
-                            style={{
-                                marginInline: 3,
-                                marginBlock: 5,
-                                fontSize: 13.5,
-                                fontWeight: 700,
-                            }}
+                            className="large-text-normnal-weight"
                         >
                             Discover Chat Channels
                         </h4>

@@ -5,7 +5,7 @@ import { recommendedSearch } from "../services/tribe";
 import { darkColorTheme, FILE_URL } from "../constant";
 import { useNavigate } from "react-router-dom";
 
-export default function Search({ style, placeholder, children, setclicked, clicked }) {
+export default function Search({ style, placeholder, children, setclicked, clicked,className }) {
     const searchRef = useRef(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [recommendation, setRecommendation] = useState([]);
@@ -62,26 +62,17 @@ export default function Search({ style, placeholder, children, setclicked, click
             <form
                 onSubmit={handleSubmit}
                 onClick={() => searchQuery.length === 0 ? setclicked((prev) => !prev) : null}
-                className="search-container secondary-bg"
+                className={`search-container secondary-bg ${className} border-radius-large p-3 div-center`}
                 style={{
-                    // background: "#3c3c3cb0",
-                    borderRadius: 30,
-                    padding: 12,
-                    display: "flex",
-                    alignItems: "center",
                     border: clicked ? '2px solid #fff' : 'none',
                     ...style
                 }}
             >
                 <CiSearch />
                 <input
-                    className="primary-text"
+                    className="primary-text bg-transparent outline-none ml-2 flex-1 "
                     style={{
                         border: "none",
-                        background: "transparent",
-                        outline: "none",
-                        marginLeft: 8,
-                        flex: 1, // Makes the input expand to fill available space
                     }}
                     placeholder={placeholder ? placeholder : 'Search...'}
                     onChange={handleChange}
@@ -91,32 +82,17 @@ export default function Search({ style, placeholder, children, setclicked, click
                 <MdCancel />
             </form>
             {searchQuery.length > 0 &&
-                <div style={{ position: 'relative' }}>
-                    <div className="primary-bg" style={{  position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20, paddingInline: 15 }}>
-                        <h4 style={{ marginBlock: 0,  }}>Tribes</h4>
+                <div className="relative" >
+                    <div className="primary-bg absolute p-4 w-[100%] max-h-[calc(100vh_-_100px)] overflow-y-auto rounded-bl-3xl " >
+                        <h4 className="large-text-large-weight" >Tribes</h4>
                         {recommendation.map((item, key) => (
-                            <div onClick={() => handlTribeClick(item._id)} key={key} style={{ display: 'flex', alignItems: 'center', marginBlock: 15, cursor: 'pointer' }}>
-                                <div
-                                    style={{
-                                        width: "35px",
-                                        height: "35px",
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <img
-                                        src={`${FILE_URL}/${item.tribeProfileImage}`}
-                                        alt=""
-                                        style={{
-                                            width: "90%",
-                                            height: "90%",
-                                            objectFit: "cover",
-                                            borderRadius: "50%", // Optional: makes the image circular
-                                            display: "block", // Removes extra space under image
-                                        }}
-                                    />
-                                </div>
-                                <h5 style={{ marginInline: 3, marginBlock: 0, fontSize: 14, fontWeight: 400, }}>t/{item.tribeName}</h5>
+                            <div className="div-center my-4 cursor-pointer" onClick={() => handlTribeClick(item._id)} key={key}>
+                                <img
+                                    src={`${FILE_URL}/${item.tribeProfileImage}`}
+                                    alt=""
+                                    className="img-small-style"
+                                />
+                                <h5 className="medium-text-normal-weight">t/{item.tribeName}</h5>
                             </div>
                         ))}
                     </div>

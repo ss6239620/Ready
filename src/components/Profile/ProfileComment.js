@@ -16,87 +16,58 @@ export default function ProfileComment({ hoverEffect, data }) {
     return (
         <>
             <Underline
-                color={darkColorTheme.divider}
-                sizeInPx={0.3}
-                style={{ marginTop: 10 }}
+                sizeInPx={0.1}
+                className={'mt-3'}
             />
-            <div className={hoverEffect_style} style={{ display: 'flex', alignItems: 'flex-start', gap: 5, padding: 10 }}>
-                <div
-                    style={{
-                        display: "flex",
-                    }}
-                >
+            <div className={`${hoverEffect_style} div-start gap-1 p-2`}>
                     <img
                         src={`${FILE_URL}/${data?.post_id?.posted_tribe_id?.tribeProfileImage}`}
                         alt=""
-                        style={{
-                            width: "35px",
-                            height: "35px",
-                            objectFit: "cover",
-                            borderRadius: "50%", // Optional: makes the image circular
-                            display: "block", // Removes extra space under image
-                        }}
+                        className="img-small-style"
                     />
-                </div>
                 <div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
+                    <div className='div-baseline gap-1' >
                         <h4
-                            // className='text-underline'
-                            style={{
-                                fontSize: 14,
-                                marginBlock: 0,
-                                fontWeight: 500,
-                                color: darkColorTheme.secondaryTextColor,
-                            }}
+                           className='small-text-normal-weight primary-text '
                         >
                             t/{data?.post_id?.posted_tribe_id?.tribeName}
                         </h4>
-                        <div style={{ background: darkColorTheme.secondaryTextColor, padding: 2, borderRadius: 20, }} />
-                        <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>{truncateText(data?.post_id?.content_title, 60)}</a>
+                        <div className='secondary-bg p-[2px] rounded-2xl ' />
+                        <a className='small-text-normal-weight secondary-text '>{truncateText(data?.post_id?.content_title, 60)}</a>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 5 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <div  className='div-center gap-1 mt-1'>
+                        <div className='div-center gap-1'>
                             <h4
-                                style={{
-                                    fontSize: 14,
-                                    marginBlock: 0,
-                                    fontWeight: 500,
-                                    color: darkColorTheme.secondaryTextColor,
-                                }}
+                               className='small-text-normal-weight primary-text '
                             >
                                 {user.user.username}
                             </h4>
-                            <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>{reply_or_commented ? 'replied to' : 'commented'}</a>
+                            <a className='small-text-normal-weight secondary-text '>{reply_or_commented ? 'replied to' : 'commented'}</a>
                             {reply_or_commented &&
                                 <h4
-                                    style={{
-                                        fontSize: 14,
-                                        marginBlock: 0,
-                                        fontWeight: 500,
-                                        color: darkColorTheme.secondaryTextColor,
-                                    }}
+                                   className='small-text-normal-weight secondary-text '
                                 >
                                     {data.parent_comment_ids.created_by.username}
                                 </h4>
                             }
-                            <a style={{ color: darkColorTheme.secondaryTextColor, fontSize: 13, marginLeft: 5 }}>{created_at} ago</a>
+                            <a className='small-text-normal-weight secondary-text '>{created_at} ago</a>
                         </div>
                     </div>
-                    <div style={{ marginTop: 15 }}>
-                        <a style={{ color: darkColorTheme.primaryTextColor, fontSize: 14 }}> {truncateText(data?.comment_text, 150)}</a>
+                    <div className='mt-4' >
+                        <a className='small-text-normal-weight primary-text '> {truncateText(data?.comment_text, 150)}</a>
                     </div>
-                    <div className='div-center' style={{ marginTop: 10 }}>
-                        <div className='secondary-bg div-center' style={{ borderRadius: 30 }}>
+                    <div className='div-center mt-3 '>
+                        <div className='secondary-bg div-center rounded-[30px] '>
                             <IconButton Icon={BiUpvote} size={17} />
-                            <h5 style={{ marginInline: 5, marginBlock: 0 }}>{data?.total_comment_vote}</h5>
+                            <h5 className='medium-text-normal-weight'>{data?.total_comment_vote}</h5>
                             <IconButton Icon={BiUpvote} size={17} />
                         </div>
-                        <div className='secondary-bg' style={{ borderRadius: 30, marginInline: 15 }}>
-                            <BigButton Icon={FaRegComment} iconSize={20} style={{ background: 'none' }} title={`1`} />
+                        <div className='secondary-bg rounded-[20px] mx-4 ' >
+                            <BigButton className={'medium-text-normal-weight my-[0px!important] mx-[0px!important]'} Icon={FaRegComment} iconSize={20} title={`1`} />
                         </div>
-                        <div className='secondary-bg' style={{ borderRadius: 30 }}>
-                            <BigButton Icon={FaShare} iconSize={20} style={{ background: 'none' }} title={`share`} />
+                        <div className='secondary-bg rounded-[30px]'>
+                            <BigButton className={'medium-text-normal-weight my-[0px!important] mx-[0px!important] bg-[transparent] '} Icon={FaShare} iconSize={18} title={`share`} />
                         </div>
                     </div>
                 </div>

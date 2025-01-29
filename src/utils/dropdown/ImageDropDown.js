@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { darkColorTheme } from '../../constant'
 import { IoChevronDown } from "react-icons/io5";
 
-export default function ImageDropDown({ source, children, style, childStyle }) {
+export default function ImageDropDown({ source, children, style, childStyle,className,childClassName }) {
     const [clicked, setClicked] = useState(false);
     const dropDownRef = useRef(null);
 
@@ -20,25 +20,19 @@ export default function ImageDropDown({ source, children, style, childStyle }) {
     }, [])
 
     return (
-        <div ref={dropDownRef} style={{ position: 'relative' }}>
-            <div  className='simple-drop-down' onClick={() => clicked ? setClicked(false) : setClicked(true)} style={{padding:10, ...style }}>
-                <div className='div-center' style={{gap:10}}>
+        <div ref={dropDownRef} className='relative'>
+            <div  className={`simple-drop-down ${className} p-2 `} onClick={() => clicked ? setClicked(false) : setClicked(true)} style={{ ...style }}>
+                <div className='div-center gap-2'>
                     <img
                         src={source}
                         alt=""
-                        style={{
-                            width: "30px",
-                            height: "30px",
-                            objectFit: "cover",
-                            borderRadius: "50%", // Optional: makes the image circular
-                            display: "block", // Removes extra space under image
-                        }}
+                        className='img-small-style'
                     />
                     <IoChevronDown size={20} />
                 </div>
             </div>
             {clicked &&
-                <div className='card' style={{ position: 'absolute', zIndex: 100, top: 40, borderRadius: 10, ...childStyle }}>
+                <div className={`card absolute z-[100] top-[55px] rounded-xl ${childClassName}`} style={{ ...childStyle }}>
                     {children}
                 </div>
             }

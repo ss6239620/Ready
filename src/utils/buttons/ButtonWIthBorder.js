@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { darkColorTheme } from '../../constant'
 import '../../asset/css/util.css'
 
-export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile, iconSize }) {
+export default function ButtonWithBorder({ title, style, Icon, onClick, className, disabled, setFile, iconSize }) {
     const fileInputRef = useRef(null); // Reference for the file input
 
 
@@ -24,33 +24,25 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
 
     return (
         <div
-            className={`button-with-border`}
+            className={`button-with-border px-[10px] py-[8px] rounded-[30px] cursor-pointer transition-[opacity_0.3s] div-center-justify-center `}
             style={{
-                paddingInline:10,paddingBlock:8,
-                borderRadius: 30,
-                cursor: 'pointer',
-                transition: 'opacity 0.3s',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: "red",  
                 ...style,
             }}
             onClick={handleButtonClick} // Prevent onClick if disabled
         >
             {Icon && (
-                <div style={{ marginRight: title ? 10 : 0 }}>
+                <div className={`${title?'mr-[10px]':'mr-0'}`}>
                     <Icon size={iconSize ? iconSize : 25} />
                 </div>
             )}
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <div className='div-justify-center flex-1' >
                 <a>{title}</a>
             </div>
 
             {setFile && <input
                 ref={fileInputRef}
                 type="file"
-                style={{ display: 'none' }} // Hide the file input
+                className='hidden'
                 onChange={handleFileChange}
             />}
         </div>

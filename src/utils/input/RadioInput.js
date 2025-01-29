@@ -12,7 +12,7 @@ function RadioInput({ style, title, selected, setSelected }) {
     const selected_radio = selected === title
 
     return (
-        <div className={`${selected_radio ? 'secondary-bg' : ''}`} style={{ ...style, paddingInline: 15, paddingBlock: 8, }}>
+        <div className={`${selected_radio ? 'secondary-bg' : ''} px-4 py-2 `} style={{ ...style, }}>
             <label className="radio-container">
                 <input
                     type="radio"
@@ -22,7 +22,7 @@ function RadioInput({ style, title, selected, setSelected }) {
                     onChange={() => handleChange(title)}
                 />
                 <span className="custom-radio"></span>
-                <p style={{ marginBlock: 0 }}>{title}</p>
+                <p  className="medium-text-normal-weight ">{title}</p>
             </label>
         </div>
     );

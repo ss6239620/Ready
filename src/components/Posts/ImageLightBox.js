@@ -35,37 +35,15 @@ export default function ImageLightBox({ isOpen, setModal, source }) {
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                cursor: clicked ? 'zoom-out' : 'zoom-in'
-            }}
+            className={`modal-overlay ${clicked ? 'cursor-zoom-out' : 'cursor-zoom-in'} `}
         >
             <div
-
-                className="modal-content div-center"
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    padding: 0,
-                    borderRadius: 0,
-                    justifyContent: 'center',  // Distribute space between items, pushing the button to the bottom
-                    position: 'relative',
-                    overflowY:'auto',
-                }}
+                className="modal-content div-center-justify-center w-[100%!important] h-[100%!important] relative overflow-y-auto p-[0px!important] "
             >
                 <img
                     ref={imageRef}
                     src={source}
-                    style={{
-                        width: "100%",
-                        maxHeight:'100vh',
-                        objectFit: "cover",
-                        display: "block", // Removes extra space under image
-                        position: 'absolute',
-                        filter: 'blur(100px)',
-                        zIndex: 1,
-                        backgroundColor: 'red'
-                    }}
+                    className="w-[100%] max-h-[100vh] object-cover block absolute blur-[100px] z-[1] "
                 />
                 <img
                     src={source}
@@ -78,11 +56,7 @@ export default function ImageLightBox({ isOpen, setModal, source }) {
                         zIndex: 2,
                     }}
                 />
-                <div className="primary-bg" onClick={() => setModal(false)} style={{
-                    position: 'absolute',
-                    top: 20, right: 20,
-                    zIndex: 2, padding: 5, borderRadius: '50%', border: '2px solid #fff', cursor: 'pointer'
-                }}>
+                <div className="primary-bg absolute top-5 z-[2] right-5 rounded-[50%] border cursor-pointer " onClick={() => setModal(false)}>
                     <IconButton Icon={RxCross1} size={30} />
                 </div>
             </div>

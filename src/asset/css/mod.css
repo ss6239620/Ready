@@ -1,5 +1,30 @@
-.hover-bg:hover{
-    cursor: pointer;
-    background-color: #FFFFFF19;
-    border-radius: 50px;
+.hover-bg:hover {
+  cursor: pointer;
+  background-color: #ffffff19;
+  border-radius: 50px;
+}
+
+.large-title {
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.mod-padding {
+  height: 100vh;
+  padding-top: 80px;
+}
+
+.div-hide:hover{
+    display: none;
+}
+
+@media (max-width: 900px) {
+  .new-rules {
+    padding-right: 0px;
+    padding-inline: 20px;
+  }
 }

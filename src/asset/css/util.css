@@ -214,8 +214,34 @@ input[type="radio"]:checked + .custom-radio::after {
 .popular-carousel-card {
   background-size: 100%;
   cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-size 0.3s ease-in-out, background-position 0.3s ease-in-out;
+  width: 280px;
+  height: 210px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  border-radius: 20px;
 }
 
 .popular-carousel-card:hover {
   background-size: 120%;
+}
+
+
+/* spinner loader */
+
+.spinner {
+  border: 3px solid #f3f3f3; /* Light gray background */
+  border-top: 3px solid #3498db; /* Blue color for the spinner */
+  border-radius: 50%; /* Make it round */
+  width: 30px; /* Size of the spinner */
+  height: 30px;
+  animation: spin 2s linear infinite; /* Infinite spinning animation */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

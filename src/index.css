@@ -5,6 +5,10 @@ html {
   scroll-behavior: smooth;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: "Quicksand", serif;
@@ -15,6 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   --background: white;
   --secondary: #e5ebee;
+  --teritory:red;
   --color-hover:#eaeced8c;
   --fixed-bg-color: #eaeced8c;
   --text-primary: black;
@@ -30,6 +35,7 @@ body {
 body.dark-theme {
   --background: #121212;
   --secondary: #2a3236;
+  --teritory:red;
   --color-hover:#201f1f;
   --fixed-bg-color: #000000;
   --text-primary: #ffffff;
@@ -66,8 +72,15 @@ body.modal-open {
 .accent-bg {
   background-color: var(--accent);
 }
+.teritory-bg {
+  background-color: var(--teritory);
+}
 .fixed-bg {
   background-color: var(--fixed-bg-color);
+}
+
+.border-radius-large{
+  border-radius: 30px;
 }
 
 .primary-text{
@@ -75,6 +88,9 @@ body.modal-open {
 }
 .secondary-text{
   color: var(--text-secondary);
+}
+.accent-text{
+  color: var(--accent);
 }
 .divider-bottom {
   border-bottom: 1px solid var(--divider);
@@ -90,13 +106,154 @@ body.modal-open {
   border-left: 1px solid var(--divider);
 }
 
+
+
 .border {
   border: 1px solid var(--divider);
+}
+
+.border-none{
+  border: none !important;
 }
 
 .card{
   background-color: var(--background);
   box-shadow: 1px 8px 8px var(--shadow);
+}
+
+.fixed-component{
+  position: fixed;
+  overflow-y: auto;
+  z-index: 0;
+}
+
+.sticky-component{
+  position: sticky;
+  overflow-y: auto;
+  z-index: 0;
+}
+
+.accent-text-style{
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.extra-large-text-large-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.extra-large-text-extra-large-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.extra-large-text-normal-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.extra-large-text-small-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.large-text-large-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.large-text-normal-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.large-text-small-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.medium-text-large-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.medium-text-normal-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.medium-text-small-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.small-text-large-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.small-text-small-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 13.5px;
+  font-weight: 400;
+}
+
+.small-text-normal-weight{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 13.5px;
+  font-weight: 500;
 }
 
 /* Modal.css */
@@ -114,9 +271,10 @@ body.modal-open {
   background: var(--background);
   padding: 20px;
   border-radius: 8px;
-  width: 480px;
-  height: 80%;
+  width: 550px;
+  height: 85%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .close-button {
@@ -127,16 +285,61 @@ body.modal-open {
   color: red;
 }
 
+.div-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .div-center {
   display: flex;
   align-items: center;
+}
+
+.div-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+.div-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.div-center-justify{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.div-justify-center{
+  display: flex;
+  justify-content: center;
+}
+
+.div-justify{
+  display: flex;
+  justify-content: center;
+}
+
+.div-center-justify-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-small-style{
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
 .main-content {
   margin-top: 60px; /* Push the content below the fixed navbar */
   height: 100%;
   background-color: var(--background);
-  z-index: 100;
+  z-index: 50;
 }
 
 /* Custom scrollbar styling for WebKit browsers */

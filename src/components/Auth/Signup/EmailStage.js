@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { darkColorTheme } from "../../../constant";
 import BigButton from "../../../utils/buttons/BigButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaMeta } from "react-icons/fa6";
 import Basicinput from "../../../utils/input/Basicinput";
+import { validateEmail } from "../../../utils/CommonFunction";
 
 export default function EmailStage({
   isOpen,
@@ -12,6 +13,9 @@ export default function EmailStage({
   formValues,
   setFormValues,
 }) {
+
+  const [disabled, setdisabled] = useState(false)
+
   if (!isOpen) return null;
 
   const handleOverlayClick = (event) => {
@@ -30,32 +34,22 @@ export default function EmailStage({
 
   return (
     <div
-      className="modal-overlay"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className="modal-overlay div-center-justify-center "
       onClick={handleOverlayClick}
     >
       <div
-        className="modal-content"
-        style={{
-          display: "flex",
-          flexDirection: "column", // Stack content vertically
-          justifyContent: "space-between",
-        }}
+        className="modal-content flex justify-between flex-col  px-[30px!important] "
       >
-        <div style={{ paddingInline: 30 }}>
-          <h2 style={{ marginBlock: 10 }}>Sign Up</h2>
+        <div  >
+          <h2 className="large-text-large-weight mx-[0px!important]">Sign Up</h2>
           <div>
             <a>
               By continuing, you agree to our{" "}
-              <span style={{ color: "#648EFC", cursor: "pointer" }}>
+              <span className={'accent-text-style cursor-pointer '}>
                 User Agreement
               </span>{" "}
               and acknowledge that you understand the{" "}
-              <span style={{ color: "#648EFC", cursor: "pointer" }}>
+              <span className={'accent-text-style cursor-pointer '}>
                 Privacy Policy
               </span>{" "}
               .
@@ -64,46 +58,39 @@ export default function EmailStage({
           <BigButton
             Icon={FcGoogle}
             title={"Continue With google"}
-            style={{ background: "#fff", color: "black", marginBlock: 10 }}
+            className={'secondary-bg primary-text my-3 rounded-3xl '}
           />
           <BigButton
             Icon={FaMeta}
             title={"Continue With Meta"}
-            style={{ background: "#fff", color: "black", marginBlock: 10 }}
+            className={'secondary-bg primary-text my-3 rounded-3xl '}
           />
           <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBlock: 10,
-            }}
+            className="div-center-justify-center my-3"
           >
-            <div style={{ border: "1px solid #FFFFFF19", width: "100%" }} />
-            <span style={{ marginInline: 10 }}>OR</span>
-            <div style={{ border: "1px solid #FFFFFF19", width: "100%" }} />
+            <div className="divider-bottom w-[100%]" />
+            <span className="mx-3" >OR</span>
+            <div className="divider-bottom w-[100%]" />
           </div>
           <Basicinput
             placeHolder={"Email"}
-            style={{ marginBlock: 20 }}
+            className={'my-5'}
             value={formValues.email}
+            validationFunc={validateEmail}
             setFormValues={setFormValues}
             name="email"
           />
-          <div style={{ marginBottom: 30 }}>
+          <div className="mb-7" >
             <a>Alredy A Member? </a>
-            <span style={{ color: "#648EFC", cursor: "pointer" }}>Log In</span>
+            <span className={'accent-text-style cursor-pointer '}>
+              Log In</span>
           </div>
         </div>
-        <div style={{ paddingInline: 30 }}>
+        <div className="py-7">
           <BigButton
             title={"Continue"}
             disabled={isDisabled}
-            style={{
-              background: "red",
-              borderRadius: 50,
-              background: isDisabled ? "grey" : "red",
-            }}
+            className={`rounded-[50px!important] ${isDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
             onClick={handleClick}
           />
         </div>

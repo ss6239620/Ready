@@ -12,21 +12,11 @@ export default function Modal({ isOpen,setModal }) {
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            className="modal-overlay div-center-justify-center"
             onClick={handleOverlayClick}
         >
             <div
-                className="modal-content"
-                style={{
-                    height: '80%', display: 'flex',  // Use flexbox for layout
-                    flexDirection: 'column',  // Stack elements vertically
-                    justifyContent: 'space-between',  // Distribute space between items, pushing the button to the bottom
-                }}
+                className="modal-content h-[80%] flex flex-col justify-between "
             >
 
             </div>

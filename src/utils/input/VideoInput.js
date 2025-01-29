@@ -33,12 +33,9 @@ const VideoInput = ({ contentPath ,style}) => {
       ref={videoRef}
       src={`${contentPath}#t=0.1`}
       controls
+      className="w-[100%] object-cover block rounded-xl "
       muted
       style={{
-        width: "100%",
-        objectFit: "cover",
-        display: "block",
-        borderRadius: 10,
         ...style
       }}
     />

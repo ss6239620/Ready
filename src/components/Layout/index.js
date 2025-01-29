@@ -15,12 +15,12 @@ export default function Layout() {
         {/* <button onClick={switchTheme}>
         Switch to {theme === 'light' ? "Dark" : "Light"} Theme
       </button> */}
-        <div style={{ display: 'flex', flex: 1 }}>
-          <div className='sidebar' style={{  }}> {/* Fixed width for the sidebar */}
+        <div className='flex flex-1' >
+          <div className='sidebar' > {/* Fixed width for the sidebar */}
             <Sidebar />
           </div>
-          <div className='sidebar' style={{flex:0.23}}></div>
-          <div style={{ flex:1 }}> {/* Take remaining space */}
+          <div className='sidebar flex-[0.23]' ></div>
+          <div className='flex-1' > {/* Take remaining space */}
             <Outlet />
           </div>
         </div>

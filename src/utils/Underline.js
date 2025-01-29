@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Underline({ color, sizeInPx, style }) {
+export default function Underline({ color, sizeInPx, style,className }) {
     return (
-        <div style={{ borderBottom: `${sizeInPx ? sizeInPx : 0.1}px solid ${color ? color : '#FFFFFF55'}`, ...style }} />
+        <div className={`${className}`} style={{ borderBottom: `${sizeInPx ? sizeInPx : 0.1}px solid var(--divider)`, ...style }} />
     )
 }

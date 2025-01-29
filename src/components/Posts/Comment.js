@@ -17,6 +17,8 @@ import { BsEmojiSmile } from "react-icons/bs";
 import EmojiInput from "../../utils/input/EmojiInput";
 import RichTextEditor from "../../utils/RichTextEditor";
 import InfiniteScroll from "../../utils/InfiniteScroll";
+import { usePostData, useTribeDetails } from "../../hooks/postHook";
+import ErrorAlert from "../../utils/Alert/ErrorAlert";
 
 
 function ReplyInput({ comment_id, handleCLose, style }) {
@@ -38,24 +40,18 @@ function ReplyInput({ comment_id, handleCLose, style }) {
 
   return (
     <div
+      className="border rounded-[30px] px-[15px] py-[10px] my-[10px] relative ml-[37px]"
       style={{
-        border: "1px solid #666",
-        borderRadius: 30,
-        paddingInline: 15,
-        paddingBlock: 10,
-        marginBlock: 10,
-        position: 'relative',
-        marginLeft: 37,
         ...style
       }}
     >
       {gifClicked &&
-        <div style={{ position: 'absolute', top: 120, zIndex: 1 }}>
+        <div className="absolute top-[120px] z-[1]">
           <GifInput />
         </div>
       }
       {emojiClicked &&
-        <div style={{ position: 'absolute', top: 120, zIndex: 1 }}>
+        <div className="absolute top-[120px] z-[1]" >
           <EmojiInput
             replyComment={replyComment}
             setReplyComment={setReplyComment}
@@ -63,7 +59,7 @@ function ReplyInput({ comment_id, handleCLose, style }) {
         </div>
       }
       {textEditorClicked ?
-        <div style={{}}>
+        <div >
           <RichTextEditor />
         </div>
         :
@@ -71,34 +67,29 @@ function ReplyInput({ comment_id, handleCLose, style }) {
           value={replyComment.replyToCommentText}
           setFormValues={setReplyComment}
           name="replyToCommentText"
-          style={{ background: "none", border: "none", padding: 0 }}
+          className={'bg-[transparent!important] border-none p-[0px!important] '}
           minHeight={18}
         />
       }
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        className="div-center-justify"
       >
-        <div className="div-center" style={{ gap: 10 }}>
-          <IconButton onClick={() => setGifClicked(prev => !prev)} Icon={HiOutlineGif} size={20} style={{}} />
-          <IconButton onClick={() => setEmojiClicked(prev => !prev)} Icon={BsEmojiSmile} size={20} style={{}} />
-          <div onClick={() => setTextEditorClicked(prev => !prev)} className='icon-button-hover' style={{ cursor: 'pointer', paddingBlock: 8, paddingInline: 14, display: 'flex', justifyContent: 'center', borderRadius: 30, }}>
+        <div className="div-center gap-[8px]" >
+          <IconButton onClick={() => setGifClicked(prev => !prev)} Icon={HiOutlineGif} size={20} />
+          <IconButton onClick={() => setEmojiClicked(prev => !prev)} Icon={BsEmojiSmile} size={20} />
+          <div onClick={() => setTextEditorClicked(prev => !prev)} className='icon-button-hover cursor-pointer py-2 px-3 div-center rounded-[30px] '>
             <a>T</a>
           </div>
         </div>
-        <div className="div-center" style={{}}>
+        <div className="div-center" >
           <BigButton
-            className={'secondary-bg'}
+            className={'secondary-bg mr-3'}
             onClick={handleCLose}
             title={"cancel"}
-            style={{ marginRight: 10, }}
             labelStyle={{ fontSize: 13 }}
           />
           <BigButton
-            className={'accent-bg'}
+            className={'accent-bg text-[#fff]'}
             title={"comment"}
             onClick={() => ReplyToComment(comment_id)}
             labelStyle={{ fontSize: 13 }}
@@ -110,19 +101,20 @@ function ReplyInput({ comment_id, handleCLose, style }) {
 }
 
 export default function Comment() {
-  const [postData, setPostData] = useState({});
   const [addComment, setAddComment] = useState({
     commentText: "",
     replyToCommentText: ''
   });
   const [showComment, setShowComment] = useState(false)
-  const [loading, setIsLoading] = useState(true);
-  const [tribeDetail, setTribeDetail] = useState([]);
   const [replyVisible, setReplyVisible] = useState(null);
   const [allCommentdata, setAllCommentdata] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
   const { tribeid, postid } = useParams();
+
+  const { data: postData, isLoading: postLoading, isError: isPostError } = usePostData(postid);
+  const { data: tribeDetail, isLoading: tribeLoading, isError: isTribeError } = useTribeDetails(tribeid);
+
   const navigate = useNavigate();
 
   const fetchAllPostCommentData = useCallback((page) => {
@@ -135,34 +127,6 @@ export default function Comment() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
-  function fetchpostData(params) {
-    getPost(postid)
-      .then((res) => {
-        setPostData(res.data.data);
-        document.title = `${res.data.data.content_title}`
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function fetchTribeDetail(params) {
-    getTribeDetails(tribeid)
-      .then((res) => {
-        setTribeDetail(res.data.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(true);
-      });
-  }
-
-  useEffect(() => {
-    fetchpostData();
-    fetchTribeDetail();
   }, []);
 
   function handleCLose() {
@@ -178,15 +142,27 @@ export default function Comment() {
   }
 
 
+  if (postLoading || tribeLoading) {
+    return <div className="main-content p-[10px_90px_10px_40px] flex justify-between py-3 ">Loading...</div>;
+  }
+  if (isTribeError || isPostError) {
+    return <ErrorAlert className={'py-6 px-5'} />
+  }
+
+
+  if (!postData || !tribeDetail) {
+    return <div>No data available</div>;
+  }
+
 
   function renderComments(comments, depth = 0, maxDepth = 3, marginLeft = 0) {
     if (depth > maxDepth) return (
       <div>
-        <p style={{ fontSize: 14, color: darkColorTheme.secondaryTextColor, marginBlock: 0 }}>{comments.length} more replies</p>
+        <p className="medium-text-normal-weight secondary-text" >{comments.length} more replies</p>
       </div>
     );
     return comments.map((comment) => (
-      <div key={comment._id} style={{ marginLeft: marginLeft + "px", marginTop: 5, position: 'relative', }}>
+      <div key={comment._id} className={`ml-[${marginLeft}px] mt-1 relative `} >
         <CommentCard
           commentText={comment.comment_text}
           created_at={comment.created_at}
@@ -207,87 +183,67 @@ export default function Comment() {
 
   return (
     <div>
-      {!loading ? (
-        <div
-          className="main-content"
-          style={{
-            padding: "10px 90px 10px 40px",
-            paddingBlock: 10,
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <IconButton Icon={IoIosArrowRoundBack} onClick={() => navigate(-1)} />
-          </div>
+      <div
+        className="main-content p-[10px_90px_10px_40px] flex justify-between py-3 "
+      >
+        <div>
+          <IconButton Icon={IoIosArrowRoundBack} onClick={() => navigate(-1)} />
+        </div>
 
-          <div style={{ flex: "1", paddingInline: 15, paddingBlock: 2 }} >
-            <PostCard
-              data={postData}
-              tribeInfo={tribeDetail}
-              style={{ paddingInline: 0, paddingBlock: 0, marginBottom: 10 }}
-            />
+        <div className="flex-1 px-4 py-1"  >
+          <PostCard
+            data={postData}
+            tribeInfo={tribeDetail}
+            className={'py-[0px!important] px-[0px!important] mb-2'}
+          />
 
 
-            <div
-              style={{
-                border: "1px solid #666",
-                borderRadius: 30,
-                padding: 8,
-              }}
-            >
-              <div onClick={() => setShowComment(true)}>
-                <Biginput
-                  value={addComment.commentText}
-                  setFormValues={setAddComment}
-                  name="commentText"
-                  placeHolder={"Add a comment"}
-                  style={{ border: 0, padding: 0, background: 'none' }}
-                  minHeight={2}
-                />
-              </div >
-              {showComment &&
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>T</div>
-                  <div className="div-center" style={{ paddingBlock: 10 }}>
-                    <BigButton
-                      className={'secondary-bg'}
-                      onClick={() => setShowComment(false)}
-                      title={"cancel"}
-                      style={{ marginRight: 10 }}
-                    />
-                    <BigButton
-                      className={'accent-bg'}
-                      title={"comment"}
-                      onClick={AddComment}
-                    />
-                  </div>
+          <div
+            className="border rounded-[20px] p-2"
+          >
+            <div onClick={() => setShowComment(true)}>
+              <Biginput
+                value={addComment.commentText}
+                setFormValues={setAddComment}
+                name="commentText"
+                placeHolder={"Add a comment"}
+                className={'bg-[transparent!important] p-[0px!important] border-none'}
+                minHeight={2}
+              />
+            </div >
+            {showComment &&
+              <div
+                className="div-center-justify"
+              >
+                <div>T</div>
+                <div className="div-center py-2" >
+                  <BigButton
+                    className={'secondary-bg mr-3 small-text-normal-weight'}
+                    onClick={() => setShowComment(false)}
+                    title={"cancel"}
+                  />
+                  <BigButton
+                    className={'accent-bg text-[#fff] small-text-normal-weight'}
+                    title={"comment"}
+                    onClick={AddComment}
+                  />
                 </div>
-              }
-            </div>
-
-
-            <div style={{ marginBlock: 30 }}>
-
-              <InfiniteScroll fetchData={fetchAllPostCommentData} hasMoreData={hasMore}>
-                {renderComments(allCommentdata, 0, 3, 0)}
-              </InfiniteScroll>
-              {!hasMore && <div>No More Comments To Show</div>}
-            </div>
+              </div>
+            }
           </div>
-          <div style={{ position: 'sticky', top: 70, left: 0, alignSelf: 'flex-start', width: '25%' }}>
-            <TribeSideInfo tribeDetail={tribeDetail} />
+
+
+          <div className="my-8" >
+            <InfiniteScroll fetchData={fetchAllPostCommentData} hasMoreData={hasMore}>
+              {renderComments(allCommentdata, 0, 3, 0)}
+            </InfiniteScroll>
+            {!hasMore && <div>No More Comments To Show</div>}
           </div>
         </div>
-      ) : (
-        <div>Loading...</div>
-      )}
+        <div className="sticky top-16 left-0 self-start w-[25%]" >
+          <TribeSideInfo tribeDetail={tribeDetail} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
+import '../../asset/css/util.css'
 
-export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile,iconSize ,labelStyle}) {
+export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile, iconSize, labelStyle, loading }) {
     const [isHovered, setIsHovered] = useState(false);
     const fileInputRef = useRef(null); // Reference for the file input
 
@@ -23,15 +24,8 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
 
     return (
         <div
-            className={className}
+            className={`${className} rounded-lg cursor-pointer p-[10px] ${isHovered ? 'opacity-70' : 'opacity-100'} transition-[opacity_0.3s] div-center `}
             style={{
-                padding: 10,
-                borderRadius: 10,
-                cursor: 'pointer',
-                opacity: isHovered ? 0.7 : 1,
-                transition: 'opacity 0.3s',
-                display: 'flex',
-                alignItems: 'center',
                 ...style,
             }}
             onMouseEnter={() => setIsHovered(true)}
@@ -39,18 +33,20 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
             onClick={handleButtonClick} // Prevent onClick if disabled
         >
             {Icon && (
-                <div style={{ marginRight: 5,display:'flex',justifyContent:'center',alignItems:'center' }}>
-                    <Icon size={iconSize?iconSize:25} />
+                <div className='div-center-justify-center mr-1' >
+                    <Icon size={iconSize ? iconSize : 25} />
                 </div>
             )}
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'center',...labelStyle }}>
-                <a>{title}</a>
+            <div className='div-justify-center flex-1' style={{ ...labelStyle }}>
+                {loading ? <div className="spinner"></div> :
+                    <a>{title}</a>
+                }
             </div>
 
             {setFile && <input
                 ref={fileInputRef}
                 type="file"
-                style={{ display: 'none' }} // Hide the file input
+                className='hidden'
                 onChange={handleFileChange}
             />}
         </div>

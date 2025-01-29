@@ -27,24 +27,12 @@ export default function CommentCard({
     const created_time = formatTimeDifference(created_at);
 
     return (
-        <div style={{ display: "flex", marginBlock: 10, ...style }}>
+        <div className="flex my-3" style={{ ...style }}>
             <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
+                className="div-center-justify flex-col"
             >
                 <div
-                    style={{
-                        width: "35px",
-                        height: "35px",
-                        display: "flex",
-                        alignItems: "center",
-                        position: "relative",
-                        zIndex: 10
-                    }}
+                    className="relative z-10"
                 >
                     {depth != 0 &&
                         <div
@@ -63,92 +51,63 @@ export default function CommentCard({
                     <img
                         src={`${FILE_URL}/${profile}`}
                         alt=""
-                        style={{
-                            width: "90%",
-                            height: "90%",
-                            objectFit: "cover",
-                            borderRadius: "50%", // Optional: makes the image circular
-                            display: "block", // Removes extra space under image
-                        }}
+                        className="img-small-style"
                     />
                 </div>
                 {depth != 3 && childCount !== 0 && (
                     <div
-                        className="comment-vertical-bar"
+                        className={`comment-vertical-bar absolute top-[30px] left-[16px] z-0 `}
                         style={{
-                            position: "absolute",
-                            top: 30,
-                            left: 16,
                             height: `${100 - depth * 10}%`,
-                            zIndex:0
                         }}
                     />
                 )}
-                <IconButton Icon={CiCirclePlus} size={15} style={{ padding: 0 }} />
+                <IconButton Icon={CiCirclePlus} size={15} className={'p-[0px!important]'} />
             </div>
             <div
-                style={{
-                    marginLeft: 10,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                }}
+            className="div-justify ml-3 flex-col"
             >
-                <div className="div-center" style={{}}>
-                    <div style={{ marginLeft: 2, marginRight: 7 }}>
-                        <h5 style={{ marginBlock: 0 }}>{creatorName}</h5>
+                <div className="div-center">
+                    <div className="ml-[2px] mr-2" >
+                        <h5 className="medium-text-normal-weight my-[0px!important] mx-[0px!important] ">{creatorName}</h5>
                     </div>
                     <div
-                        style={{
-                            background: darkColorTheme.secondaryTextColor,
-                            padding: 2,
-                            borderRadius: 20,
-                            marginInline: 3,
-                        }}
+                    className="secondary-bg p-[2px] rounded-2xl mx-1"
                     />
                     <p
-                        style={{
-                            fontSize: 14,
-                            color: darkColorTheme.secondaryTextColor,
-                            marginBlock: 0,
-                        }}
+                        className="medium-text-normal-weight secondary-text my-[0px!important] mx-[0px!important]"
                     >
                         {created_time} ago
                     </p>
                     <div
-                        style={{
-                            background: darkColorTheme.secondaryTextColor,
-                            padding: 2,
-                            borderRadius: 20,
-                            marginInline: 3,
-                        }}
+                    className="secondary-bg p-[2px] rounded-2xl mx-1"
                     />
                 </div>
                 <div>
-                    <p style={{ marginBlock: 8 }}>{commentText}</p>
+                    <p className="medium-text-normal-weight my-[8px!important] mx-[0px!important]" >{commentText}</p>
                 </div>
-                <div style={{ display: "flex" }}>
-                    <div className="div-center" style={{}}>
-                        <IconButton Icon={BiUpvote} size={15} style={{ padding: 0 }} />
-                        <h5 style={{ marginInline: 15, marginBlock: 0, fontSize: 14 }}>
+                <div className="flex" >
+                    <div className="div-center" >
+                        <IconButton Icon={BiUpvote} size={15} className={'p-[0px!important]'}  />
+                        <h5 className="medium-text-normal-weight my-[0px!important] mx-[10px!important]" >
                             {total_comment_vote}
                         </h5>
-                        <IconButton Icon={BiUpvote} size={17} style={{ padding: 0 }} />
+                        <IconButton Icon={BiUpvote} size={17} className={'p-[0px!important]'} />
                     </div>
-                    <div style={{ marginInline: 30 }}>
+                    <div className="mx-7" >
                         <BigButton
                             onClick={onReplyClick}
                             Icon={FaRegComment}
                             iconSize={15}
-                            style={{ background: "none", padding: 0 }}
+                            className={'p-[0px!important] bg-[transparent!important] '}
                             title={`Reply`}
                         />
                     </div>
-                    <div style={{}}>
+                    <div >
                         <BigButton
                             Icon={FaShare}
                             iconSize={15}
-                            style={{ background: "none", padding: 0, fontSize: 14 }}
+                            className={'p-[0px!important] bg-[transparent!important] '}
                             title={`Share`}
                         />
                     </div>

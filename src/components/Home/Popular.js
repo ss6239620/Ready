@@ -18,28 +18,28 @@ export default function Popular() {
     const [recentPost, setRecentPost] = useState([])
     const [loading, setLoading] = useState(false);
     const [searchTrendingPost, setSearchTrendingPost] = useState([])
-  
+
     const fetchHomeFeed = useCallback((page) => {
         getPopularFeed(page, 2)
-        .then((res) => {
-          setPostData((prevData) => [...prevData, ...res.data.data]); // Append new posts
-          setHasMore(res.data.data.length > 0);
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+            .then((res) => {
+                setPostData((prevData) => [...prevData, ...res.data.data]); // Append new posts
+                setHasMore(res.data.data.length > 0);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            });
     }, []);
-  
+
     function fetchRecentPost(params) {
-      setLoading(true)
-      getRecentPost().then((res) => {
-        setRecentPost(res.data.data)
-        setLoading(false)
-      }).catch(err => {
-        console.log(err);
-      })
+        setLoading(true)
+        getRecentPost().then((res) => {
+            setRecentPost(res.data.data)
+            setLoading(false)
+        }).catch(err => {
+            console.log(err);
+        })
     }
-  
+
     function fetchTrendingTodayPost(params) {
         setLoading(true)
         getTrendingTodayPost().then((res) => {
@@ -50,12 +50,12 @@ export default function Popular() {
             console.log(err);
         })
     }
-    
-  
+
+
     useEffect(() => {
-      document.title = 't/popular';
-      fetchRecentPost();
-      fetchTrendingTodayPost();
+        document.title = 't/popular';
+        fetchRecentPost();
+        fetchTrendingTodayPost();
     }, [])
 
     const renderItem = (item, index) => (
@@ -64,25 +64,24 @@ export default function Popular() {
 
     return (
         <div
-            className="main-content"
-            style={{ marginInline: 70, paddingBlock: 10, position: 'relative',zIndex:10 }}
+            className="main-content mx-16 py-3 relative z-10"
         >
-            { !loading? 
-            <div style={{ position: 'relative', height: 210 }}>
-                <HorizontalCarousel items={searchTrendingPost} renderItem={renderItem} style={{ position: 'absolute' }} />
-            </div>
-            :
-            <div>Loading...</div>
+            {!loading ?
+                <div className='relative h-[210px]' >
+                    <HorizontalCarousel className={'absolute'} items={searchTrendingPost} renderItem={renderItem} />
+                </div>
+                :
+                <div>Loading...</div>
             }
-            <div style={{ display: 'flex',gap:10 }}>
-                <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex' }}>
+            <div className='flex gap-3' >
+                <div className='flex-1'>
+                    <div className='flex'>
                         <SimpleDropdown title={'Best'} />
                     </div>
                     <InfiniteScroll fetchData={fetchHomeFeed} hasMoreData={hasMore}>
                         {postData.map((item, index) => (
-                            <div style={{ marginBlock: 5, marginInline: 10 }} key={index}>
-                                <Underline style={{ marginBlock: 5, paddingInline: 10 }} color={darkColorTheme.divider} />
+                            <div className='my-1 mx-3'  key={index}>
+                                <Underline className='my-1 px-3' color={darkColorTheme.divider} />
                                 <PostCard
                                     data={item}
                                     tribeInfo={item.posted_tribe_id}
@@ -96,22 +95,12 @@ export default function Popular() {
                 </div>
                 {!loading ?
                     <div
-                        className="slectDivContainer main-content"
-                        style={{
-                            marginBlock: 10,
-                            overflowY: "auto",
-                            maxHeight: "calc(100vh - 90px)", // Adjust based on the header/footer size
-                            position: 'sticky',
-                            // width: '100%',
-                            zIndex: 0,
-                            flex: 0.44,
-                            top: 60,
-                            bottom: 0,
-                        }}>
-                        <div className='fixed-bg' style={{  padding: 15, borderRadius: 10 }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <h5 style={{ color: darkColorTheme.secondaryTextColor, fontWeight: 500, marginBlock: 15 }}>RECENT POSTS</h5>
-                                <a style={{ color: '#648EFC', cursor: 'pointer' }}>Clear</a>
+                        className="slectDivContainer main-content sticky-component flex-[0.44] my-3 top-16 bottom-0 max-h-[calc(100vh_-_90px)] "
+                    >
+                        <div className='fixed-bg p-4 rounded-xl' >
+                            <div className='div-center-justify' >
+                                <h5 className='secondary-text medium-text-large-weight' >RECENT POSTS</h5>
+                                <a className='accent-text cursor-pointer'>Clear</a>
                             </div>
                             {
                                 recentPost.map((item, key) => (

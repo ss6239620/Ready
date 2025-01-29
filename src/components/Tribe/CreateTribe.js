@@ -58,114 +58,82 @@ export default function Tribe({ isOpen, setModal }) {
 
     return (
         <div
-            className="modal-overlay"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            className="modal-overlay div-center-justify-center"
             onClick={handleOverlayClick}
         >
             <div
-                className="modal-content"
-                style={{
-                    borderRadius: '2%', width: '50%', height: '75%', display: 'flex',  // Use flexbox for layout
-                    flexDirection: 'column',  // Stack elements vertically
-                    justifyContent: 'space-between',  // Distribute space between items, pushing the button to the bottom
-                    position:'relative',
-                }}
+                className="modal-content rounded-[2%] w-[50%!important] h-[80%!important] flex flex-col justify-between relative "
             >
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div className="flex justify-between">
                     <div>
-                        <h2 style={{ marginBlock: 5 }}>Tell us about your Tribe</h2>
-                        <a style={{ fontSize: 15, color: darkColorTheme.secondaryTextColor }}>
+                        <h2 className="large-text-normal-weight">Tell us about your Tribe</h2>
+                        <a className="large-text-small-weight secondary-text">
                             Fillout the information to let other people know about your tribe.
                         </a>
                     </div>
                     <div onClick={() => setModal(false)}>
-                        <RxCross1 className="back-button" size={25} style={{ padding: 5 }} />
+                        <RxCross1 className="back-button p-1" size={25} />
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', height: '85%', }}>
-                    <div className="slectDivContainer" style={{ flex: '1 0 10%', overflowY: "auto", paddingInline: 10, paddingBlock: 5 }}>
+                <div className="flex justify-between h-[85%]">
+                    <div className="slectDivContainer flex-[1_0_10%] overflow-y-auto px-2 py-[5px]" >
                         <Basicinput setFormValues={setformValues} name={'tribeName'} value={formValues.tribeName} placeHolder={'Tribe name'} />
-                        <Biginput setFormValues={setformValues} name={'tribeDescription'} value={formValues.tribeDescription} placeHolder={'Tribe description'} style={{ marginBlock: 30, height: '40%' }} />
+                        <Biginput setFormValues={setformValues} name={'tribeDescription'} value={formValues.tribeDescription} placeHolder={'Tribe description'} className={'my-7 h-[40%]'} />
 
-                        <div><Search placeholder={"Filter Topic"} style={{ marginBottom: 30, width: '90%' }} /></div>
+                        <div><Search placeholder={"Filter Topic"} className={'w-[100%!important] mb-7 '} /></div>
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+                        <div  className="div-center-justify mb-5" >
                             <a>Tribe Banner</a>
-                            <div style={{ display: 'flex' }}>
+                            <div className="flex">
                                 {tribeBannerImage && <a>{tribeBannerImage?.name}</a>}
-                                <BigButton className={'secondary-bg'} setFile={setTribeBanner} title={'Add'} Icon={LuImage} style={{  padding: 5 }} />
+                                <BigButton className={'secondary-bg p-[5px!important]'} setFile={setTribeBanner} title={'Add'} Icon={LuImage}  />
                             </div>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div className="div-center-justify" >
                             <a>Tribe Icon</a>
-                            <div style={{ display: 'flex' }}>
+                            <div className="flex" >
                                 {tribeProfileImage && <a>{tribeProfileImage?.name}</a>}
-                                <BigButton className={'secondary-bg'} setFile={setTribeProfileImage} title={'Add'} Icon={LuImage} style={{  padding: 5 }} />
+                                <BigButton className={'secondary-bg p-[5px!important] '} setFile={setTribeProfileImage} title={'Add'} Icon={LuImage}   />
                             </div>
                         </div>
                     </div>
-                    <div style={{ flex: 1 }}>
+                    <div className="flex-1" >
                         <div
-                            className="card"
-                            style={{
-                                margin: 20,
-                                borderRadius: 20,
-                                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
-                                overflow: 'hidden', // Ensures border radius applies to inner content
-                            }}
+                            className="card m-5 rounded-2xl shadow-[0px_4px_10px_rgba(0,0,0,0.2)] overflow-hidden "
                         >
-                            <div style={{ width: '100%', height: 35 }}>
-                                {tribeBannerImage &&
+                            {tribeBannerImage &&
+                                <img
+                                    src={URL.createObjectURL(tribeBannerImage)}
+                                    alt="Logo"
+                                    className="img-small-style w-[100%!important] rounded-[0px!important] "
+                                />
+                            }
+                            <div className="div-center-justify p-5">
+                                {tribeProfileImage &&
                                     <img
-                                        src={URL.createObjectURL(tribeBannerImage)}
+                                        src={URL.createObjectURL(tribeProfileImage)}
                                         alt="Logo"
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            display: 'block', // Removes extra space under image
-                                        }}
+                                        className="img-small-style w-[40px!important] h-[40px!important] "
                                     />
                                 }
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 20 }}>
-                                <div style={{ width: 40, height: 40 }}>
-                                    {tribeProfileImage &&
-                                        <img
-                                            src={URL.createObjectURL(tribeProfileImage)}
-                                            alt="Logo"
-                                            style={{
-                                                width: '100%',
-                                                height: '100%',
-                                                objectFit: 'cover',
-                                                display: 'block', // Removes extra space under image
-                                                borderRadius: '50%'
-                                            }}
-                                        />
-                                    }
-                                </div>
-                                <div style={{ paddingInline: 5 }}>
-                                    <h3 style={{ margin: 0 }}>t/{formValues.tribeName}</h3>
+                                <div className="px-1">
+                                    <h3 className="large-text-large-weight mx-[0px!important] my-[0px!important]">t/{formValues.tribeName}</h3>
                                     <div>
-                                        <p style={{ fontSize: 15, color: darkColorTheme.secondaryTextColor, margin: 0, padding: 0 }}>
+                                        <p className="medium-text-normal-weight secondary-text">
                                             1 member <span> . </span> <span>1 online</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div style={{ paddingInline: 20, paddingBottom: 20 }}>
+                            <div className="p-5">
                                 {formValues.tribeDescription}
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <BigButton className={'accent-bg'} onClick={handleClick} title={'Create Tribe'} style={{  borderRadius: 30, width: '15%', color: 'white',position:'absolute',bottom:20,right:20 }} />
+                <BigButton className={'accent-bg text-[#fff] w-[15%] absolute bottom-5 right-5 rounded-[30px!important]'} onClick={handleClick} title={'Create Tribe'}  />
             </div>
         </div>
 

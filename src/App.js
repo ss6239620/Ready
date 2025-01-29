@@ -17,6 +17,8 @@ import Popular from './components/Home/Popular';
 import ModSidebar from './components/Mod/ModSidebar';
 import ModLayout from './components/Mod/ModLayout';
 import Queues from './components/Mod/Overview/Queues';
+import Rules from './components/Mod/Moderation/Rules/Rules';
+import CreateRules from './components/Mod/Moderation/Rules/CreateRules';
 
 export default function App() {
 
@@ -46,6 +48,8 @@ export default function App() {
         {/* Route for mod that takes up the entire screen */}
         <Route path="mod" element={<ModLayout />} >
           <Route path=":id/queue" element={<Queues />} />
+          <Route path=":id/rules" element={<Rules />} />
+          <Route path=":id/rules/new" element={<CreateRules />} />
         </Route>
       </Routes>
     </BrowserRouter>

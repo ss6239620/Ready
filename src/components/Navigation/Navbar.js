@@ -36,7 +36,7 @@ const SideBarModal = ({ isOpen, onClose, children }) => {
 
     return (
         <div className="modal-overlay" onClick={handleOverlayClick}>
-            <div style={{ width: "65%", }}>
+            <div className="w-[65%]" >
                 {children}
             </div>
         </div>
@@ -119,7 +119,7 @@ export default function Navbar() {
     return (
         <div>
             <div
-                className="primary-bg divider-bottom"
+                className="primary-bg divider-bottom "
                 style={{
                     position: "fixed", // Fix the navbar to the top
                     top: 0,
@@ -168,28 +168,20 @@ export default function Navbar() {
                     setFormValues={setFormValues}
                 />
 
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="div-center">
                     <div
-                        className="navbar-menu"
-                        style={{ paddingRight: 15 }}
+                        className="navbar-menu pr-4"
                         onClick={() => openModal()}
                     >
                         <RiMenuFill size={30} />
                     </div>
-                    <div style={{ width: "45px", height: "45px" }}>
                         <img
                             src={require("../../asset/img/logo.png")}
                             alt=""
-                            style={{
-                                width: "90%",
-                                height: "90%",
-                                objectFit: "cover",
-                                borderRadius: "50%", // Optional: makes the image circular
-                            }}
+                            className='img-small-style w-[45px!important] h-[45px!important]'
                         />
-                    </div>
                     <div
-                        className="navbar-title"
+                        className="navbar-title  "
                         style={{
                             paddingLeft: 10,
                             fontWeight: "bold",
@@ -200,16 +192,16 @@ export default function Navbar() {
                         ready
                     </div>
                 </div>
-                <div style={{ display: "flex" }}>
+                <div className="flex" >
                     <Search clicked={searchClicked} setclicked={setSearchClicked}>
                         {!loading &&
-                            <div style={{ position: 'relative' }}>
-                                <div className="primary-bg" style={{ position: 'absolute', paddingBlock: 15, width: '100%', maxHeight: "calc(100vh - 100px)", overflowY: 'auto', borderBottomLeftRadius: 20 }}>
-                                    <Underline style={{ marginBlock: 10 }} />
-                                    <div style={{ paddingInline: 15 }}>
-                                        <div className="div-center" style={{}}>
+                            <div className="relative" >
+                                <div className="primary-bg absolute py-4 w-[100%] max-h-[calc(100vh_-_100px)] overflow-y-auto rounded-bl-3xl " >
+                                    <Underline className={'my-3'} />
+                                    <div className="px-4">
+                                        <div className="div-center" >
                                             <IconButton Icon={FaArrowTrendUp} size={15} />
-                                            <h5 style={{ marginBlock: 0, fontWeight: 400 }}>TRENDING TODAY</h5>
+                                            <h5 className="large-text-normal-weight" >TRENDING TODAY</h5>
                                         </div>
                                         {searchTrendingPost.map((item, key) => (
                                             <PostSummaryCard data={item} key={key} onClick={closeSearchChild} no_of_charactor={120} />
@@ -221,17 +213,17 @@ export default function Navbar() {
                     </Search>
                 </div>
                 {!user && (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <div style={{ marginInline: 10 }}>
+                    <div className="div-center" >
+                        <div className="mx-3">
                             <BigButton
-                                style={{ background: "red" }}
+                                className={'bg-[var(--teritory)]'}
                                 title={"Log in"}
                                 onClick={() => setLoginModal(true)}
                             />
                         </div>
-                        <div style={{ marginInline: 10 }}>
+                        <div className="mx-3">
                             <BigButton
-                                style={{ background: "red" }}
+                                className={'bg-[var(--teritory)]'}
                                 title={"Sign up"}
                                 onClick={() => setEmailStageModal(true)}
                             />
@@ -240,56 +232,33 @@ export default function Navbar() {
                 )}
 
                 {user && (
-                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                        <div onClick={handleChatNavigate} style={{ marginInline: 10, cursor: 'pointer' }}>
+                    <div className="div-baseline">
+                        <div className="mx-3 cursor-pointer" onClick={handleChatNavigate}>
                             <IoChatbubbleEllipsesOutline size={25} />
                         </div>
-                        <div onClick={() => navigate(`/createpost`)} style={{ cursor: 'pointer', marginInline: 10, display: 'flex', alignItems: 'center' }}>
-                            <FaPlus size={25} style={{ marginInline: 10 }} />
+                        <div onClick={() => navigate(`/createpost`)} className="mx-3 cursor-pointer div-center">
+                            <FaPlus size={25} className="mx-3" />
                             <span>Create</span>
                         </div>
-                        <div style={{ marginInline: 10, cursor: 'pointer' }}>
+                        <div className="mx-3 cursor-pointer">
                             <IoIosNotifications size={25} />
                         </div>
-                        <div style={{ marginInline: 10 }}>
-                            <IconDropDown Icon={RiAccountCircleFill} childStyle={{ width: 230, right: 0, top: 50, paddingBlock: 15, paddingInline: 20 }}>
-                                <div onClick={() => navigate(`user/${user.user._id}`)} className="div-center profile-dropdown" style={{ gap: 10, marginBlock: 10, cursor: 'pointer' }}>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                        }}
-                                    >
-                                        <img
-                                            src={require('../../asset/img/logo.png')}
-                                            alt="communities-logo"
-                                            style={{
-                                                width: "35px", // Fixed size
-                                                height: "35px", // Fixed size
-                                                objectFit: "cover", // Ensures the aspect ratio is preserved
-                                                borderRadius: "50%", // Circular shape
-                                            }}
-                                        />
-                                    </div>
+                        <div className="mx-3">
+                            <IconDropDown Icon={RiAccountCircleFill} childClassName={'w-[230px] right-0 top-[50px] py-[15px] px-5 '} >
+                                <div onClick={() => navigate(`user/${user.user._id}`)} className="div-center profile-dropdown gap-3 my-3 cursor-pointer" >
+                                    <img
+                                        src={require('../../asset/img/logo.png')}
+                                        alt="communities-logo"
+                                        className="img-small-style"
+                                    />
                                     <div>
                                         <h5
-                                            className="profile-dropdown-text"
-                                            style={{
-                                                marginInline: 3,
-                                                marginBlock: 0,
-                                                fontSize: 14,
-                                                fontWeight: 500,
-                                            }}
+                                            className="profile-dropdown-text medium-text-normal-weight my-[0px!important]"
                                         >
                                             View Profile
                                         </h5>
                                         <h5
-                                            style={{
-                                                marginInline: 3,
-                                                marginBlock: 0,
-                                                fontSize: 12,
-                                                fontWeight: 400,
-                                            }}
+                                            className="small-text-small-weight secondary-text my-[0px!important]"
                                         >
                                             u/{user.user.username}
                                         </h5>
@@ -297,19 +266,13 @@ export default function Navbar() {
                                 </div>
                                 <div>
                                     {profile_dropDown.map((item, key) => (
-                                        <div className="div-center" key={key} style={{ gap: 10, marginBlock: 10 }}>
+                                        <div className="div-center gap-3 my-3" key={key}>
                                             <IconButton onClick={() => handleFucntion(item.id)} Icon={theme === 'dark' && item.id === 'dark_mode' ? CiLight : item.icon} size={25} />
                                             <div>
                                                 <h5
-                                                    // className="profile-dropdown-text"
-                                                    style={{
-                                                        marginInline: 3,
-                                                        marginBlock: 0,
-                                                        fontSize: 14,
-                                                        fontWeight: 400,
-                                                    }}
+                                                    className="medium-text-small-weight"
                                                 >
-                                                    {theme === 'dark' && item.id === 'dark_mode'?'Light Mode':item.title}
+                                                    {theme === 'dark' && item.id === 'dark_mode' ? 'Light Mode' : item.title}
                                                 </h5>
                                             </div>
                                         </div>
