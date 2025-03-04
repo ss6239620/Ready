@@ -19,39 +19,41 @@ import ModLayout from './components/Mod/ModLayout';
 import Queues from './components/Mod/Overview/Queues';
 import Rules from './components/Mod/Moderation/Rules/Rules';
 import CreateRules from './components/Mod/Moderation/Rules/CreateRules';
+import { AppProviders } from './AppProviders';
 
 export default function App() {
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='home' element={<Home />} />
-          <Route path="explore" element={<Explore />} />
-          <Route path="popular" element={<Popular />} />
-          <Route path="search" element={<SearchHomePage />} />
-          <Route path="tribe/:id" element={<TribeHomePage />} />
-          <Route path="comment/:tribeid/:postid" element={<Comment />} />
-          <Route path="createpost" element={<CreatePost />} />
-          <Route path="user/:id" element={<UserHomePage />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
-        </Route>
+    <AppProviders>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path='home' element={<Home />} />
+            <Route path="explore" element={<Explore />} />
+            <Route path="popular" element={<Popular />} />
+            <Route path="search" element={<SearchHomePage />} />
+            <Route path="tribe/:id" element={<TribeHomePage />} />
+            <Route path="comment/:tribeid/:postid" element={<Comment />} />
+            <Route path="createpost" element={<CreatePost />} />
+            <Route path="user/:id" element={<UserHomePage />} />
+            {/* <Route path="*" element={<NoPage />} /> */}
+          </Route>
 
-        {/* Route for chat that takes up the entire screen */}
-        <Route path="chat" element={<ChatLayout />} >
-          <Route path='room/:id' element={<ChatRoom />} />
-          <Route path='room/create' element={<StartChat />} />
-          <Route path='user/:id' element={<ChatUser />} />
-        </Route>
+          {/* Route for chat that takes up the entire screen */}
+          <Route path="chat" element={<ChatLayout />} >
+            <Route path='room/:id' element={<ChatRoom />} />
+            <Route path='room/create' element={<StartChat />} />
+            <Route path='user/:id' element={<ChatUser />} />
+          </Route>
 
-        {/* Route for mod that takes up the entire screen */}
-        <Route path="mod" element={<ModLayout />} >
-          <Route path=":id/queue" element={<Queues />} />
-          <Route path=":id/rules" element={<Rules />} />
-          <Route path=":id/rules/new" element={<CreateRules />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* Route for mod that takes up the entire screen */}
+          <Route path="mod" element={<ModLayout />} >
+            <Route path=":id/queue" element={<Queues />} />
+            <Route path=":id/rules" element={<Rules />} />
+            <Route path=":id/rules/new" element={<CreateRules />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AppProviders>
   )
 }

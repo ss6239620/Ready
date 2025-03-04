@@ -17,7 +17,7 @@ import { BsEmojiSmile } from "react-icons/bs";
 import EmojiInput from "../../utils/input/EmojiInput";
 import RichTextEditor from "../../utils/RichTextEditor";
 import InfiniteScroll from "../../utils/InfiniteScroll";
-import { usePostData, useTribeDetails } from "../../hooks/postHook";
+import { useAddComment, usePostComment, usePostData, useReplyComment, useTribeDetails } from "../../hooks/postHook";
 import ErrorAlert from "../../utils/Alert/ErrorAlert";
 
 
@@ -30,12 +30,18 @@ function ReplyInput({ comment_id, handleCLose, style }) {
   const [emojiClicked, setEmojiClicked] = useState(false);
   const [textEditorClicked, setTextEditorClicked] = useState(false);
 
+  const { mutate, isPending, isError, error } = useReplyComment();
+
   function ReplyToComment(comment_id) {
-    replyToComment(replyComment.replyToCommentText, comment_id).then((res) => {
-      console.log('Cmment Added');
-    }).catch((err) => {
-      console.log(err);
-    })
+    mutate(
+      { commentText: replyComment.replyToCommentText, commentId: comment_id },
+      {
+        onSuccess: () => {
+          handleCLose();
+          setReplyComment({ replyToCommentText: '' }); // Clear input field after success
+        },
+      }
+    );
   }
 
   return (
@@ -107,38 +113,39 @@ export default function Comment() {
   });
   const [showComment, setShowComment] = useState(false)
   const [replyVisible, setReplyVisible] = useState(null);
-  const [allCommentdata, setAllCommentdata] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
 
   const { tribeid, postid } = useParams();
 
   const { data: postData, isLoading: postLoading, isError: isPostError } = usePostData(postid);
   const { data: tribeDetail, isLoading: tribeLoading, isError: isTribeError } = useTribeDetails(tribeid);
 
-  const navigate = useNavigate();
+  const { mutate, isPending: isCommentPending, isError, error } = useAddComment();
 
-  const fetchAllPostCommentData = useCallback((page) => {
-    console.log('fetched....', page);
-    getAllPostComment(postid, page)
-      .then((res) => {
-        setAllCommentdata((prevData) => [...prevData, ...res.data.data]);
-        setHasMore(res.data.data.length > 0);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+  } = usePostComment(postid);
+
+  const allCommentdata = data ? data.pages.flatMap(page => page.data.data) : [];
+
+  const navigate = useNavigate();
 
   function handleCLose() {
     setReplyVisible(null);
   }
 
   function AddComment(params) {
-    postComment(addComment.commentText, postid).then((res) => {
-      console.log('Cmment Added');
-    }).catch((err) => {
-      console.log(err);
-    })
+    mutate(
+      { commentText: addComment.commentText, postId: postid },
+      {
+        onSuccess: () => {
+          setShowComment(false);
+          setAddComment({ replyToCommentText: '', commentText: '' }); // Clear input field after success
+        },
+      }
+    );
+
   }
 
 
@@ -158,24 +165,24 @@ export default function Comment() {
   function renderComments(comments, depth = 0, maxDepth = 3, marginLeft = 0) {
     if (depth > maxDepth) return (
       <div>
-        <p className="medium-text-normal-weight secondary-text" >{comments.length} more replies</p>
+        <p className="medium-text-normal-weight secondary-text" >{comments?.length} more replies</p>
       </div>
     );
     return comments.map((comment) => (
       <div key={comment._id} className={`ml-[${marginLeft}px] mt-1 relative `} >
         <CommentCard
-          commentText={comment.comment_text}
-          created_at={comment.created_at}
-          total_comment_vote={comment.total_comment_vote}
+          commentText={comment?.comment_text}
+          created_at={comment?.created_at}
+          total_comment_vote={comment?.total_comment_vote}
           creatorName={comment?.created_by?.username}
-          onReplyClick={() => setReplyVisible(comment._id)}
+          onReplyClick={() => setReplyVisible(comment?._id)}
           profile={comment?.created_by?.profile_avtar}
           depth={depth}
-          childCount={comment.child_comment_ids.length}
+          childCount={comment?.child_comment_ids?.length}
         />
-        {replyVisible === comment._id && <ReplyInput comment_id={comment._id} handleCLose={handleCLose} />}
-        {comment.child_comment_ids && comment.child_comment_ids.length > 0 && (
-          <div>{renderComments(comment.child_comment_ids, depth + 1, maxDepth, 37)}</div>
+        {replyVisible === comment?._id && <ReplyInput comment_id={comment?._id} handleCLose={handleCLose} />}
+        {comment?.child_comment_ids && comment?.child_comment_ids?.length > 0 && (
+          <div>{renderComments(comment?.child_comment_ids, depth + 1, maxDepth, 37)}</div>
         )}
       </div>
     ));
@@ -196,8 +203,6 @@ export default function Comment() {
             tribeInfo={tribeDetail}
             className={'py-[0px!important] px-[0px!important] mb-2'}
           />
-
-
           <div
             className="border rounded-[20px] p-2"
           >
@@ -226,18 +231,17 @@ export default function Comment() {
                     className={'accent-bg text-[#fff] small-text-normal-weight'}
                     title={"comment"}
                     onClick={AddComment}
+                    loading={isCommentPending}
                   />
                 </div>
               </div>
             }
           </div>
-
-
           <div className="my-8" >
-            <InfiniteScroll fetchData={fetchAllPostCommentData} hasMoreData={hasMore}>
+            <InfiniteScroll fetchData={fetchNextPage} hasMoreData={hasNextPage}>
               {renderComments(allCommentdata, 0, 3, 0)}
             </InfiniteScroll>
-            {!hasMore && <div>No More Comments To Show</div>}
+            {!hasNextPage && <div>No More Comments To Show</div>}
           </div>
         </div>
         <div className="sticky top-16 left-0 self-start w-[25%]" >

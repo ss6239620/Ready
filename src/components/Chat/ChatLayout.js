@@ -3,7 +3,6 @@ import useLocalStorage from 'use-local-storage'
 import './../../index.css';
 import { Outlet } from 'react-router-dom';
 import ChatSidebar from './ChatSidebar';
-import { AppProviders } from '../../AppProviders';
 import { ChatRoomProvider } from '../../Context/ChatRoomContext';
 
 export default function Layout() {
@@ -21,17 +20,15 @@ export default function Layout() {
   }, [theme]);
 
   return (
-    <AppProviders>
-      <ChatRoomProvider>
-        <div className='flex' >
-          <div className='flex-[0 0 25%]'> {/* Fixed width for the sidebar */}
-            <ChatSidebar />
-          </div>
-          <div className='flex-1' > {/* Take remaining space */}
-            <Outlet />
-          </div>
+    <ChatRoomProvider>
+      <div className='flex' >
+        <div className='flex-[0 0 25%]'> {/* Fixed width for the sidebar */}
+          <ChatSidebar />
         </div>
-      </ChatRoomProvider>
-    </AppProviders>
+        <div className='flex-1' > {/* Take remaining space */}
+          <Outlet />
+        </div>
+      </div>
+    </ChatRoomProvider>
   )
 }
