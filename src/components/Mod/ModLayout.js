@@ -4,7 +4,6 @@ import './../../index.css';
 import { Outlet } from 'react-router-dom';
 import ModSidebar from './ModSidebar';
 import Navbar from '../Navigation/Navbar';
-import { AppProviders } from '../../AppProviders';
 
 export default function ModLayout() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -21,7 +20,7 @@ export default function ModLayout() {
     }, [theme]);
 
     return (
-        <AppProviders>
+        <>
             <Navbar />
             <div className='flex flex-1' >
                 <div className='sidebar' >  {/* Fixed width for the sidebar */}
@@ -32,6 +31,6 @@ export default function ModLayout() {
                     <Outlet />
                 </div>
             </div>
-        </AppProviders>
+        </>
     )
 }

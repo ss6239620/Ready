@@ -91,6 +91,11 @@ export default function TribeHomePage({ }) {
         navigate(`/createpost?id=${tribeDetail._id}`)
     }
 
+    function handleMod(params) {
+        localStorage.setItem("mod_tribe", JSON.stringify(id));
+        navigate(`/mod/${id}/queue`)
+    }
+
     return (
         <div className='main-content px-[6%] py-5 '>
             {!isLoading &&
@@ -114,14 +119,14 @@ export default function TribeHomePage({ }) {
                                 />
                             </div>
                             <div
-                            className="ml-[120px] my-3"
+                                className="ml-[120px] my-3"
                             >
                                 <div>
                                     <h1 className='extra-large-text-extra-large-weight'>t/{tribeDetail.tribeName}</h1>
                                 </div>
                             </div>
                             <div
-                            className="div-center-justify my-2 ml-5 gap-4"
+                                className="div-center-justify my-2 ml-5 gap-4"
                             >
                                 <ButtonWIthBorder onClick={handleCreatepostClick} iconSize={20} title={'Create Post'} Icon={FaPlus} className={'bg-[transparent!important mx-2]'} />
                                 {isJoined &&
@@ -133,7 +138,7 @@ export default function TribeHomePage({ }) {
                                     <ButtonWIthBorder onClick={join_tribe} title={'Join'} className={'bg-[transparent!important mx-2]'} />
                                 }
                                 {userCreatedTribe &&
-                                    <BigButton className={'accent-bg text-[#fff]  border-radius-large '} onClick={() => navigate(`/mod/${id}/queue`)} title={'Mod Tools'}  />
+                                    <BigButton className={'accent-bg text-[#fff]  border-radius-large '} onClick={handleMod} title={'Mod Tools'} />
                                 }
                                 <ButtonWIthBorder iconSize={25} Icon={TbDots} className={'bg-[transparent!important] mx-2'} />
                             </div>

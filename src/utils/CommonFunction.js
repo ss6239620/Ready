@@ -24,6 +24,24 @@ function formatTimeDifference(inputDate) {
     }
 }
 
+function formatTime(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        hour12: true 
+    });
+}
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleString('en-US', { 
+        month: 'short', 
+        day: '2-digit', 
+        year: 'numeric' 
+    }).replace(',', '');
+}
+
 function truncateText(text, maxLength) {
     // Check if the length of the text is greater than the provided maxLength
     if (text.length > maxLength) {
@@ -56,4 +74,4 @@ const validatePassword = (value) => {
     return '';
 };
 
-export { formatTimeDifference, truncateText, validateEmail,validateUserName,validatePassword }
+export { formatTimeDifference, truncateText, validateEmail,validateUserName,validatePassword,formatDate,formatTime }

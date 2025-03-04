@@ -37,7 +37,7 @@ export const routeMap = {
     'generalsetting': { list: 'setting', key: 0 },
     'poastandcomments': { list: 'setting', key: 1 },
     'lookandfeel': { list: 'setting', key: 2 },
-    'communityguide': { list: 'setting', key: 3 },
+    'tribeguide': { list: 'setting', key: 3 },
     'notification': { list: 'setting', key: 4 },
     'achievements': { list: 'setting', key: 5 },
 }
