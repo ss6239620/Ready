@@ -1,6 +1,7 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { login, signup } from '../services/auth';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { login, removeSavedPostService, savePostService, signup } from '../services/auth';
 import { useUser } from '../Context/UserContext';
+import SuccessAlert from '../utils/Alert/SuccessAlert';
 
 export const useLogin = (email, password) => {
     const { setUser } = useUser();

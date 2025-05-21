@@ -49,31 +49,32 @@ export const modSidebarOverviewELemnet = [
         external_link: false,
         route: 'queue',
     },
-    {
-        title: 'Mod Mail',
-        icon: FiMail,
-        external_link: true
-    },
-    {
-        title: 'Scheduled Posts and Events',
-        icon: CiCalendarDate,
-        external_link: false
-    },
+    // {
+    //     title: 'Mod Mail',
+    //     icon: FiMail,
+    //     external_link: true
+    // },
+    // {
+    //     title: 'Scheduled Posts and Events',
+    //     icon: CiCalendarDate,
+    //     external_link: false
+    // },
     {
         title: 'Restricted Users',
         icon: PiHammer,
-        external_link: false
+        external_link: false,
+        route: 'restrict_user',
     },
     {
         title: 'Mods & Members',
         icon: IoPeopleOutline,
         external_link: false
     },
-    {
-        title: 'Insights',
-        icon: BsGraphUpArrow,
-        external_link: false
-    }
+    // {
+    //     title: 'Insights',
+    //     icon: BsGraphUpArrow,
+    //     external_link: false
+    // }
 ]
 
 export const modSidebarModerationELemnet = [

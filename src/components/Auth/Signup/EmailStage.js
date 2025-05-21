@@ -14,8 +14,6 @@ export default function EmailStage({
   setFormValues,
 }) {
 
-  const [disabled, setdisabled] = useState(false)
-
   if (!isOpen) return null;
 
   const handleOverlayClick = (event) => {

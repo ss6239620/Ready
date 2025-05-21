@@ -30,8 +30,6 @@ export default function Home() {
 
   if (!user) {
     navigate('/popular');
-    console.log('heell');
-    
   }
 
   // Flatten the pages array

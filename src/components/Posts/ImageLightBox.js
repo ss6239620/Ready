@@ -8,7 +8,7 @@ export default function ImageLightBox({ isOpen, setModal, source }) {
     const [clicked, setClicked] = useState(false)
 
     const handleClickedOutside = (event) => {
-        if (imageRef.current && !imageRef.current.contains(event.target)) {
+        if (imageRef.current && !imageRef.current.contains(event.target) && !event.target.closest('.modal-close-button')) {
             setClicked(prev => !prev)
         }
     }
@@ -56,7 +56,7 @@ export default function ImageLightBox({ isOpen, setModal, source }) {
                         zIndex: 2,
                     }}
                 />
-                <div className="primary-bg absolute top-5 z-[2] right-5 rounded-[50%] border cursor-pointer " onClick={() => setModal(false)}>
+                <div className="modal-close-button primary-bg absolute top-5 z-[2] right-5 rounded-[50%] border cursor-pointer " onClick={() => setModal(false)}>
                     <IconButton Icon={RxCross1} size={30} />
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getTribeDetails } from '../services/tribe';
-import { getHomeFeed, getPopularFeed, getPost, getRecentPost, getTrendingTodayPost } from '../services/posts';
+import { getHomeFeed, getPopularFeed, getPost, getRecentPost, getTrendingTodayPost, hidePostService, makeVote, savePostService } from '../services/posts';
 import { getAllPostComment, postComment, replyToComment } from '../services/comment';
+import { usePostStore } from '../store/postStore'
 
 export const usePostData = (postId) => {
     return useQuery({
@@ -105,7 +106,7 @@ export const useTrendingTodayPost = () => {
 export const useAddComment = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({commentText, postId}) => {
+        mutationFn: ({ commentText, postId }) => {
             return postComment(commentText, postId)
         },
         onSuccess: () => {
@@ -120,8 +121,8 @@ export const useAddComment = () => {
 export const useReplyComment = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({commentText, commentId}) => {
-            return replyToComment(commentText, commentId)
+        mutationFn: ({ commentText, commentId, post_id }) => {
+            return replyToComment(commentText, commentId, post_id)
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['postComment']);
@@ -131,3 +132,54 @@ export const useReplyComment = () => {
         },
     })
 }
+
+export const useSavePost = () => {
+    const { toggleSaved } = usePostStore();
+
+    return useMutation({
+        mutationFn: ({ post_id }) => savePostService(post_id),
+        onMutate: ({ post_id }) => {
+            // Optimistically update the UI
+            toggleSaved(post_id);
+        },
+        onError: (error, { post_id }) => {
+            // Revert if error occurs
+            toggleSaved(post_id);
+            console.error('Error saving post:', error);
+        }
+    });
+};
+
+export const useHidePost = () => {
+    const { toggleHide } = usePostStore();
+
+    return useMutation({
+        mutationFn: ({ post_id }) => hidePostService(post_id),
+        onMutate: ({ post_id }) => {
+            // Optimistically update the UI
+            toggleHide(post_id);
+        },
+        onError: (error, { post_id }) => {
+            // Revert if error occurs
+            toggleHide(post_id);
+            console.error('Error hiding post:', error);
+        }
+    });
+};
+
+export const useMakeVote = () => {
+    const { updateVote } = usePostStore();
+
+    return useMutation({
+        mutationFn: ({ post_id, vote }) => makeVote(post_id, vote),
+        onMutate: ({ post_id, vote }) => {
+            // Optimistically update the UI
+            updateVote(post_id, vote);
+        },
+        onError: (error, { post_id, vote }) => {
+            // Revert if error occurs
+            updateVote(post_id, vote === 1 ? 0 : 1); // Toggle back
+            console.error('Error voting on post:', error);
+        }
+    });
+};
