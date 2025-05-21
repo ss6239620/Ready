@@ -26,7 +26,7 @@ export default function Biginput({ placeHolder, style, value, setFormValues, nam
       className='primary-text'
         style={{
           width: "100%",
-          minHeight: minHeight ? minHeight : "150px", // Adjust as desired
+          minHeight: minHeight ? minHeight : "30px", // Adjust as desired
           border: "none",
           background: "transparent",
           outline: "none",

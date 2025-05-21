@@ -2,21 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { BiSolidError } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 
-export default function FailAlert({ className, title }) {
+export default function FailAlert({ className, title, isError }) {
   const [canceled, setCanceled] = useState(false);
   let msg = ''
   if (!title.response.data.error) {
     msg = title.response.data.errors[0].msg
   } else {
-    msg=title.response.data.error
+    msg = title.response.data.error
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setCanceled(true); // This will hide the alert after 5 seconds
-    }, 5000);
+    if (isError) {
+      setCanceled(false)
+      const timer = setTimeout(() => {
+        setCanceled(true); // This will hide the alert after 5 seconds
+      }, 5000);
 
-    return () => clearTimeout(timer); // Clean up the timer on component unmount
+      return () => clearTimeout(timer); // Clean up the timer on component unmount
+    }
   }, []);
 
   return (

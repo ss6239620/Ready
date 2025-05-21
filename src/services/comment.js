@@ -17,9 +17,10 @@ const postComment = (comment_text, post_id) => api.post(`/postcomment`, {
     post_id: post_id
 })
 
-const replyToComment = (comment_text, comment_id) => api.post(`/replytocomment`, {
+const replyToComment = (comment_text, comment_id,post_id) => api.post(`/replytocomment`, {
     comment_text: comment_text,
-    comment_id: comment_id
+    comment_id: comment_id,
+    post_id:post_id
 })
 
 export { getAllPostComment, getAllUserComment, postComment, replyToComment, searchComments }

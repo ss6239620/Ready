@@ -26,19 +26,19 @@ function formatTimeDifference(inputDate) {
 
 function formatTime(dateStr) {
     const date = new Date(dateStr);
-    return date.toLocaleString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        hour12: true 
+    return date.toLocaleString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
     });
 }
 
 function formatDate(dateStr) {
     const date = new Date(dateStr);
-    return date.toLocaleString('en-US', { 
-        month: 'short', 
-        day: '2-digit', 
-        year: 'numeric' 
+    return date.toLocaleString('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric'
     }).replace(',', '');
 }
 
@@ -74,4 +74,11 @@ const validatePassword = (value) => {
     return '';
 };
 
-export { formatTimeDifference, truncateText, validateEmail,validateUserName,validatePassword,formatDate,formatTime }
+const validateEmptyString = (value) => {
+    if (typeof value !== 'string' || value.trim() === '') {
+        return 'Please enter a valid value. This field cannot be empty.';
+    }
+    return '';
+};
+
+export { formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString }

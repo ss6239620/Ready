@@ -21,15 +21,6 @@ const searchUser = (q, page) => api.get(`/usersearch?q=${q}&page=${page}&limit=$
 
 const getUserInfo = (id) => api.get(`/getuserinfo/${id}`);
 
-
-// const signup = (email,username, password,identity,interests) => api.post(`/signup`, {
-//     email: email,
-//     password: password,
-//     username: username,
-//     identity: identity,
-//     interests: interests,
-// })
-
 const signup = (form) => api.post(`/signup`, form, {
     headers: {
         'Content-Type': 'multipart/form-data', // This is required to send form data with files

@@ -20,6 +20,7 @@ import Queues from './components/Mod/Overview/Queues';
 import Rules from './components/Mod/Moderation/Rules/Rules';
 import CreateRules from './components/Mod/Moderation/Rules/CreateRules';
 import { AppProviders } from './AppProviders';
+import RestrictedUsers from './components/Mod/Overview/RestrictedUsers';
 
 export default function App() {
   return (
@@ -49,6 +50,7 @@ export default function App() {
           {/* Route for mod that takes up the entire screen */}
           <Route path="mod" element={<ModLayout />} >
             <Route path=":id/queue" element={<Queues />} />
+            <Route path=":id/restrict_user" element={<RestrictedUsers />} />
             <Route path=":id/rules" element={<Rules />} />
             <Route path=":id/rules/new" element={<CreateRules />} />
           </Route>

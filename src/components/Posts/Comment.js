@@ -21,7 +21,7 @@ import { useAddComment, usePostComment, usePostData, useReplyComment, useTribeDe
 import ErrorAlert from "../../utils/Alert/ErrorAlert";
 
 
-function ReplyInput({ comment_id, handleCLose, style }) {
+function ReplyInput({ comment_id, post_id, handleCLose, style }) {
   const [replyComment, setReplyComment] = useState({
     replyToCommentText: ''
   });
@@ -34,7 +34,7 @@ function ReplyInput({ comment_id, handleCLose, style }) {
 
   function ReplyToComment(comment_id) {
     mutate(
-      { commentText: replyComment.replyToCommentText, commentId: comment_id },
+      { commentText: replyComment.replyToCommentText, commentId: comment_id, post_id: post_id },
       {
         onSuccess: () => {
           handleCLose();
@@ -180,7 +180,7 @@ export default function Comment() {
           depth={depth}
           childCount={comment?.child_comment_ids?.length}
         />
-        {replyVisible === comment?._id && <ReplyInput comment_id={comment?._id} handleCLose={handleCLose} />}
+        {replyVisible === comment?._id && <ReplyInput post_id={comment?.post_id} comment_id={comment?._id} handleCLose={handleCLose} />}
         {comment?.child_comment_ids && comment?.child_comment_ids?.length > 0 && (
           <div>{renderComments(comment?.child_comment_ids, depth + 1, maxDepth, 37)}</div>
         )}

@@ -72,9 +72,9 @@ export default function Basicinput({
   }, 3000); // 1-second delay after typing stops
 
   return (
-    <div className={`${className}`}>
+    <div className={``}>
       <div
-        className={`basicInput-external-div p-[20px] div-center rounded-[30px] ${error !== '' ? 'border-[var(--teritory)!important]' : ''}`}
+        className={`basicInput-external-div p-[20px] div-center rounded-[30px] ${error !== '' ? 'border-[var(--teritory)!important]' : ''} ${className}`}
         style={{
           ...style,
         }}

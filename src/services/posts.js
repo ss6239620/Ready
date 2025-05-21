@@ -12,6 +12,14 @@ const createPost = (form) => api.post(`/createpost`, form, {
     },
 })
 
+const savePostService = (post_id) => api.post(`/savepost`, {
+    post_id: post_id
+});
+
+const hidePostService = (post_id) => api.post(`/hidepost`, {
+    post_id: post_id
+});
+
 const getPost = (postId) => api.get(`/getpost/${postId}`);
 
 const getAllUserPosts = (page) => api.get(`/alluserpost?page=${page}&limit=${5}`);
@@ -37,4 +45,4 @@ const makeVote = (post_id, vote) => api.post(`/postvote`, {
     post_id: post_id
 })
 
-export { createPost, getAllPostOfTribe, getAllUserPosts, getPost, getHomeFeed, makeVote, getRecentPost, getTrendingTodayPost, searchPost,getPopularFeed }
+export { createPost, getAllPostOfTribe, getAllUserPosts, getPost, getHomeFeed, makeVote, getRecentPost, getTrendingTodayPost, searchPost, getPopularFeed, savePostService, hidePostService }
