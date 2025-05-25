@@ -82,8 +82,7 @@ export default function PostCard({ style, data, tribeInfo, hoverEfftect, classNa
         };
     }
   };
-
-
+  
   const created_time = formatTimeDifference(data?.created_at)
 
   const hoverEffect = hoverEfftect ? "bright-border-button-hover" : ''
@@ -152,10 +151,10 @@ export default function PostCard({ style, data, tribeInfo, hoverEfftect, classNa
             <IconButton Icon={isDownVoted ? BiSolidDownvote : BiDownvote} size={17} onClick={() => { handleVote(0) }} />
           </div>
           <div className='secondary-bg border-radius-large mx-4' >
-            <BigButton onClick={() => { handlePost(tribeInfo?._id, data?._id) }} Icon={FaRegComment} iconSize={20} title={`1`} />
+            <BigButton onClick={() => { handlePost(tribeInfo?._id, data?._id) }} Icon={FaRegComment} iconSize={18} title={`${data?.total_comments}`} />
           </div>
           <div className='secondary-bg border-radius-large' >
-            <BigButton Icon={FaShare} iconSize={20} className={'bg-transparent'} title={`share`} />
+            <BigButton Icon={FaShare} iconSize={18 } className={'bg-transparent'} title={`share`} />
           </div>
         </div>
       </div >
