@@ -8,7 +8,7 @@ export default function IconDropDown({ Icon, iconSize, children, style, childSty
 
     function handleClickOutside(event) {
         if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
-            setClicked(false);
+            closeDropDown();
         }
     }
     function closeDropDown(params) {

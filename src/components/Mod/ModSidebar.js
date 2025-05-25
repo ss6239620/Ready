@@ -7,12 +7,10 @@ import { RiArrowLeftDoubleFill } from "react-icons/ri";
 import { GrNotes } from "react-icons/gr";
 import '../../asset/css/mod.css'
 import { LuExternalLink } from "react-icons/lu";
-import { modSidebarContentELemnet, modSidebarModerationELemnet, modSidebarOverviewELemnet, modSidebarSettingELemnet, routeMap } from '../../asset/data/modData'
+import { modSidebarContentELemnet, modSidebarModerationELemnet, modSidebarOverviewELemnet, modSidebarSettingELemnet } from '../../asset/data/modData'
 import Underline from '../../utils/Underline'
 
 function SideBarElements({ data, Icon, isSelected, onClick }) {
-    const navigate = useNavigate();
-
     return (
         <div onClick={onClick} className='div-center-justify pr-5 cursor-pointer'>
             <div className='div-center gap-3' >
@@ -34,20 +32,40 @@ export default function ModSidebar() {
 
     const handleSelection = (list, key, route) => {
         setSelectedItem({ list, key });
-        navigate(`${id}/${route}`)
+        navigate(`/mod/${id}/${route}`)
     };
 
-    function handleNavigation(component) {
-        navigate(`${component}`)
-    }
+    const generateRouteMap = () => {
+        const map = {};
+
+        modSidebarOverviewELemnet.forEach((item, key) => {
+            if (item.route) map[item.route] = { list: 'overview', key };
+        });
+
+        modSidebarModerationELemnet.forEach((item, key) => {
+            if (item.route) map[item.route] = { list: 'moderation', key };
+        });
+
+        modSidebarContentELemnet.forEach((item, key) => {
+            if (item.route) map[item.route] = { list: 'content', key };
+        });
+
+        modSidebarSettingELemnet.forEach((item, key) => {
+            if (item.route) map[item.route] = { list: 'setting', key };
+        });
+
+        return map;
+    };
 
     useEffect(() => {
         // Extract the route after the ID
         const relativePath = location.pathname.split(`${id}/`)[1];
-        const removeslash=relativePath.split('/')[0];
-        
-        if (routeMap[removeslash]) {
-            setSelectedItem(routeMap[removeslash]);
+        if (relativePath) {
+            const routeKey = relativePath.split('/')[0]; // Get the route after id
+            const routeMap = generateRouteMap();
+            if (routeMap[routeKey]) {
+                setSelectedItem(routeMap[routeKey]);
+            }
         }
     }, [location.pathname, id]);
 
@@ -83,7 +101,7 @@ export default function ModSidebar() {
             <div className='my-1' >
                 {
                     modSidebarOverviewELemnet.map((item, key) => (
-                        <SideBarElements key={key} data={item} Icon={item.icon} isSelected={selectedItem.list === "overview" && selectedItem.key === key} onClick={() => handleSelection("overview", key,item?.route)} />
+                        <SideBarElements key={key} data={item} Icon={item.icon} isSelected={selectedItem.list === "overview" && selectedItem.key === key} onClick={() => handleSelection("overview", key, item?.route)} />
                     ))
                 }
             </div>
@@ -102,7 +120,7 @@ export default function ModSidebar() {
             <div className='my-1'>
                 {
                     modSidebarContentELemnet.map((item, key) => (
-                        <SideBarElements key={key} data={item} Icon={item.icon} isSelected={selectedItem.list === "content" && selectedItem.key === key} onClick={() => handleSelection("content", key,item?.route)} />
+                        <SideBarElements key={key} data={item} Icon={item.icon} isSelected={selectedItem.list === "content" && selectedItem.key === key} onClick={() => handleSelection("content", key, item?.route)} />
                     ))
                 }
             </div>
@@ -111,7 +129,7 @@ export default function ModSidebar() {
             <div className='my-1'>
                 {
                     modSidebarSettingELemnet.map((item, key) => (
-                        <SideBarElements key={key} data={item} Icon={item.icon} isSelected={selectedItem.list === "setting" && selectedItem.key === key} onClick={() => handleSelection("setting", key,item?.route)} />
+                        <SideBarElements key={key} data={item} Icon={item.icon} isSelected={selectedItem.list === "setting" && selectedItem.key === key} onClick={() => handleSelection("setting", key, item?.route)} />
                     ))
                 }
             </div>

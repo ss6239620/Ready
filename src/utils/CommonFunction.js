@@ -42,6 +42,27 @@ function formatDate(dateStr) {
     }).replace(',', '');
 }
 
+function getTimeLeft(isoDate) {
+    const now = new Date();
+    const target = new Date(isoDate);
+    const diffMs = target - now;
+
+    if (diffMs <= 0) {
+        return "Expired";
+    }
+
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHr = Math.floor(diffMin / 60);
+    const diffDay = Math.floor(diffHr / 24);
+
+    if (diffDay > 0) return `${diffDay} day${diffDay > 1 ? 's' : ''} left`;
+    if (diffHr > 0) return `${diffHr} hour${diffHr > 1 ? 's' : ''} left`;
+    if (diffMin > 0) return `${diffMin} minute${diffMin > 1 ? 's' : ''} left`;
+    return `${diffSec} second${diffSec > 1 ? 's' : ''} left`;
+}
+
+
 function truncateText(text, maxLength) {
     // Check if the length of the text is greater than the provided maxLength
     if (text.length > maxLength) {
@@ -81,4 +102,15 @@ const validateEmptyString = (value) => {
     return '';
 };
 
-export { formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString }
+// Custom debounce function (standalone, no lodash)
+function debounce(func, delay) {
+    let timeoutId;
+    const debounced = (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func(...args), delay);
+    };
+    debounced.cancel = () => clearTimeout(timeoutId); // Add cancel method
+    return debounced;
+}
+
+export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString }

@@ -277,6 +277,16 @@ body.modal-open {
   overflow: hidden;
 }
 
+.small-modal-content {
+  background: var(--background);
+  padding: 15px;
+  border-radius: 8px;
+  width: 400px;
+  /* height: 50%; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
 .close-button {
   background: none;
   border: none;
