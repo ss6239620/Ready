@@ -14,10 +14,7 @@ export default function Login({ isOpen, setModal }) {
         password: "",
         email: "",
     });
-    const { mutate, isPending, isError, error } = useLogin(
-        formValues.email,
-        formValues.password,
-    );
+    const { mutate, isPending, isError, error } = useLogin();
 
     const handleOverlayClick = (event) => {
         // Close modal only if clicking on the overlay, not the modal content
@@ -25,6 +22,11 @@ export default function Login({ isOpen, setModal }) {
             setModal(false);
         }
     };
+
+    function handleClick(e) {
+        e.preventDefault();
+        mutate({ email: formValues.email, password: formValues.password, onClose: () => setModal(false) });
+    }
 
     const responseGoogle = async (authResult) => {
         try {
@@ -58,7 +60,7 @@ export default function Login({ isOpen, setModal }) {
             onClick={handleOverlayClick}
         >
             <div className="modal-content px-[30px!important]">
-                <div>
+                <form onSubmit={handleClick}>
                     {isError && <FailAlert title={error} />}
                     <h2 className="large-text-large-weight mx-[0px!important]" >Log In</h2>
                     <div className="my-2">
@@ -78,12 +80,12 @@ export default function Login({ isOpen, setModal }) {
                         Icon={FcGoogle}
                         onClick={googleLogin}
                         title={"Continue With google"}
-                        className={'secondary-bg primary-text my-3 rounded-3xl '}
+                        className={'secondary-bg primary-text my-3 rounded-3xl w-full'}
                     />
                     <BigButton
                         Icon={FaMeta}
                         title={"Continue With Meta"}
-                        className={'secondary-bg primary-text my-3 rounded-3xl'}
+                        className={'secondary-bg primary-text my-3 rounded-3xl w-full'}
                     />
                     <div
                         className="div-center-justify-center my-3"
@@ -119,13 +121,14 @@ export default function Login({ isOpen, setModal }) {
                     </div>
                     {/* Loading Spinner or Text */}
                     <BigButton
-                        onClick={() => mutate(formValues.email, formValues.password)}
+                        onClick={handleClick}
                         title={"Log in"}
-                        className={`rounded-[50px!important] ${isLoginDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
+                        type={"submit"}
+                        className={`w-full rounded-[50px!important] ${isLoginDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
                         disabled={isLoginDisabled}
                         loading={isPending}
                     />
-                </div>
+                </form>
             </div>
         </div>
     );

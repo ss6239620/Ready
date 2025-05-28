@@ -51,10 +51,10 @@ export default function AboutStage({ isOpen, setModal, setNextModal, setPrevious
                             <a >How do you identify? </a>
                         </div>
                         <div className="px-5" >
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Woman" })} title={'Woman'} className={'secondary-bg rounded-[50px!important] my-2 '}  />
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Man" })} title={'Man'} className={'secondary-bg rounded-[50px!important] my-2 '}  />
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Non-binary" })} title={'Non-binary'}className={'secondary-bg rounded-[50px!important] my-2 '}  />
-                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Prefer not to say" })} title={'I prefer not to say'}className={'secondary-bg rounded-[50px!important] my-2 '}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Woman" })} title={'Woman'} className={'secondary-bg rounded-[50px!important] my-2 w-full'}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Man" })} title={'Man'} className={'secondary-bg rounded-[50px!important] my-2 w-full'}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Non-binary" })} title={'Non-binary'}className={'secondary-bg rounded-[50px!important] my-2 w-full'}  />
+                            <BigButton onClick={() => setFormValues({ ...formValues, identity: "Prefer not to say" })} title={'I prefer not to say'}className={'secondary-bg rounded-[50px!important] my-2 w-full'}  />
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default function AboutStage({ isOpen, setModal, setNextModal, setPrevious
                     <BigButton
                         title={"Continue"}
                         disabled={isDisabled}
-                        className={`rounded-[50px!important] ${isDisabled ?'bg-[var(--divider)]':'bg-[var(--teritory)]' }`}
+                        className={`w-full rounded-[50px!important] ${isDisabled ?'bg-[var(--divider)]':'bg-[var(--teritory)]' }`}
                         onClick={handleClick}
                     />
                 </div>

@@ -20,7 +20,7 @@ import Queues from './components/Mod/Overview/Queues';
 import Rules from './components/Mod/Moderation/Rules/Rules';
 import CreateRules from './components/Mod/Moderation/Rules/CreateRules';
 import { AppProviders } from './AppProviders';
-import RestrictedUsers from './components/Mod/Overview/RestrictedUsers';
+import RestrictedUsers from './components/Mod/Overview/RestrictUsers/RestrictedUsers';
 
 export default function App() {
   return (

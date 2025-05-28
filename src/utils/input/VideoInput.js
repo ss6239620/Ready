@@ -9,9 +9,9 @@ const VideoInput = ({ contentPath ,style}) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          videoRef.current?.play(); // Play when in view
+          videoRef.current?.play?.(); // Play when in view
         } else {
-          videoRef.current?.pause(); // Pause when out of view
+          videoRef.current?.pause?.(); // Pause when out of view
         }
       },
       {

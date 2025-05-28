@@ -21,10 +21,12 @@ const searchUser = (q, page) => api.get(`/usersearch?q=${q}&page=${page}&limit=$
 
 const getUserInfo = (id) => api.get(`/getuserinfo/${id}`);
 
+const getUserByUsername = (query) => api.get(`/getuserbyusername?q=${query}`);
+
 const signup = (form) => api.post(`/signup`, form, {
     headers: {
         'Content-Type': 'multipart/form-data', // This is required to send form data with files
     },
 })
 
-export { googleAuth, login, signup, test, logoutService, searchUser, getUserInfo }
+export { googleAuth, login, signup, test, logoutService, searchUser, getUserInfo, getUserByUsername }

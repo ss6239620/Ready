@@ -113,7 +113,7 @@ export default function InterestStage({
                     <BigButton
                         title={"Finish"}
                         disabled={isDisabled}
-                        className={`rounded-[50px!important] ${isDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
+                        className={`w-full rounded-[50px!important] ${isDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
                         onClick={handleClick}
                         loading={isPending}
                     />

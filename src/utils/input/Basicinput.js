@@ -17,7 +17,9 @@ export default function Basicinput({
   type,
   isSingleValueSetter,
   disabled,
-  disableRemoveFunc
+  disableRemoveFunc,
+  errorText,
+  errorTextClass
 }) {
   const [error, setError] = useState('');
   const [typingStarted, setTypingStarted] = useState(false); // Track if user is typing
@@ -107,7 +109,8 @@ export default function Basicinput({
           <IconButton onClick={() => { disableRemoveFunc?.() }} Icon={IoMdClose} size={20} />
         )}
       </div>
-      {error && <p className="text-[var(--teritory)] text-sm small-text-normal-weight mx-[15px!important] my-[0px!important]">* {error}</p>} {/* Error message */}
+      {error && <p className="text-[var(--teritory)] text-sm small-text-normal-weight mx-[15px!important] my-[0px!important]">* {error}</p>}
+      {errorText && <p className={`text-[var(--text-error-color)] text-sm small-text-normal-weight mx-[15px!important] my-[3px!important] ${errorTextClass}`}> {errorText}</p>}
     </div>
   );
 }

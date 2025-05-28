@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '../../asset/css/util.css'
 
-export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile, iconSize, labelStyle, loading }) {
+export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile, iconSize, labelStyle, loading, type = "button", }) {
     const [isHovered, setIsHovered] = useState(false);
     const fileInputRef = useRef(null); // Reference for the file input
 
@@ -13,21 +13,23 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
     };
 
     // Handle button click, and trigger file input click if file upload button is set
-    const handleButtonClick = () => {
+    const handleButtonClick = (e) => {
         if (!disabled) {
             if (fileInputRef.current) {
                 fileInputRef.current.click(); // Trigger file input click
             }
-            onClick && onClick(); // Call onClick if provided
+            onClick && onClick(e); // Call onClick if provided
         }
     };
 
     return (
-        <div
-            className={`${className} rounded-lg cursor-pointer p-[10px] ${isHovered ? 'opacity-70' : 'opacity-100'} transition-[opacity_0.3s] div-center `}
+        <button
+            className={`${className} rounded-lg cursor-pointer p-[10px] ${isHovered ? 'opacity-70' : 'opacity-100'} transition-[opacity_0.3s] div-center`}
             style={{
                 ...style,
             }}
+            disabled={disabled}
+            type={type}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={handleButtonClick} // Prevent onClick if disabled
@@ -49,6 +51,6 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
                 className='hidden'
                 onChange={handleFileChange}
             />}
-        </div>
+        </button>
     );
 }
