@@ -30,5 +30,16 @@ const removeUserBan = (tribe_id, ban_id) => api.delete(`/removeduserban?id=${tri
 
 const getBanUsers = (tribe_id, page, limit) => api.get(`/getbanuser?id=${tribe_id}&page=${page}&limit=${limit}`);
 
+const searchBanUsers = (tribe_id, query, restrict_type) => api.get(`/searchbanusers?id=${tribe_id}&q=${query}&restriction_type=${restrict_type}`);
 
-export { createRule, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan };
+const muteUser = (tribe_id, mute_user_id, mod_note, mute_duration) => api.post(`/muteuser`, {
+    id: tribe_id,
+    mute_user_id: mute_user_id,
+    mod_note: mod_note,
+    mute_duration: mute_duration,
+});
+
+const getMutedUsers = (tribe_id, page, limit) => api.get(`/getmuteduser?id=${tribe_id}&page=${page}&limit=${limit}`);
+
+
+export { createRule, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers };

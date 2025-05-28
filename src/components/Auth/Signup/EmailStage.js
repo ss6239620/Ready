@@ -56,12 +56,12 @@ export default function EmailStage({
           <BigButton
             Icon={FcGoogle}
             title={"Continue With google"}
-            className={'secondary-bg primary-text my-3 rounded-3xl '}
+            className={'secondary-bg primary-text my-3 rounded-3xl w-full'}
           />
           <BigButton
             Icon={FaMeta}
             title={"Continue With Meta"}
-            className={'secondary-bg primary-text my-3 rounded-3xl '}
+            className={'secondary-bg primary-text my-3 rounded-3xl w-full'}
           />
           <div
             className="div-center-justify-center my-3"
@@ -88,7 +88,7 @@ export default function EmailStage({
           <BigButton
             title={"Continue"}
             disabled={isDisabled}
-            className={`rounded-[50px!important] ${isDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
+            className={`w-full rounded-[50px!important] ${isDisabled ? 'bg-[var(--divider)]' : 'bg-[var(--teritory)]'}`}
             onClick={handleClick}
           />
         </div>

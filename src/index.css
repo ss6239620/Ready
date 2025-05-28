@@ -27,6 +27,7 @@ body {
   --divider: #00000033;
   --accent: royalblue;
   --shadow:#292a2a49;
+  --text-error-color:#01A816;
 
   background: var(--background);
   color: var(--text-primary);
@@ -43,6 +44,7 @@ body.dark-theme {
   --divider: #ffffff19;
   --accent: royalblue;
   --shadow:#0000009b;
+  --text-error-color:#01A816;
 
   background: var(--background);
   color: var(--text-primary);

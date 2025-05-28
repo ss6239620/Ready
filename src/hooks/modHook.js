@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { banUser, createRule, deletetriberule, getalltriberules, getBanUsers, removeUserBan } from '../services/mod';
+import { banUser, createRule, deletetriberule, getalltriberules, getBanUsers, getMutedUsers, muteUser, removeUserBan, searchBanUsers } from '../services/mod';
 import { useNavigate } from 'react-router-dom';
 
 export const useCreateRules = () => {
@@ -83,6 +83,22 @@ export const useGetBanUsers = (page, limit = 10) => {
     })
 }
 
+export const useSearchBannedUser = ({ query,restrict_type }) => {
+    return useQuery({
+        queryKey: ['tribe-search-ban-users', query],
+        queryFn: async () => {
+            const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
+            const response = await searchBanUsers(tribe_id, query,restrict_type);
+            return response.data.data; // Extract the `data` property
+        },
+        enabled: false,
+        keepPreviousData: true,
+        onError: (error) => {
+            console.error('Error fetching tribe details:', error);
+        },
+    })
+}
+
 export const useRemoveUserBan = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -91,10 +107,43 @@ export const useRemoveUserBan = () => {
             return removeUserBan(tribe_id, ban_id);
         },
         onSuccess: (res) => {
-            queryClient.invalidateQueries(['tribe-ban-users'])
+            queryClient.invalidateQueries(['tribe-ban-users','tribe-muted-users']);
         },
         onError: (error) => {
             console.error('Error fetching post data:', error);
+        },
+    })
+}
+
+export const useMuteUser = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: ({ mute_user_id, mod_note, mute_duration }) => {
+            const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
+            return muteUser(tribe_id, mute_user_id, mod_note, mute_duration);
+        },
+        onSuccess: (res) => {
+            queryClient.invalidateQueries(['tribe-muted-users']);
+            console.log(res);
+            
+        },
+        onError: (error) => {
+            console.error('Error fetching post data:', error);
+        },
+    })
+}
+
+export const useGetMutedUsers = (page, limit = 10) => {
+    return useQuery({
+        queryKey: ['tribe-muted-users', page, limit],
+        queryFn: async () => {
+            const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
+            const response = await getMutedUsers(tribe_id, page, limit);
+            return response.data.data; // Extract the `data` property
+        },
+        keepPreviousData: true,
+        onError: (error) => {
+            console.error('Error fetching tribe details:', error);
         },
     })
 }

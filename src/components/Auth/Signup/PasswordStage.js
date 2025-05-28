@@ -86,7 +86,7 @@ export default function PasswordStage({ isOpen, setModal, setNextModal, setPrevi
                     <BigButton
                         title={"Continue"}
                         disabled={isDisabled}
-                        className={`rounded-[50px!important] ${isDisabled ?'bg-[var(--divider)]':'bg-[var(--teritory)]' }`}
+                        className={` w-full rounded-[50px!important] ${isDisabled ?'bg-[var(--divider)]':'bg-[var(--teritory)]' }`}
                         onClick={handleClick}
                     />
                 </div>
