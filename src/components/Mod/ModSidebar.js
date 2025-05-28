@@ -71,7 +71,7 @@ export default function ModSidebar() {
 
     return (
         <div
-            className="slectDivContainer main-content fixed-bg divider-right fixed-component top-1 left-0 w-[270] max-h-[calc(100vh_-_70px)]"
+            className="slectDivContainer main-content fixed-bg divider-right fixed-component top-1 left-0 w-[270px] max-h-[calc(100vh_-_70px)]"
         >
             <div className='div-center gap-1 cursor-pointer p-3' onClick={() => { navigate(-1) }}>
                 <IconButton Icon={IoMdArrowBack} size={20} />

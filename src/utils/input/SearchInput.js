@@ -11,7 +11,6 @@ export default function SearchInput({ value, setFormValues, placeHolder, style, 
     return (
         <form
             onSubmit={handleSubmit}
-            // onClick={() => value.length === 0 ? setclicked((prev) => !prev) : null}
             className={`search-container secondary-bg ${className} border-radius-large p-3 div-center`}
             style={{
                 ...style
@@ -19,7 +18,7 @@ export default function SearchInput({ value, setFormValues, placeHolder, style, 
         >
             <CiSearch />
             <input
-                className="primary-text bg-transparent outline-none ml-2 flex-1 "
+                className="primary-text bg-transparent outline-none ml-2 flex-1 pr-2 "
                 style={{
                     border: "none",
                 }}

@@ -41,5 +41,25 @@ const muteUser = (tribe_id, mute_user_id, mod_note, mute_duration) => api.post(`
 
 const getMutedUsers = (tribe_id, page, limit) => api.get(`/getmuteduser?id=${tribe_id}&page=${page}&limit=${limit}`);
 
+const inviteMembers = (tribe_id, user_id, permissions) => api.post(`/invitemember`, {
+    id: tribe_id,
+    user_id: user_id,
+    permissions: permissions
+});
 
-export { createRule, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers };
+const removeUserInvite = (tribe_id, member_id) => api.delete(`/deleteinvite?id=${tribe_id}&member_id=${member_id}`);
+
+const getAllModerators = (tribe_id, page, limit) => api.get(`/getalltribemoderators?id=${tribe_id}&page=${page}&limit=${limit}`);
+
+const approveMember = (tribe_id, user_id) => api.post(`/approveuser`, {
+    id: tribe_id,
+    user_id: user_id,
+});
+
+const removeApprovedUser = (tribe_id, member_id) => api.delete(`/deleteapproveduser?id=${tribe_id}&member_id=${member_id}`);
+
+const getAllApprovedMembers = (tribe_id, page, limit) => api.get(`/getallapprovemembers?id=${tribe_id}&page=${page}&limit=${limit}`);
+
+const getAlltribeInvite = (tribe_id, page, limit) => api.get(`/getAlltribeInvite?id=${tribe_id}&page=${page}&limit=${limit}`);
+
+export { createRule, getAllModerators, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers, inviteMembers, approveMember, getAllApprovedMembers, getAlltribeInvite, removeApprovedUser, removeUserInvite };
