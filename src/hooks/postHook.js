@@ -63,7 +63,7 @@ export const usePopularFeed = () => {
 
 export const usePostComment = (post_id) => {
     return useInfiniteQuery({
-        queryKey: ['postComment'], // Query key as an array
+        queryKey: ['postComment', post_id], // Query key as an array
         queryFn: ({ pageParam = 1 }) => getAllPostComment(post_id, pageParam), // Fetch function
         getNextPageParam: (lastPage, allPages) => {
             const nextPage = allPages.length + 1;

@@ -28,9 +28,9 @@ const InfiniteScroll = ({ fetchData, hasMoreData, children }) => {
   }, [fetchData, hasMoreData]); // Only trigger when fetchData or hasMoreData changes
 
   return (
-    <div>
+    <>
       {children}
-    </div>
+    </>
   );
 };
 

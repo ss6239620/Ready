@@ -58,6 +58,10 @@
   background-color: var(--color-hover);
 }
 
+.bright-icon-color{
+  background-color: var(--secondary);
+}
+
 .comment-vertical-bar{
   width: 1px;
   flex: 1;

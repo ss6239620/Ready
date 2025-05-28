@@ -21,10 +21,13 @@ import Rules from './components/Mod/Moderation/Rules/Rules';
 import CreateRules from './components/Mod/Moderation/Rules/CreateRules';
 import { AppProviders } from './AppProviders';
 import RestrictedUsers from './components/Mod/Overview/RestrictUsers/RestrictedUsers';
+import Moderators from './components/Mod/Overview/ModsMembers/Moderators';
+import SuccessAlert from './utils/Alert/SuccessAlert';
 
 export default function App() {
   return (
     <AppProviders>
+      <SuccessAlert />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -51,6 +54,7 @@ export default function App() {
           <Route path="mod" element={<ModLayout />} >
             <Route path=":id/queue" element={<Queues />} />
             <Route path=":id/restrict_user" element={<RestrictedUsers />} />
+            <Route path=":id/moderators" element={<Moderators />} />
             <Route path=":id/rules" element={<Rules />} />
             <Route path=":id/rules/new" element={<CreateRules />} />
           </Route>

@@ -68,7 +68,8 @@ export const modSidebarOverviewELemnet = [
     {
         title: 'Mods & Members',
         icon: IoPeopleOutline,
-        external_link: false
+        external_link: false,
+        route: 'moderators',
     },
     // {
     //     title: 'Insights',
