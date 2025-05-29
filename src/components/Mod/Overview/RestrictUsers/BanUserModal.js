@@ -19,7 +19,7 @@ export default function BanUserModal({
     const [ruleSelected, setRuleSelected] = useState(0);
     const [banSelected, setBanSelected] = useState(0);
     const [userSelected, setUserSelected] = useState(false);
-    const [username, setUsername] = useState("")
+    const [username, setUsername] = useState("");
     const [serachTerm, setSerachTerm] = useState("");
 
     const [formValues, setFormValues] = useState({
@@ -30,7 +30,7 @@ export default function BanUserModal({
         ban_duration: 1,
     })
 
-    const { mutate, isPending,  } = useBanUser();
+    const { mutate, isPending, } = useBanUser();
 
     const { data, isLoading, isFetching } = useSearchUsers({
         query: serachTerm,
@@ -154,10 +154,9 @@ export default function BanUserModal({
                             value={formValues.msg_to_user}
                             name={"msg_to_user"}
                         />
-                        <Biginput
+                        <Basicinput
                             placeHolder={"Mod note"}
-                            minHeight={15}
-                            className={'mt-4'}
+                            className={'mt-4 bg-[var(--secondary)]'}
                             setFormValues={setFormValues}
                             value={formValues.mod_note}
                             name={"mod_note"}

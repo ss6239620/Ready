@@ -8,3 +8,11 @@ export const Mods_And_Moderators_Tabs = {
     Approved_Users: 'Approved_Users',
     Invite:'Invite'
 };
+
+export const Mods_Overview_Queue = {
+    Need_Review: 'Need_Review',
+    Reported: 'Reported',
+    Removed:'Removed',
+    Edited:'Edited',
+    Unmoderted:'Unmoderted',
+};

@@ -8,7 +8,6 @@ import Underline from '../../../../utils/Underline';
 import IconButton from '../../../../utils/buttons/IconButton';
 import { useGetMutedUsers, useRemoveUserBan, useSearchBannedUser } from '../../../../hooks/modHook';
 import { FILE_URL } from '../../../../constant';
-import { GoPencil } from 'react-icons/go';
 import { PiHammer } from 'react-icons/pi';
 import { getTimeLeft, truncateText } from '../../../../utils/CommonFunction';
 import CircularLoader from '../../../../utils/CircularLoader';
@@ -144,7 +143,6 @@ export default function MuteUser() {
                     </td>
                     <td className={`div-center gap-3 p-[20px_8px] transition-opacity duration-200 ${muteHovered === key ? 'opacity-100' : 'opacity-0'}`}>
                       <IconButton onClick={() => handleMuteRemove(item?._id)} className={'teritory-bg'} Icon={PiHammer} size={20} />
-                      <IconButton Icon={GoPencil} size={20} />
                     </td>
                   </tr>
                 ))
@@ -176,7 +174,7 @@ function RemoveMute({
           <p className='large-text-normal-weight'>Are You Sure?</p>
           <IconButton Icon={IoMdClose} onClick={() => setModal(false)} />
         </div>
-        <p className='small-text-normal-weight '>They'll be able to participate in your community again.</p>
+        <p className='small-text-normal-weight '>They'll be able to participate in your tribe again.</p>
         <div className='div-center-justify gap-3 mt-7'>
           <BigButton onClick={() => setModal(false)} className={'secondary-bg my-4 w-full rounded-[20px!important] text-[#fff]'} title={'Cancel'} />
           <BigButton loading={isPending} onClick={handleRemove} className={'teritory-bg px-4 rounded-[20px!important] w-full text-[#fff]'} title={'Yes, Unmute'} />

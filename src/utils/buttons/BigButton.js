@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '../../asset/css/util.css'
 
-export default function BigButton({ title, style, Icon, onClick, className, disabled, setFile, iconSize, labelStyle, loading, type = "button", }) {
+export default function BigButton({ title, style, Icon, onClick, className,labelClassName, disabled, setFile, iconSize, labelStyle, loading, type = "button", }) {
     const [isHovered, setIsHovered] = useState(false);
     const fileInputRef = useRef(null); // Reference for the file input
 
@@ -39,7 +39,7 @@ export default function BigButton({ title, style, Icon, onClick, className, disa
                     <Icon size={iconSize ? iconSize : 25} />
                 </div>
             )}
-            <div className='div-justify-center flex-1' style={{ ...labelStyle }}>
+            <div className={`div-justify-center flex-1 ${labelClassName}`} style={{ ...labelStyle }}>
                 {loading ? <div className="spinner"></div> :
                     <a>{title}</a>
                 }

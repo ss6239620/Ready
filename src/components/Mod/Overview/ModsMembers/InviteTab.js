@@ -54,7 +54,7 @@ export default function InviteTab() {
                     <thead>
                         <tr className='divider-bottom '>
                             <th className='medium-text-large-weight text-left p-[15px_8px] w-[60%]'>USERNAME</th>
-                            <th className='medium-text-large-weight text-left p-[15px_8px] w-[20%]'>PERMISSIONS</th>
+                            <th className='medium-text-large-weight text-left p-[15px_15px] w-[20%]'>PERMISSIONS</th>
                             <th className='medium-text-large-weight text-left p-[15px_8px] w-[20%]'>INVITED</th>
                         </tr>
                     </thead>
@@ -71,11 +71,16 @@ export default function InviteTab() {
                                         />
                                         u/{item?.member?.username}
                                     </td>
-                                    <td className='small-text-normal-weight text-left p-[20px_8px]'>{item?.permissions.map(val => (`${val} , `))}</td>
-                                    <td className='small-text-normal-weight text-left p-[20px_8px]'>{formatDate(item?.created_at)}</td>
-                                    <td className={`div-center gap-3 p-[20px_8px] transition-opacity duration-200 ${inviteHovered === key ? 'opacity-100' : 'opacity-0'}`}>
-                                        <IconButton onClick={() => handleModRemove(item?._id)} className={'teritory-bg'} Icon={AiOutlineDelete} size={20} />
-                                    </td>
+                                    <td className='small-text-normal-weight text-left p-[20px_15px]'>{item?.permissions.map(val => (`${val} , `))}</td>
+                                    {
+                                        inviteHovered === key ?
+                                            (
+                                                <div className='div-center'>
+                                                    <IconButton onClick={() => handleModRemove(item?._id)} className={'teritory-bg'} Icon={AiOutlineDelete} size={20} />
+                                                </div>
+                                            ) :
+                                            formatDate(item?.created_at)
+                                    }
                                 </tr>
                             ))}
                         </InfiniteScroll>

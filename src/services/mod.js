@@ -26,6 +26,15 @@ const banUser = (tribe_id, ban_reason, ban_user_id, mod_note, msg_to_user, ban_d
     ban_duration: ban_duration,
 });
 
+const updateUserBan = (tribe_id, ban_reason, ban_id, mod_note, msg_to_user, ban_duration) => api.patch(`/updateuserban`, {
+    ban_reason: ban_reason,
+    id: tribe_id,
+    ban_id: ban_id,
+    mod_note: mod_note,
+    msg_to_user: msg_to_user,
+    ban_duration: ban_duration,
+});
+
 const removeUserBan = (tribe_id, ban_id) => api.delete(`/removeduserban?id=${tribe_id}&ban_id=${ban_id}`);
 
 const getBanUsers = (tribe_id, page, limit) => api.get(`/getbanuser?id=${tribe_id}&page=${page}&limit=${limit}`);
@@ -62,4 +71,6 @@ const getAllApprovedMembers = (tribe_id, page, limit) => api.get(`/getallapprove
 
 const getAlltribeInvite = (tribe_id, page, limit) => api.get(`/getAlltribeInvite?id=${tribe_id}&page=${page}&limit=${limit}`);
 
-export { createRule, getAllModerators, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers, inviteMembers, approveMember, getAllApprovedMembers, getAlltribeInvite, removeApprovedUser, removeUserInvite };
+const getAllUnModeratedUser = (tribe_id, page, limit) => api.get(`/getallunmoderatedposts?id=${tribe_id}&page=${page}&limit=${limit}`);
+
+export { createRule, getAllModerators, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers, inviteMembers, approveMember, getAllApprovedMembers, getAlltribeInvite, removeApprovedUser, removeUserInvite, updateUserBan, getAllUnModeratedUser };
