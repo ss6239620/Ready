@@ -1,7 +1,9 @@
 import { CiBookmark, CiDark, CiFlag1, CiLogout, CiSettings } from "react-icons/ci"
 import { IoShirtOutline, IoTrophyOutline } from "react-icons/io5"
 import { IoMdNotificationsOutline } from "react-icons/io"
-import { FaRegEyeSlash } from "react-icons/fa"
+import { FaModx, FaRegEyeSlash } from "react-icons/fa"
+import { PiWarningCircleBold } from "react-icons/pi"
+import { AiFillWarning } from "react-icons/ai";
 
 export const search_filter = [
     "Relevance", "Hot", "Top", "New", "Comment Count"
@@ -64,4 +66,19 @@ export const profile_dropDown = [
         title: 'Settings',
         icon: CiSettings
     }
+]
+
+export const UnModerated_Post_DropDownData = [
+    {
+        title: 'Hide mod label',
+        icon: FaModx
+    },
+    {
+        title: 'Add NSFW tag',
+        icon: AiFillWarning
+    },
+    {
+        title: 'Add Spoiler Tag',
+        icon: PiWarningCircleBold
+    },
 ]

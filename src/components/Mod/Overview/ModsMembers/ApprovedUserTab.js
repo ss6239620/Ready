@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BigButton from '../../../../utils/buttons/BigButton'
-import { GoPencil, GoPlus } from 'react-icons/go'
+import { GoPlus } from 'react-icons/go'
 import { AiOutlineDelete } from "react-icons/ai";
 import SearchInput from '../../../../utils/input/SearchInput';
 import ApprovedUserModal from './ApprovedUserModal';
@@ -11,7 +11,7 @@ import { formatDate } from '../../../../utils/CommonFunction';
 import IconButton from '../../../../utils/buttons/IconButton';
 import CircularLoader from '../../../../utils/CircularLoader';
 import Underline from '../../../../utils/Underline';
-import RemoveMembers from './RemoveMembers' 
+import RemoveMembers from './RemoveMembers'
 
 export default function ApprovedUserTab() {
     const [approvedUserModal, setApprovedUserModal] = useState(false);
@@ -98,10 +98,16 @@ export default function ApprovedUserTab() {
                                         />
                                         u/{item?.member?.username}
                                     </td>
-                                    <td className='small-text-normal-weight text-left p-[20px_8px]'>{formatDate(item?.created_at)}</td>
-                                    <td className={`div-center gap-3 p-[20px_8px] transition-opacity duration-200 ${approvedUserHoverd === key ? 'opacity-100' : 'opacity-0'}`}>
-                                        <IconButton onClick={() => handleApprovedUserRemove(item?._id)} className={'teritory-bg'} Icon={AiOutlineDelete} size={20} />
-                                        <IconButton Icon={GoPencil} size={20} />
+                                    <td className='small-text-normal-weight text-left p-[20px_8px]'>
+                                        {
+                                            approvedUserHoverd === key ?
+                                                (
+                                                    <div className='div-center'>
+                                                        <IconButton onClick={() => handleApprovedUserRemove(item?._id)} className={'teritory-bg'} Icon={AiOutlineDelete} size={20} />
+                                                    </div>
+                                                ) :
+                                                formatDate(item?.created_at)
+                                        }
                                     </td>
                                 </tr>
                             ))}

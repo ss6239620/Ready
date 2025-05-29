@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { approveMember, banUser, createRule, deletetriberule, getAllApprovedMembers, getAllModerators, getAlltribeInvite, getalltriberules, getBanUsers, getMutedUsers, inviteMembers, muteUser, removeUserBan, removeUserInvite, searchBanUsers } from '../services/mod';
+import { approveMember, banUser, createRule, deletetriberule, getAllApprovedMembers, getAllModerators, getAlltribeInvite, getalltriberules, getAllUnModeratedUser, getBanUsers, getMutedUsers, inviteMembers, muteUser, removeUserBan, removeUserInvite, searchBanUsers, updateUserBan } from '../services/mod';
 import { useNavigate } from 'react-router-dom';
 import { useToastStore } from '../store/toastStore';
 import { BsEnvelope } from "react-icons/bs";
@@ -67,6 +67,25 @@ export const useBanUser = () => {
             queryClient.invalidateQueries(['tribe-ban-users'])
         },
         onError: (error) => {
+            console.error('Error fetching post data:', error);
+        },
+    })
+}
+
+export const useUpdateUserBan = () => {
+    const queryClient = useQueryClient();
+    const showToast = useToastStore((state) => state.showToast);
+    return useMutation({
+        mutationFn: ({ ban_reason, ban_id, mod_note, msg_to_user, ban_duration }) => {
+            const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
+            return updateUserBan(tribe_id, ban_reason, ban_id, mod_note, msg_to_user, ban_duration);
+        },
+        onSuccess: (res) => {
+            showToast("Updated user ban.",'success');
+            queryClient.invalidateQueries(['tribe-ban-users'])
+        },
+        onError: (error) => {
+            showToast("unable to update user ban.",'error');
             console.error('Error fetching post data:', error);
         },
     })
@@ -257,6 +276,26 @@ export const useRemoveInvite = () => {
         },
         onError: (error) => {
             console.error('Error fetching post data:', error);
+        },
+    })
+}
+
+export const useGetAllUnModeratedPosts = (limit = 10) => {
+    return useInfiniteQuery({
+        queryKey: ['tribe-moderators'],
+        queryFn: async ({ pageParam = 1 }) => {
+            const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
+            const response = await getAllUnModeratedUser(tribe_id, pageParam, limit);
+            return response;
+        },
+        getNextPageParam: (lastPage, allPages) => {
+            const nextPage = allPages.length + 1;
+            return lastPage.data.data.length > 0 ? nextPage : undefined; // Determine the next page
+        },
+        keepPreviousData: true,
+         refetchOnWindowFocus: false,
+        onError: (error) => {
+            console.error('Error fetching tribe details:', error);
         },
     })
 }

@@ -113,4 +113,22 @@ function debounce(func, delay) {
     return debounced;
 }
 
-export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString }
+function getBanDurationInDays(banEndDate) {
+    if (!banEndDate) {
+        return -1; // Permanent ban
+    }
+
+    const now = new Date();
+    const endDate = new Date(banEndDate);
+
+    // Calculate the difference in milliseconds
+    const diffMs = endDate - now;
+
+    // Convert to full days
+    const durationInDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+    return durationInDays;
+}
+
+
+export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString, getBanDurationInDays }

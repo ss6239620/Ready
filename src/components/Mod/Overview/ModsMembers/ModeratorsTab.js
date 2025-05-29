@@ -102,7 +102,7 @@ export default function ModeratorsTab() {
                                         />
                                         u/{item?.member?.username}
                                     </td>
-                                    <td className='small-text-normal-weight text-left p-[20px_8px]'>{item?.permissions.map(val => (`${val} , `))}</td>
+                                    <td className='small-text-normal-weight text-left p-[20px_8px]'>{item?.permissions?.map(val => (`${val} , `))}</td>
                                     <td className='small-text-normal-weight text-left p-[20px_8px]'>{"Yes"}</td>
                                     <td className='small-text-normal-weight text-left p-[20px_8px]'>{formatDate(item?.created_at)}</td>
                                     <td className={`div-center gap-3 p-[20px_8px] transition-opacity duration-200 ${moderatorHovered === key ? 'opacity-100' : 'opacity-0'}`}>
