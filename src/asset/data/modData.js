@@ -157,3 +157,15 @@ export const modSidebarSettingELemnet = [
 export const modQueuesAllcontentDropdown = ['All content', 'Posts and comments', 'Posts', 'Comments', 'Awards']
 
 export const modQueuesNewestFirstDropdown = ['Newest First', 'Oldest First', 'Most Reported First']
+
+export const MOD_QUEUE_POST_STATUS = {
+    APPROVED: 'APPROVED',
+    REMOVED: 'REMOVED',
+    EDITED: 'EDITED',
+    NEED_REVIEW: 'NEED_REVIEW',
+    UNMODERATED: 'UNMODERATED',
+    REPORTED: 'REPORTED',
+    SPAMMED: 'SPAMMED',
+    LOCK: "LOCK",
+    ADD_TO_HIGHLIGHT: "ADD_TO_HIGHLIGHT",
+}

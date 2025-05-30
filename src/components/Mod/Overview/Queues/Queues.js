@@ -9,7 +9,11 @@ import ImageDropDown from '../../../../utils/dropdown/ImageDropDown';
 import '../../../../asset/css/mod.css'
 import { useSearchParams } from 'react-router-dom';
 import { Mods_Overview_Queue } from '../../../../asset/data/searchParamsData';
-import Unmoderator from './Unmoderator';
+import UnmoderatorTab from './UnmoderatorTab';
+import NeedReviewTab from './NeedReviewTab';
+import ReportedTab from './ReportedTab';
+import RemovedTab from './RemovedTab';
+import EditedTab from './EditedTab';
 
 export default function Queues() {
     const [contentFilter, setcontentFilter] = useState(modQueuesAllcontentDropdown[0]);
@@ -32,7 +36,7 @@ export default function Queues() {
                 </div>
                 <div className="div-center-justify my-4 pb-2">
                     <div>
-                        <div className='flex gap-3' >
+                        <div className='flex' >
                             <BigButton
                                 className={`${currentTab === Mods_Overview_Queue.Unmoderted ? 'secondary-bg' : ''} rounded-[50px!important] px-4`}
                                 title={"Unmoderted"}
@@ -82,9 +86,31 @@ export default function Queues() {
                 </div>
             </div>
             {/* Scrollable Content Area */}
-            <div className="overflow-y-auto flex-grow slectDivContainer">
-                {currentTab === Mods_Overview_Queue.Unmoderted && <Unmoderator />}
-            </div>
+            {currentTab === Mods_Overview_Queue.Unmoderted &&
+                <div className="overflow-y-auto flex-grow slectDivContainer">
+                    <UnmoderatorTab />
+                </div>
+            }
+            {currentTab === Mods_Overview_Queue.Need_Review &&
+                <div className="overflow-y-auto flex-grow slectDivContainer">
+                    <NeedReviewTab />
+                </div>
+            }
+            {currentTab === Mods_Overview_Queue.Reported &&
+                <div className="overflow-y-auto flex-grow slectDivContainer">
+                    <ReportedTab />
+                </div>
+            }
+            {currentTab === Mods_Overview_Queue.Removed &&
+                <div className="overflow-y-auto flex-grow slectDivContainer">
+                    <RemovedTab />
+                </div>
+            }
+            {currentTab === Mods_Overview_Queue.Edited &&
+                <div className="overflow-y-auto flex-grow slectDivContainer">
+                    <EditedTab />
+                </div>
+            }
         </div>
     )
 }

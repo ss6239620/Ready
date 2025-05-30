@@ -1,3 +1,5 @@
+import { useToastStore } from "../store/toastStore";
+
 function formatTimeDifference(inputDate) {
     const now = new Date();
     const givenDate = new Date(inputDate);
@@ -130,5 +132,12 @@ function getBanDurationInDays(banEndDate) {
     return durationInDays;
 }
 
+async function copyToClipBoard(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+    } catch (error) {
+        console.error('Failed to copy text: ', error);
+    }
+}
 
-export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString, getBanDurationInDays }
+export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString, getBanDurationInDays, copyToClipBoard }
