@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { approveMember, banUser, createRule, deletetriberule, getAllApprovedMembers, getAllModerators, getAlltribeInvite, getalltriberules, getAllUnModeratedUser, getBanUsers, getMutedUsers, inviteMembers, muteUser, removeUserBan, removeUserInvite, searchBanUsers, updateUserBan } from '../services/mod';
+import { approveMember, banUser, createRule, deletetriberule, getAllApprovedMembers, getAllModerators, getAlltribeInvite, getalltriberules, getAllModQueuePosts, getBanUsers, getMutedUsers, inviteMembers, muteUser, removeUserBan, removeUserInvite, searchBanUsers, updateUnModeratedPostStatus, updateUserBan } from '../services/mod';
 import { useNavigate } from 'react-router-dom';
 import { useToastStore } from '../store/toastStore';
 import { BsEnvelope } from "react-icons/bs";
@@ -81,11 +81,11 @@ export const useUpdateUserBan = () => {
             return updateUserBan(tribe_id, ban_reason, ban_id, mod_note, msg_to_user, ban_duration);
         },
         onSuccess: (res) => {
-            showToast("Updated user ban.",'success');
+            showToast("Updated user ban.", 'success');
             queryClient.invalidateQueries(['tribe-ban-users'])
         },
         onError: (error) => {
-            showToast("unable to update user ban.",'error');
+            showToast("unable to update user ban.", 'error');
             console.error('Error fetching post data:', error);
         },
     })
@@ -280,12 +280,12 @@ export const useRemoveInvite = () => {
     })
 }
 
-export const useGetAllUnModeratedPosts = (limit = 10) => {
+export const useGetAllModQueuePosts = (post_status, limit = 10) => {
+    const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
     return useInfiniteQuery({
-        queryKey: ['tribe-moderators'],
+        queryKey: ['tribe-modQueuePosts', post_status, tribe_id],
         queryFn: async ({ pageParam = 1 }) => {
-            const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
-            const response = await getAllUnModeratedUser(tribe_id, pageParam, limit);
+            const response = await getAllModQueuePosts(tribe_id, pageParam, limit, post_status);
             return response;
         },
         getNextPageParam: (lastPage, allPages) => {
@@ -293,9 +293,27 @@ export const useGetAllUnModeratedPosts = (limit = 10) => {
             return lastPage.data.data.length > 0 ? nextPage : undefined; // Determine the next page
         },
         keepPreviousData: true,
-         refetchOnWindowFocus: false,
+        refetchOnWindowFocus: false,
         onError: (error) => {
             console.error('Error fetching tribe details:', error);
+        },
+    })
+}
+
+export const useUpdateUnModeartedPostStatus = () => {
+    const queryClient = useQueryClient();
+    const showToast = useToastStore((state) => state.showToast);
+    const tribe_id = JSON.parse(localStorage.getItem("mod_tribe"));
+    return useMutation({
+        mutationFn: ({ post_id, post_action }) => {
+            return updateUnModeratedPostStatus(tribe_id, post_id, post_action);
+        },
+        onSuccess: (res, variable) => {
+            showToast(`Post status changes to ${variable.post_action}`, 'success');
+            queryClient.invalidateQueries(['tribe-modQueuePosts', variable.post_action, tribe_id]);
+        },
+        onError: (error) => {
+            console.error('Error fetching post data:', error);
         },
     })
 }

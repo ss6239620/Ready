@@ -71,6 +71,12 @@ const getAllApprovedMembers = (tribe_id, page, limit) => api.get(`/getallapprove
 
 const getAlltribeInvite = (tribe_id, page, limit) => api.get(`/getAlltribeInvite?id=${tribe_id}&page=${page}&limit=${limit}`);
 
-const getAllUnModeratedUser = (tribe_id, page, limit) => api.get(`/getallunmoderatedposts?id=${tribe_id}&page=${page}&limit=${limit}`);
+const getAllModQueuePosts = (tribe_id, page, limit, status = "UNMODERATED") => api.get(`/getallmodqueueposts?id=${tribe_id}&page=${page}&limit=${limit}&status=${status}`);
 
-export { createRule, getAllModerators, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers, inviteMembers, approveMember, getAllApprovedMembers, getAlltribeInvite, removeApprovedUser, removeUserInvite, updateUserBan, getAllUnModeratedUser };
+const updateUnModeratedPostStatus = (tribe_id, post_id, post_action) => api.patch(`/updateunmoderatedpost`, {
+    id: tribe_id,
+    post_id: post_id,
+    post_action: post_action
+});
+
+export { createRule, getAllModerators, getalltriberules, deletetriberule, banUser, getBanUsers, removeUserBan, searchBanUsers, muteUser, getMutedUsers, inviteMembers, approveMember, getAllApprovedMembers, getAlltribeInvite, removeApprovedUser, removeUserInvite, updateUserBan, getAllModQueuePosts, updateUnModeratedPostStatus };
