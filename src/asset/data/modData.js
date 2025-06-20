@@ -125,17 +125,19 @@ export const modSidebarSettingELemnet = [
     {
         title: 'General Settings',
         icon: TbSettings,
-        external_link: false
+        external_link: false,
+        route: 'general_settings'
     },
     {
         title: 'Posts & Comments',
         icon: MdOutlineSpeakerNotes,
-        external_link: false
+        external_link: false,
     },
     {
         title: 'Look & Feel',
         icon: IoIosBrush,
-        external_link: false
+        external_link: false,
+        route: 'lookandfeel'
     },
     {
         title: 'Community Guide',
@@ -169,3 +171,118 @@ export const MOD_QUEUE_POST_STATUS = {
     LOCK: "LOCK",
     ADD_TO_HIGHLIGHT: "ADD_TO_HIGHLIGHT",
 }
+
+export const ModGeneralSettingTab = { General: "General", Privacy_and_Discovery: "Privacy & Discovery", Notifications: "Notifications" };
+
+export const ModGeneralTabRowInput = [
+    {
+        id: 'display_name',
+        title: "Display Name",
+        desc: "vcet3"
+    },
+    {
+        id: 'description',
+        title: "Description",
+        desc: "a college in vasai"
+    },
+    {
+        id: 'welcome_message',
+        title: "Welcome message",
+        desc: ""
+    },
+    {
+        id: 'comment_thread',
+        title: "Comment threads",
+        desc: ""
+    }
+]
+
+export const ModPrivacyDiscoveryTabRowInput = [
+    {
+        id: 'tribe_type',
+        title: "Tribe Type",
+        desc: "Who can view and contribute to your Tribe",
+        status: "Public",
+        method_type: "icon"
+    },
+    {
+        id: 'mature',
+        title: "Mature (18+)",
+        desc: "Restrict your Tribe to those who have confirmed they're over 18 and want to see NSFW content",
+        status: "On",
+        method_type: "icon"
+    },
+    {
+        id: 'appear_in_tribe_field',
+        title: "Appear in tribe feeds",
+        desc: "Allow your tribes to appear in r/all, r/popular, and trending lists",
+        status: "",
+        method_type: "switch"
+    },
+    {
+        id: 'appear_in_recommendations',
+        title: "Appear in recommendations",
+        desc: "Let Tribe App recommend your Tribe to people with similar interests",
+        status: "",
+        method_type: "switch"
+    }
+]
+
+export const ModNotificationTabRowInput = [
+    {
+        id: 'allow_notification',
+        title: "Allow Notifications",
+        desc: "Turn off to stop any mod notifications from this tribe",
+        method_type: "switch"
+    },
+    {
+        id: 'activity',
+        title: "Activity",
+        method_type: "icon"
+    },
+    {
+        id: 'mod_mail',
+        title: "Mod Mail",
+        method_type: "icon"
+    },
+    {
+        id: 'reports',
+        title: "Reports",
+        method_type: "icon"
+    },
+    {
+        id: 'milestones',
+        title: "Milestones",
+        desc: "Cake days and membership milestones",
+        method_type: "switch"
+    },
+    {
+        id: 'tips_tricks',
+        title: "Tips & Tricks",
+        desc: "Get tips and reminders to help you grow",
+        method_type: "switch"
+    },
+]
+
+export const ModLookAndFeelTabData = [
+    {
+        title: 'Tribe Appearence',
+        desc: "Customize your community icon, banner image, and colors",
+        id: "tribe_appearence",
+    },
+    {
+        title: 'Post flair',
+        desc: "Visual tags members of your community can add to their posts",
+        id: "post_flair",
+    },
+    {
+        title: 'User flair',
+        desc: "Visual tags members of your community can add to their usernames",
+        id: "user_flair",
+    },
+    {
+        title: 'Custom emoji',
+        desc: "Upload custom emoji to use in flair and community status",
+        id: "custom_emoji",
+    },
+]

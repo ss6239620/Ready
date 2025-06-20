@@ -22,6 +22,9 @@ import { AppProviders } from './AppProviders';
 import RestrictedUsers from './components/Mod/Overview/RestrictUsers/RestrictedUsers';
 import Moderators from './components/Mod/Overview/ModsMembers/Moderators';
 import SuccessAlert from './utils/Alert/SuccessAlert';
+import Settings from './components/Mod/ModSettings/GeneralSettings/Settings';
+import LookFeel from './components/Mod/ModSettings/LookAndFeel/LookFeel';
+import PostFlair from './components/Mod/ModSettings/LookAndFeel/PostFlair';
 
 export default function App() {
   return (
@@ -56,6 +59,9 @@ export default function App() {
             <Route path=":id/moderators" element={<Moderators />} />
             <Route path=":id/rules" element={<Rules />} />
             <Route path=":id/rules/new" element={<CreateRules />} />
+            <Route path=":id/general_settings" element={<Settings />} />
+            <Route path=":id/lookandfeel" element={<LookFeel />} />
+            <Route path=":id/lookandfeel/postfair" element={<PostFlair />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -10,6 +10,9 @@ export default function LimitInput({
     isRequired,
     onChangeFunc,
     className,
+    isSingleValueSetter,
+    hideTotalChar,
+    disabled,
     maxChars = 100, // Default max characters
     type = 'input', // Default to 'input', can be 'textarea'
 }) {
@@ -19,10 +22,11 @@ export default function LimitInput({
         const { name, value } = e.target;
 
         if (value.length <= maxChars) {
-            setFormValues((prevValues) => ({
-                ...prevValues,
-                [name]: value,
-            }));
+            if (isSingleValueSetter) {
+                setFormValues(value)
+            } else {
+                setFormValues((prev) => ({ ...prev, [name]: value }));
+            }
             setRemainingChars(maxChars - value.length);
         }
 
@@ -41,6 +45,7 @@ export default function LimitInput({
             >
                 {type === 'textarea' ? (
                     <textarea
+                        disabled={disabled}
                         className="primary-text"
                         autoComplete="off"
                         style={{
@@ -51,7 +56,7 @@ export default function LimitInput({
                             resize: 'none', // Prevent resizing
                         }}
                         placeholder={`${placeHolder}*`}
-                        value={value}
+                        value={disabled ? "" : value}
                         onChange={handleChange}
                         name={name}
                         maxLength={maxChars}
@@ -59,6 +64,7 @@ export default function LimitInput({
                     />
                 ) : (
                     <input
+                        disabled={disabled}
                         className="primary-text"
                         autoComplete="off"
                         style={{
@@ -69,15 +75,15 @@ export default function LimitInput({
                         }}
                         type="text"
                         placeholder={`${placeHolder}*`}
-                        value={value}
+                        value={disabled ? "" : value}
                         onChange={handleChange}
                         name={name}
                         maxLength={maxChars}
                     />
                 )}
             </div>
-            <div className="div-center-justify secondary-text px-5">
-                <a className="small-text-normal-weight my-[0px!important]">Max characters {maxChars}</a>
+            <div className={`div-center ${!hideTotalChar ? "justify-between" : "justify-end"} secondary-text px-5`}>
+                {!hideTotalChar && <a className="small-text-normal-weight my-[0px!important]">Max characters {maxChars}</a>}
                 <a className="small-text-normal-weight my-[0px!important]">{remainingChars}</a>
             </div>
         </div>

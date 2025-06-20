@@ -90,6 +90,13 @@ const validateUserName = (value) => {
     return '';
 };
 
+const validateColorHex = (value) => {
+    if (!/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(value)) {
+        return 'This is not a valid hex color.';
+    }
+    return '';
+};
+
 const validatePassword = (value) => {
     if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]|\\:;"'<>,.?/`~\-]).{8,}$/.test(value)) {
         return 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.';
@@ -140,4 +147,4 @@ async function copyToClipBoard(text) {
     }
 }
 
-export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString, getBanDurationInDays, copyToClipBoard }
+export { getTimeLeft, debounce, formatTimeDifference, truncateText, validateEmail, validateUserName, validatePassword, formatDate, formatTime, validateEmptyString, getBanDurationInDays, copyToClipBoard, validateColorHex }

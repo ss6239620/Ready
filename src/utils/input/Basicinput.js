@@ -91,7 +91,7 @@ export default function Basicinput({
             background: 'transparent',
             outline: 'none',
           }}
-          type={type ? passwordReveal : "text"}
+          type={passwordReveal}
           placeholder={`${placeHolder}*`}
           value={disabled ? "" : value}
           onChange={handleChange} // Handle changes in input

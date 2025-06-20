@@ -19,11 +19,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   --background: white;
   --secondary: #e5ebee;
+  --partial-secondary:#bec7cc;        
   --teritory:red;
   --color-hover:#eaeced8c;
   --fixed-bg-color: #eaeced8c;
   --text-primary: black;
   --text-secondary: #2525258c;
+  --text-teritory: #c9c5c5;
   --divider: #00000033;
   --accent: royalblue;
   --shadow:#292a2a49;
@@ -36,11 +38,13 @@ body {
 body.dark-theme {
   --background: #121212;
   --secondary: #2a3236;
+  --partial-secondary:#3f4a4f;
   --teritory:red;
   --color-hover:#201f1f;
   --fixed-bg-color: #000000;
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
+  --text-teritory: #666565;
   --divider: #ffffff19;
   --accent: royalblue;
   --shadow:#0000009b;
@@ -70,6 +74,9 @@ body.modal-open {
 }
 .secondary-bg {
   background-color: var(--secondary);
+}
+.partial-secondary-bg {
+  background-color: var(--partial-secondary);
 }
 .accent-bg {
   background-color: var(--accent);

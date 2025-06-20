@@ -5,7 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { darkColorTheme } from "../../constant";
 
 
-export default function FileInput({ fileTypes = [], style, setFile, file,className }) {
+export default function FileInput({ fileTypes = [], style, setFile, file, className, placeHolder }) {
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file && (fileTypes.length === 0 || fileTypes.some(type => file.type.includes(type)))) {
@@ -39,7 +39,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file,classNa
 
     return (
         <div
-        className={`${className}`}
+            className={`${className}`}
             style={{
                 border: file ? 'none' : '0.5px dashed #666',
                 borderRadius: 30,
@@ -54,8 +54,8 @@ export default function FileInput({ fileTypes = [], style, setFile, file,classNa
         >
             {!file &&
                 <>
-                    <div style={{ display: "flex", alignItems: "center", paddingBlock: 60 }}>
-                        <p  className="large-text-normal-weight mx-5">Drag and Drop or Upload Media</p>
+                    <div style={{ display: "flex", alignItems: "center", paddingBlock: 60 ,gap:10}}>
+                        <p className="large-text-normal-weight mx-5">{placeHolder || "Drag and Drop or Upload Media"}</p>
                         <FaCloudUploadAlt size={25} />
                     </div>
                     <input
@@ -95,10 +95,10 @@ export default function FileInput({ fileTypes = [], style, setFile, file,classNa
                         <div style={{
                             width: '100%',
                             height: '100%',
-                            position:'relative',
+                            position: 'relative',
                             borderRadius: 30,
-                            overflow:'hidden',
-                            border:'1px solid gray'
+                            overflow: 'hidden',
+                            border: '1px solid gray'
                         }}>
                             <img
                                 src={URL.createObjectURL(file)}
@@ -110,8 +110,8 @@ export default function FileInput({ fileTypes = [], style, setFile, file,classNa
                                     display: "block", // Removes extra space under image
                                     position: 'absolute',
                                     filter: 'blur(50px)',
-                                    zIndex:1,
-                                    backgroundColor:'red'
+                                    zIndex: 1,
+                                    backgroundColor: 'red'
                                 }}
                             />
                             <img
@@ -123,7 +123,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file,classNa
                                     objectFit: "contain",
                                     display: "block", // Removes extra space under image
                                     position: 'relative',
-                                    zIndex:2
+                                    zIndex: 2
                                 }}
                             />
                         </div>
@@ -135,7 +135,7 @@ export default function FileInput({ fileTypes = [], style, setFile, file,classNa
                         padding: 5,
                         borderRadius: '50%',
                         cursor: 'pointer',
-                        zIndex:10
+                        zIndex: 10
                     }}>
                         <AiOutlineDelete size={20} onClick={cancelFile} />
                     </div>

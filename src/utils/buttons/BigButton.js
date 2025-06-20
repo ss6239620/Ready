@@ -39,7 +39,7 @@ export default function BigButton({ title, style, Icon, onClick, className,label
                     <Icon size={iconSize ? iconSize : 25} />
                 </div>
             )}
-            <div className={`div-justify-center flex-1 ${labelClassName}`} style={{ ...labelStyle }}>
+            <div className={`div-justify-center ${labelClassName}`} style={{ ...labelStyle }}>
                 {loading ? <div className="spinner"></div> :
                     <a>{title}</a>
                 }
